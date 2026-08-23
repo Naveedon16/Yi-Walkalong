@@ -402,8 +402,8 @@ export function Home() {
           <div>
             <h3 className="text-sm font-bold text-[#79747e] dark:text-gray-400 uppercase tracking-widest text-center mb-8">Title Partner</h3>
             <div className="flex justify-center">
-              <div className="w-72 h-36 bg-white rounded-3xl border border-[#cac4d0] dark:border-gray-700 flex items-center justify-center shadow-sm overflow-hidden p-6 hover:shadow-md transition-shadow">
-                <img src="/partners/dalmia.jpg" alt="Dalmia" className="max-w-full max-h-full object-contain" />
+              <div className="w-72 h-36 bg-white dark:bg-gray-800 rounded-3xl border border-[#cac4d0] dark:border-gray-700 flex items-center justify-center shadow-sm overflow-hidden p-2 hover:shadow-md transition-shadow">
+                <img src="/partners/dalmia.png" alt="Dalmia" className="max-w-full max-h-full object-contain scale-[1.3]" />
               </div>
             </div>
           </div>
@@ -412,17 +412,17 @@ export function Home() {
           <div>
             <h3 className="text-sm font-bold text-[#79747e] dark:text-gray-400 uppercase tracking-widest text-center mb-6">Gold Partners</h3>
             <div className="flex flex-wrap justify-center gap-6">
-              <div className="w-48 h-24 bg-white rounded-xl border border-[#cac4d0] dark:border-gray-700 flex items-center justify-center shadow-sm overflow-hidden p-4 hover:shadow-md transition-shadow">
+              <div className="w-48 h-24 bg-white dark:bg-gray-800 rounded-xl border border-[#cac4d0] dark:border-gray-700 flex items-center justify-center shadow-sm overflow-hidden p-4 hover:shadow-md transition-shadow">
                 <img src="/partners/armoraa.png" alt="Armora" className="max-w-full max-h-full object-contain" />
               </div>
-              <div className="w-48 h-24 bg-white rounded-xl border border-[#cac4d0] dark:border-gray-700 flex items-center justify-center shadow-sm overflow-hidden p-4 hover:shadow-md transition-shadow">
+              <div className="w-48 h-24 bg-white dark:bg-gray-800 rounded-xl border border-[#cac4d0] dark:border-gray-700 flex items-center justify-center shadow-sm overflow-hidden p-4 hover:shadow-md transition-shadow">
                 <img src="/partners/lotte.png" alt="Lotte" className="max-w-full max-h-full object-contain" />
               </div>
-              <div className="w-48 h-24 bg-white rounded-xl border border-[#cac4d0] dark:border-gray-700 flex items-center justify-center shadow-sm overflow-hidden p-4 hover:shadow-md transition-shadow">
+              <div className="w-48 h-24 bg-white dark:bg-gray-800 rounded-xl border border-[#cac4d0] dark:border-gray-700 flex items-center justify-center shadow-sm overflow-hidden p-4 hover:shadow-md transition-shadow">
                 <img src="/partners/pepero.png" alt="Pepero" className="max-w-full max-h-full object-contain" />
               </div>
-              <div className="w-48 h-24 bg-white rounded-xl border border-[#cac4d0] dark:border-gray-700 flex items-center justify-center shadow-sm overflow-hidden p-4 hover:shadow-md transition-shadow">
-                <img src="/partners/rams.png" alt="RAMS" className="max-w-full max-h-full object-contain" />
+              <div className="w-48 h-24 bg-white dark:bg-gray-800 rounded-xl border border-[#cac4d0] dark:border-gray-700 flex items-center justify-center shadow-sm overflow-hidden p-2 hover:shadow-md transition-shadow">
+                <img src="/partners/rams.png" alt="RAMS" className="max-w-full max-h-full object-contain scale-[1.3]" />
               </div>
             </div>
           </div>
@@ -431,7 +431,7 @@ export function Home() {
           <div>
             <h3 className="text-sm font-bold text-[#79747e] dark:text-gray-400 uppercase tracking-widest text-center mb-6">Support Partner</h3>
             <div className="flex justify-center">
-              <div className="w-48 h-24 bg-white rounded-xl border border-[#cac4d0] dark:border-gray-700 flex items-center justify-center shadow-sm overflow-hidden p-4 hover:shadow-md transition-shadow">
+              <div className="w-48 h-24 bg-white dark:bg-gray-800 rounded-xl border border-[#cac4d0] dark:border-gray-700 flex items-center justify-center shadow-sm overflow-hidden p-4 hover:shadow-md transition-shadow">
                 <img src="/partners/tamil_matrimony.png" alt="Tamil Matrimony" className="max-w-full max-h-full object-contain" />
               </div>
             </div>
