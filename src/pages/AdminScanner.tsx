@@ -4,7 +4,7 @@ import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
 import { AdminService } from '../services';
 import { QrCode, CheckCircle2, AlertTriangle, XCircle, Loader2 } from 'lucide-react';
-import { Html5QrcodeScanner, Html5QrcodeScanType } from 'html5-qrcode';
+import { QRScanner } from "../components/QRScanner";
 import { motion, AnimatePresence } from 'motion/react';
 
 export function AdminScanner() {
@@ -52,60 +52,30 @@ export function AdminScanner() {
     processRegistration(manualId.trim());
   };
 
+  const handleScanSuccess = (decodedText: string) => {
+    const scannedId = decodedText.trim();
+    const now = Date.now();
+    
+    if (scannedId === lastScannedIdRef.current && (now - lastScannedTimeRef.current < 5000)) {
+      return;
+    }
+    
+    lastScannedIdRef.current = scannedId;
+    lastScannedTimeRef.current = now;
+    
+    setShowScanner(false);
+    processRegistration(scannedId);
+  };
+
   const startScanner = () => {
     setScanResult(null);
     setCameraError('');
     setShowScanner(true);
-    
-    // reset double scan protection
     lastScannedIdRef.current = '';
     lastScannedTimeRef.current = 0;
-
-    // Need a small timeout to let the DOM element render before initializing the scanner
-    setTimeout(() => {
-      if (!document.getElementById('reader')) return;
-      
-      const html5QrcodeScanner = new Html5QrcodeScanner(
-        "reader",
-        { 
-          fps: 10, 
-          qrbox: { width: 250, height: 250 },
-          supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
-          rememberLastUsedCamera: true
-        },
-        /* verbose= */ false
-      );
-      
-      scannerRef.current = html5QrcodeScanner;
-
-      html5QrcodeScanner.render((decodedText: string) => {
-        const scannedId = decodedText.trim();
-        const now = Date.now();
-        
-        if (scannedId === lastScannedIdRef.current && (now - lastScannedTimeRef.current < 5000)) {
-          return;
-        }
-        
-        lastScannedIdRef.current = scannedId;
-        lastScannedTimeRef.current = now;
-        
-        stopScanner();
-        processRegistration(scannedId);
-      }, (error: any) => {
-        // ignoring errors that are just "NotFound"
-      });
-    }, 100);
   };
 
   const stopScanner = () => {
-    if (scannerRef.current) {
-      try {
-        scannerRef.current.clear();
-      } catch (e) {
-        console.error("Error clearing scanner", e);
-      }
-      scannerRef.current = null;
-    }
     setShowScanner(false);
   };
 
@@ -148,14 +118,10 @@ export function AdminScanner() {
         ) : (
           <div className="flex flex-col items-center">
             <h3 className="font-medium text-[#1d1b20] dark:text-white mb-4">Point camera at QR code</h3>
-            {cameraError ? (
-              <div className="text-red-600 text-sm mb-4">{cameraError}</div>
-            ) : (
-              <div id="reader" className="w-full max-w-sm bg-white dark:bg-[#1e1e1e] rounded-lg overflow-hidden mb-4 border border-[#e1e2ec] dark:border-gray-700"></div>
-            )}
-            <Button type="button" variant="outline" onClick={stopScanner} aria-label="Close QR scanner">
-              Cancel Scanner
-            </Button>
+            <QRScanner 
+              onScanSuccess={handleScanSuccess} 
+              onClose={stopScanner} 
+            />
           </div>
         )}
       </Card>
