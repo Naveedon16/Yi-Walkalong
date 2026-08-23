@@ -19,13 +19,14 @@ export function QRScanner({ onScanSuccess, onScanError, onClose }: QRScannerProp
   const [cameraError, setCameraError] = useState<string>('');
   
   const html5QrCodeRef = useRef<Html5Qrcode | null>(null);
+  const isStartingRef = useRef(false);
   
   const getCameraLabel = (label: string, index: number) => {
     const lower = label.toLowerCase();
     if (lower.includes('back') || lower.includes('rear') || lower.includes('environment')) {
-      return `Rear Camera (${label})`;
+      return `Rear Camera (${label || index + 1})`;
     } else if (lower.includes('front') || lower.includes('user') || lower.includes('face')) {
-      return `Front Camera (${label})`;
+      return `Front Camera (${label || index + 1})`;
     }
     return label || `Camera ${index + 1}`;
   };
@@ -42,7 +43,6 @@ export function QRScanner({ onScanSuccess, onScanError, onClose }: QRScannerProp
       if (activeCameraId && videoDevices.find(d => d.id === activeCameraId)) {
         setSelectedCameraId(activeCameraId);
       } else if (videoDevices.length > 0 && !selectedCameraId) {
-        // If we don't know the exact active ID, just try to pick the first rear camera
         const backCameras = videoDevices.filter(d => {
           const lbl = d.label.toLowerCase();
           return lbl.includes('back') || lbl.includes('rear') || lbl.includes('environment');
@@ -59,7 +59,11 @@ export function QRScanner({ onScanSuccess, onScanError, onClose }: QRScannerProp
   };
 
   const startScanning = useCallback(async (cameraIdOrConfig: any) => {
+    if (isStartingRef.current) return;
+    
     try {
+      isStartingRef.current = true;
+      
       if (!html5QrCodeRef.current) {
         html5QrCodeRef.current = new Html5Qrcode("custom-reader");
       }
@@ -84,22 +88,17 @@ export function QRScanner({ onScanSuccess, onScanError, onClose }: QRScannerProp
         }
       );
       
-      // After starting, we can reliably enumerate devices with labels
       if (typeof cameraIdOrConfig === 'string') {
         loadCameras(cameraIdOrConfig);
       } else {
-        // Find the active track to see what ID was chosen by facingMode
-        try {
-          const stream = qrCode.getRunningTrack(); 
-          // wait, getRunningTrack is not exposed on Html5Qrcode directly, but we can just call enumerateDevices
-          // and let the fallback logic pick the right dropdown value
-        } catch (e) {}
         loadCameras();
       }
       
     } catch (err: any) {
       console.error("Error starting scanner", err);
       setCameraError(err.message || "Failed to start camera.");
+    } finally {
+      isStartingRef.current = false;
     }
   }, [onScanSuccess, onScanError]);
 
@@ -107,14 +106,13 @@ export function QRScanner({ onScanSuccess, onScanError, onClose }: QRScannerProp
     let mounted = true;
     
     const initCamera = async () => {
+      if (!mounted) return;
       try {
         const savedCameraId = sessionStorage.getItem('selectedCameraId');
         if (savedCameraId) {
-          // If we have a saved camera ID for this session, use it
-          startScanning(savedCameraId);
+          await startScanning(savedCameraId);
         } else {
-          // Default to rear camera
-          startScanning({ facingMode: { ideal: "environment" } });
+          await startScanning({ facingMode: { ideal: "environment" } });
         }
       } catch (err: any) {
         if (mounted) {
@@ -123,13 +121,19 @@ export function QRScanner({ onScanSuccess, onScanError, onClose }: QRScannerProp
       }
     };
     
-    // Slight delay to ensure the div #custom-reader is rendered
-    setTimeout(initCamera, 100);
+    const timer = setTimeout(initCamera, 100);
     
     return () => {
       mounted = false;
-      if (html5QrCodeRef.current && html5QrCodeRef.current.isScanning) {
-        html5QrCodeRef.current.stop().catch(console.error);
+      clearTimeout(timer);
+      if (html5QrCodeRef.current) {
+        if (html5QrCodeRef.current.isScanning) {
+          html5QrCodeRef.current.stop().then(() => {
+            html5QrCodeRef.current?.clear();
+          }).catch(console.error);
+        } else {
+          try { html5QrCodeRef.current.clear(); } catch(e) {}
+        }
       }
     };
   }, [startScanning]);
