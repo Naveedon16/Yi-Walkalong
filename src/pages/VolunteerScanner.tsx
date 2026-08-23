@@ -1,0 +1,237 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { Card } from '../components/ui/Card';
+import { Button } from '../components/ui/Button';
+import { Input } from '../components/ui/Input';
+import { AdminService } from '../services';
+import { QrCode, CheckCircle2, AlertTriangle, XCircle, Loader2 } from 'lucide-react';
+import { Html5QrcodeScanner, Html5QrcodeScanType } from 'html5-qrcode';
+import { motion, AnimatePresence } from 'motion/react';
+
+export function VolunteerScanner() {
+  const [manualId, setManualId] = useState('');
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [showScanner, setShowScanner] = useState(false);
+  const [cameraError, setCameraError] = useState('');
+  const [scanResult, setScanResult] = useState<{ type: 'success' | 'duplicate' | 'invalid' | 'error', details?: any, message?: string } | null>(null);
+  
+  const scannerRef = useRef<any>(null);
+
+  // To avoid double scanning the same QR repeatedly
+  const lastScannedIdRef = useRef<string>('');
+  const lastScannedTimeRef = useRef<number>(0);
+
+  useEffect(() => {
+    return () => {
+      stopScanner();
+    };
+  }, []);
+
+  const processRegistration = async (id: string) => {
+    setIsProcessing(true);
+    setScanResult(null);
+    try {
+      const response = await AdminService.checkInParticipant(id);
+      setScanResult({ type: 'success', details: response.participant });
+    } catch (err: any) {
+      if (err.message === 'ALREADY_CHECKED_IN') {
+        setScanResult({ type: 'duplicate', message: 'This participant is already checked in.' });
+      } else if (err.message === 'Registration not found') {
+        setScanResult({ type: 'invalid', message: 'Registration not found.' });
+      } else {
+        setScanResult({ type: 'error', message: err.message || 'An error occurred during check-in.' });
+      }
+    } finally {
+      setIsProcessing(false);
+      setManualId('');
+    }
+  };
+
+  const handleManualSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!manualId.trim()) return;
+    processRegistration(manualId.trim());
+  };
+
+  const startScanner = () => {
+    setScanResult(null);
+    setCameraError('');
+    setShowScanner(true);
+    
+    // reset double scan protection
+    lastScannedIdRef.current = '';
+    lastScannedTimeRef.current = 0;
+
+    // Need a small timeout to let the DOM element render before initializing the scanner
+    setTimeout(() => {
+      if (!document.getElementById('reader')) return;
+      
+      const html5QrcodeScanner = new Html5QrcodeScanner(
+        "reader",
+        { 
+          fps: 10, 
+          qrbox: { width: 250, height: 250 },
+          supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
+          rememberLastUsedCamera: true
+        },
+        /* verbose= */ false
+      );
+      
+      scannerRef.current = html5QrcodeScanner;
+
+      html5QrcodeScanner.render((decodedText: string) => {
+        const scannedId = decodedText.trim();
+        const now = Date.now();
+        
+        if (scannedId === lastScannedIdRef.current && (now - lastScannedTimeRef.current < 5000)) {
+          return;
+        }
+        
+        lastScannedIdRef.current = scannedId;
+        lastScannedTimeRef.current = now;
+        
+        stopScanner();
+        processRegistration(scannedId);
+      }, (error: any) => {
+        // ignoring errors that are just "NotFound"
+      });
+    }, 100);
+  };
+
+  const stopScanner = () => {
+    if (scannerRef.current) {
+      try {
+        scannerRef.current.clear();
+      } catch (e) {
+        console.error("Error clearing scanner", e);
+      }
+      scannerRef.current = null;
+    }
+    setShowScanner(false);
+  };
+
+  return (
+    <div className="max-w-xl mx-auto w-full pt-8">
+      <div className="text-center mb-8">
+        <h1 className="text-3xl font-bold text-[#1d1b20] dark:text-white mb-2">Check-In Scanner</h1>
+        <p className="text-[#49454f] dark:text-gray-300">Scan participant QR codes or enter Registration ID manually.</p>
+      </div>
+
+      <Card className="mb-6 border-[#cac4d0] dark:border-gray-700">
+        {!showScanner ? (
+          <div className="flex flex-col items-center py-6">
+            <Button onClick={startScanner} size="lg" className="w-full sm:w-64 gap-2 mb-8 bg-[#6750a4]">
+              <QrCode className="w-5 h-5" />
+              Start Scanner
+            </Button>
+            
+            <div className="w-full relative flex items-center justify-center mb-8">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-[#cac4d0] dark:border-gray-700"></div>
+              </div>
+              <div className="relative bg-white dark:bg-[#1e1e1e] px-4 text-sm text-[#79747e] dark:text-gray-400 font-medium">OR</div>
+            </div>
+
+            <form onSubmit={handleManualSubmit} className="w-full">
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Input 
+                  placeholder="Enter Registration ID" 
+                  value={manualId}
+                  onChange={(e) => setManualId(e.target.value)}
+                  className="flex-1"
+                />
+                <Button type="submit" disabled={isProcessing} className="w-full sm:w-auto">
+                  {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Check In'}
+                </Button>
+              </div>
+            </form>
+          </div>
+        ) : (
+          <div className="flex flex-col items-center">
+            <h3 className="font-medium text-[#1d1b20] dark:text-white mb-4">Point camera at QR code</h3>
+            {cameraError ? (
+              <div className="text-red-600 text-sm mb-4">{cameraError}</div>
+            ) : (
+              <div id="reader" className="w-full max-w-sm bg-white dark:bg-[#1e1e1e] rounded-lg overflow-hidden mb-4 border border-[#e1e2ec] dark:border-gray-700"></div>
+            )}
+            <Button type="button" variant="outline" onClick={stopScanner} aria-label="Close QR scanner">
+              Cancel Scanner
+            </Button>
+          </div>
+        )}
+      </Card>
+
+      <AnimatePresence mode="wait">
+        {scanResult && (
+          <motion.div
+            key={scanResult.type + Date.now()}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            {scanResult.type === 'success' && (
+              <Card className="border-t-4 border-t-green-600 bg-green-50 dark:bg-green-900/10">
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-16 h-16 rounded-full bg-green-100 dark:bg-green-800/30 flex items-center justify-center mb-4">
+                    <CheckCircle2 className="w-8 h-8 text-green-600 dark:text-green-400" />
+                  </div>
+                  <h3 className="text-xl font-bold text-green-800 dark:text-green-300 mb-6">CHECK-IN CONFIRMED</h3>
+                  
+                  <div className="w-full bg-white dark:bg-[#1e1e1e] rounded-xl p-4 mb-6 shadow-sm border border-green-100 dark:border-green-800/30">
+                    <div className="grid grid-cols-2 gap-4 text-left">
+                      <div>
+                        <p className="text-xs text-[#79747e] dark:text-gray-400 uppercase font-bold tracking-wider mb-1">Name</p>
+                        <p className="font-medium text-[#1d1b20] dark:text-white">{scanResult.details?.name}</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-[#79747e] dark:text-gray-400 uppercase font-bold tracking-wider mb-1">Registration ID</p>
+                        <p className="font-medium text-[#1d1b20] dark:text-white">{scanResult.details?.id}</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-[#79747e] dark:text-gray-400 uppercase font-bold tracking-wider mb-1">Category</p>
+                        <p className="font-medium text-[#1d1b20] dark:text-white">{scanResult.details?.category}</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-[#79747e] dark:text-gray-400 uppercase font-bold tracking-wider mb-1">T-Shirt Size</p>
+                        <p className="font-medium text-[#1d1b20] dark:text-white">{scanResult.details?.tshirtSize}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <Button onClick={() => { setScanResult(null); startScanner(); }} variant="outline" className="w-full">Scan Next</Button>
+                </div>
+              </Card>
+            )}
+
+            {scanResult.type === 'duplicate' && (
+              <Card className="border-t-4 border-t-amber-500 bg-amber-50 dark:bg-amber-900/10">
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-16 h-16 rounded-full bg-amber-100 dark:bg-amber-800/30 flex items-center justify-center mb-4">
+                    <AlertTriangle className="w-8 h-8 text-amber-600 dark:text-amber-400" />
+                  </div>
+                  <h3 className="text-xl font-bold text-amber-800 dark:text-amber-300 mb-2">ALREADY CHECKED IN</h3>
+                  <p className="text-amber-700 dark:text-amber-400 mb-6">{scanResult.message}</p>
+                  <Button onClick={() => { setScanResult(null); startScanner(); }} variant="outline" className="w-full border-amber-300 text-amber-700 hover:bg-amber-100">Scan Next</Button>
+                </div>
+              </Card>
+            )}
+
+            {(scanResult.type === 'invalid' || scanResult.type === 'error') && (
+              <Card className="border-t-4 border-t-red-600 bg-red-50 dark:bg-red-900/10">
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-16 h-16 rounded-full bg-red-100 dark:bg-red-800/30 flex items-center justify-center mb-4">
+                    <XCircle className="w-8 h-8 text-red-600 dark:text-red-400" />
+                  </div>
+                  <h3 className="text-xl font-bold text-red-800 dark:text-red-300 mb-2">
+                    {scanResult.type === 'invalid' ? 'REGISTRATION NOT FOUND' : 'ERROR'}
+                  </h3>
+                  <p className="text-red-700 dark:text-red-400 mb-6">{scanResult.message}</p>
+                  <Button onClick={() => { setScanResult(null); startScanner(); }} variant="outline" className="w-full border-red-300 text-red-700 hover:bg-red-100">Scan Next</Button>
+                </div>
+              </Card>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}

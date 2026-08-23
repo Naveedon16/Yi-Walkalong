@@ -1,0 +1,13 @@
+{
+  "name": "Remix Remix Yi WalkAlong Registration Portal",
+  "description": "Event Registration \u0026 Management System for WalkAlong",
+  "requestFramePermissions": [
+    "clipboard-read",
+    "clipboard-write",
+    "web-share",
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

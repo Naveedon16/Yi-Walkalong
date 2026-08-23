@@ -1,0 +1,132 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #registration-pass, #registration-pass * {
+    visibility: visible;
+  }
+  #registration-pass {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-shadow: none !important;
+    border: none !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  
+  /* Ensure the QR code section specifically does not break across pages */
+  #registration-pass > div:last-child {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  
+  .print-hide {
+    display: none !important;
+  }
+}
+
+@media print {
+  /* Hide elements not needed for print */
+  nav, footer, .search-controls, form, button, .admin-controls, .scanner-controls, [aria-label="Scan registration QR code"], [aria-label="Close QR scanner"], [aria-label="Print registration pass"] {
+    display: none !important;
+  }
+  
+  /* Ensure page backgrounds and colors print well */
+  body, html {
+    background-color: white !important;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* The pass itself */
+  .registration-pass {
+    border: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 20px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+  
+  /* Make sure QR code container doesn't break */
+  .registration-pass * {
+    page-break-inside: avoid;
+  }
+}
+
+@media print {
+  /* Force light mode styles during print */
+  html.dark, body.dark {
+    background-color: white !important;
+    color: black !important;
+  }
+  .dark\:bg-\[\#1e1e1e\],
+  .dark\:bg-\[\#121212\] {
+    background-color: white !important;
+  }
+  .dark\:text-white,
+  .dark\:text-gray-100,
+  .dark\:text-gray-300 {
+    color: black !important;
+  }
+  .registration-pass {
+    background-color: white !important;
+    color: black !important;
+  }
+  /* Avoid printing dark theme toggle */
+  button[aria-label="Switch to light mode"],
+  button[aria-label="Switch to dark mode"] {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+}
+
+/* html5-qrcode scanner overrides */
+#reader {
+  border: none !important;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: black;
+}
+#reader video {
+  object-fit: cover !important;
+}
+#reader__dashboard_section_csr {
+  padding-bottom: 1rem;
+}
+#reader button {
+  background-color: #6750a4;
+  color: white;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+#reader select {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  margin-bottom: 0.5rem;
+  max-width: 100%;
+}
