@@ -16,7 +16,7 @@ const HeroBanner = () => (
     {/* Top 4 logos */}
     <div className="w-full max-w-5xl flex flex-wrap justify-center items-center gap-6 sm:gap-12 lg:gap-16 px-4 lg:px-8">
       <SafeImage src="/partners/yi-logo.jpeg?v=3" fallbackSrcs={['/Yi Logo.jpg.jpeg', '/Yi.png']} alt="Yi Logo" className="h-8 sm:h-12 lg:h-16 w-auto object-contain mix-blend-multiply" />
-      <SafeImage src="/partners/theme-2026.jpeg?v=3" fallbackSrcs={['/2026 Theme logo_White.jpeg']} alt="One Bharat Spirit" className="h-8 sm:h-12 lg:h-16 w-auto object-contain mix-blend-multiply" />
+      <SafeImage src="/partners/theme-2026.jpeg?v=3" fallbackSrcs={['/2026 Theme logo_White.jpeg']} alt="One Bharat Spirit" className="h-8 sm:h-12 lg:h-16 w-auto object-contain mix-blend-multiply scale-[1.5]" />
       <SafeImage src="/partners/chennai-day.png" fallbackSrcs={['/Chennai day logo.png']} alt="Chennai Day" className="h-8 sm:h-12 lg:h-16 w-auto object-contain mix-blend-multiply" />
       <SafeImage src="/partners/cii.jpeg" fallbackSrcs={['/CII logo blue JPG.jpg.jpeg']} alt="CII Logo" className="h-8 sm:h-12 lg:h-16 w-auto object-contain mix-blend-multiply" />
     </div>
