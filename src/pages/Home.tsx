@@ -12,30 +12,68 @@ import { Link } from 'react-router-dom';
 
 
 const HeroBanner = () => (
-  <div className="flex flex-col items-center justify-center space-y-3 sm:space-y-4 overflow-hidden relative mt-2 mb-4 lg:mb-6 w-full">
-    {/* Top 4 logos */}
-    <div className="w-full max-w-5xl flex flex-wrap justify-center items-center gap-6 sm:gap-12 lg:gap-16 px-4 lg:px-8">
-      <SafeImage src="/partners/yi-logo.jpeg?v=3" fallbackSrcs={['/Yi Logo.jpg.jpeg', '/Yi.png']} alt="Yi Logo" className="h-8 sm:h-12 lg:h-16 w-auto object-contain mix-blend-multiply" />
-      <SafeImage src="/partners/theme-2026.jpeg?v=3" fallbackSrcs={['/2026 Theme logo_White.jpeg']} alt="One Bharat Spirit" className="h-12 sm:h-16 lg:h-24 w-auto object-contain mix-blend-multiply" />
-      <SafeImage src="/partners/chennai-day.png" fallbackSrcs={['/Chennai day logo.png']} alt="Chennai Day" className="h-8 sm:h-12 lg:h-16 w-auto object-contain mix-blend-multiply" />
-      <SafeImage src="/partners/cii.jpeg" fallbackSrcs={['/CII logo blue JPG.jpg.jpeg']} alt="CII Logo" className="h-8 sm:h-12 lg:h-16 w-auto object-contain mix-blend-multiply" />
+  <div className="flex flex-col items-center justify-center space-y-3 sm:space-y-4 overflow-hidden relative mt-2 mb-4 lg:mb-6 w-full max-w-5xl mx-auto">
+    {/* Top 4 logos - 4 equal columns so they never wrap on mobile and align horizontally */}
+    <div className="w-full grid grid-cols-4 items-center justify-items-center gap-2 sm:gap-6 lg:gap-8 px-2 sm:px-6">
+      <div className="flex items-center justify-center w-full h-10 sm:h-14 lg:h-16">
+        <SafeImage 
+          src="/partners/yi-logo.jpeg" 
+          fallbackSrcs={['/Yi Logo.jpg.jpeg', '/Yi-nobg.png', '/Yi.png']} 
+          alt="Yi Logo" 
+          className="max-h-8 sm:max-h-12 lg:max-h-14 w-auto max-w-full object-contain mix-blend-multiply" 
+        />
+      </div>
+      <div className="flex items-center justify-center w-full h-10 sm:h-14 lg:h-16">
+        <SafeImage 
+          src="/partners/theme-2026.png" 
+          fallbackSrcs={['/theme-2026.png', '/partners/theme-2026.jpeg', '/2026 Theme logo_White.jpeg']} 
+          alt="One Bharat Spirit" 
+          className="max-h-8 sm:max-h-12 lg:max-h-14 w-auto max-w-full object-contain mix-blend-multiply" 
+        />
+      </div>
+      <div className="flex items-center justify-center w-full h-10 sm:h-14 lg:h-16">
+        <SafeImage 
+          src="/partners/chennai-day.png" 
+          fallbackSrcs={['/Chennai day logo.png']} 
+          alt="Chennai Day" 
+          className="max-h-8 sm:max-h-12 lg:max-h-14 w-auto max-w-full object-contain mix-blend-multiply" 
+        />
+      </div>
+      <div className="flex items-center justify-center w-full h-10 sm:h-14 lg:h-16">
+        <SafeImage 
+          src="/partners/cii.jpeg" 
+          fallbackSrcs={['/CII logo blue JPG.jpg.jpeg']} 
+          alt="CII Logo" 
+          className="max-h-8 sm:max-h-12 lg:max-h-14 w-auto max-w-full object-contain mix-blend-multiply" 
+        />
+      </div>
     </div>
 
     {/* Dalmia */}
-    <div className="pt-1 sm:pt-2">
-      <SafeImage src="/partners/dalmia.png" fallbackSrcs={['/dalmia.jpg']} alt="Dalmia Bharat Cement" className="h-24 sm:h-32 lg:h-44 w-auto object-contain mix-blend-multiply" />
+    <div className="pt-1 sm:pt-2 flex items-center justify-center">
+      <SafeImage 
+        src="/partners/dalmia.png" 
+        fallbackSrcs={['/dalmia.jpg', '/dalmia.png']} 
+        alt="Dalmia Bharat Cement" 
+        className="h-20 sm:h-28 lg:h-36 w-auto object-contain mix-blend-multiply" 
+      />
     </div>
 
     {/* Presents */}
-    <div className="flex items-center justify-center w-full max-w-[200px] sm:max-w-[250px]">
+    <div className="flex items-center justify-center w-full max-w-[180px] sm:max-w-[240px]">
       <div className="flex-grow h-px bg-[#49454f]/30"></div>
       <span className="px-3 text-[10px] sm:text-xs font-bold text-[#49454f] tracking-[0.2em] uppercase">Presents</span>
       <div className="flex-grow h-px bg-[#49454f]/30"></div>
     </div>
 
     {/* WalkAlong */}
-    <div className="pb-0">
-      <SafeImage src="/partners/walkalong.png" fallbackSrcs={['/Untitled design.png']} alt="Walk Along" className="h-14 sm:h-20 lg:h-24 w-auto object-contain mix-blend-multiply" />
+    <div className="pb-0 flex items-center justify-center">
+      <SafeImage 
+        src="/partners/walkalong.png" 
+        fallbackSrcs={['/Untitled design.png']} 
+        alt="Walk Along" 
+        className="h-14 sm:h-20 lg:h-24 w-auto object-contain mix-blend-multiply" 
+      />
     </div>
   </div>
 );
