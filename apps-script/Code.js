@@ -152,11 +152,38 @@ function getSettings() {
   return settings;
 }
 
+function validateToken(token) {
+  if (!token) return null;
+  const sessionStr = CacheService.getScriptCache().get('admin_token_' + token);
+  if (!sessionStr) return null;
+  try { return JSON.parse(sessionStr); } catch (e) { return null; }
+}
+
 function doPost(e) {
   try {
     const body = JSON.parse(e.postData.contents);
     const action = body.action;
     const payload = body.payload;
+    const token = payload.token;
+    
+    // Protected actions
+    const allProtected = ['getParticipants', 'getDashboardStats', 'updateStatus', 'updateStatuses', 'logScan', 'getScanHistory', 'checkInParticipant', 'sendRegistrationPass'];
+    const adminOnly = ['getParticipants', 'getDashboardStats', 'updateStatus', 'updateStatuses'];
+    
+    let session = null;
+    if (allProtected.includes(action)) {
+      session = validateToken(token);
+      if (!session) {
+        return ContentService.createTextOutput(JSON.stringify({ success: false, error: 'Unauthorized access', code: 'UNAUTHORIZED' })).setMimeType(ContentService.MimeType.JSON);
+      }
+      
+      if (adminOnly.includes(action) && session.role !== 'ADMIN') {
+        return ContentService.createTextOutput(JSON.stringify({ success: false, error: 'Forbidden: Admin access required', code: 'FORBIDDEN' })).setMimeType(ContentService.MimeType.JSON);
+      }
+      
+      // Inject the authenticated session email securely into the payload, overriding any client-provided adminId
+      payload._authenticatedEmail = session.email;
+    }
     
     let result;
     if (action === 'adminLogin') {
@@ -274,7 +301,9 @@ function adminLogin(payload) {
   for (let i = 1; i < data.length; i++) {
     const sheetEmail = String(data[i][0] || '').trim().toLowerCase();
     if (sheetEmail === email && email !== '') {
-      return { success: true, admin: { email: email, role: data[i][2] || 'ADMIN', token: 'dummy-token-' + new Date().getTime() } };
+      const token = Utilities.getUuid();
+      CacheService.getScriptCache().put('admin_token_' + token, JSON.stringify({ email: email, role: data[i][2] || 'ADMIN' }), 21600); // 6 hours
+      return { success: true, admin: { email: email, role: data[i][2] || 'ADMIN', token: token } };
     }
   }
   throw new Error("Invalid credentials");
@@ -413,44 +442,64 @@ function submitIndividual(payload) {
   const ss = getSpreadsheet();
   let sheet = ss.getSheetByName('Participants');
   if (!sheet) throw new Error("Participants sheet not found");
-
-  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-  const row = new Array(headers.length).fill('');
-  
-  const id = 'IND-' + new Date().getTime();
   
   const participantName = String(payload.name || '').trim();
   if (!participantName) {
     throw new Error("Validation Error: Participant name is missing or empty.");
   }
   
-  const setVal = (colName, val) => {
-    const idx = headers.findIndex(h => String(h).toLowerCase() === String(colName).toLowerCase());
-    if (idx !== -1) row[idx] = val;
-  };
-  
-  setVal('Registration ID', id);
-  setVal('Timestamp', new Date().toISOString());
-  setVal('Name', participantName);
-  setVal('Age', payload.age);
-  setVal('Gender', payload.gender);
-  setVal('Phone', payload.phone);
-  setVal('Email', payload.email);
-  setVal('Category', payload.category);
-  setVal('T-Shirt Size', payload.tshirtSize);
-  setVal('Status', 'Confirmed');
-  
   const lock = LockService.getScriptLock();
-  if (lock.tryLock(5000)) {
-    try {
-      sheet.appendRow(row);
-      CacheService.getScriptCache().remove('dashboard_stats');
-      CacheService.getScriptCache().remove('participants_data');
-    } finally {
-      lock.releaseLock();
-    }
-  } else {
+  if (!lock.tryLock(30000)) {
     throw new Error("System is currently busy due to high traffic. Please try submitting again.");
+  }
+  
+  let id;
+  try {
+    const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+    
+    // Duplicate check using TextFinder
+    const payloadEmail = String(payload.email || '').trim().toLowerCase();
+    const payloadPhone = String(payload.phone || '').trim();
+    
+    const emailIdx = headers.findIndex(h => String(h).toLowerCase() === 'email');
+    const phoneIdx = headers.findIndex(h => String(h).toLowerCase() === 'phone');
+    
+    if (payloadEmail && emailIdx !== -1) {
+      const emailCol = sheet.getRange(2, emailIdx + 1, sheet.getLastRow() || 1, 1);
+      const tf = emailCol.createTextFinder(payloadEmail).matchEntireCell(true).findNext();
+      if (tf) throw new Error("A registration with this email already exists.");
+    }
+    
+    if (payloadPhone && phoneIdx !== -1) {
+      const phoneCol = sheet.getRange(2, phoneIdx + 1, sheet.getLastRow() || 1, 1);
+      const tf = phoneCol.createTextFinder(payloadPhone).matchEntireCell(true).findNext();
+      if (tf) throw new Error("A registration with this phone number already exists.");
+    }
+    
+    id = 'IND-' + Utilities.getUuid().split('-')[0].toUpperCase();
+    const row = new Array(headers.length).fill('');
+    
+    const setVal = (colName, val) => {
+      const idx = headers.findIndex(h => String(h).toLowerCase() === String(colName).toLowerCase());
+      if (idx !== -1) row[idx] = val;
+    };
+    
+    setVal('Registration ID', id);
+    setVal('Timestamp', new Date().toISOString());
+    setVal('Name', participantName);
+    setVal('Age', payload.age);
+    setVal('Gender', payload.gender);
+    setVal('Phone', payload.phone);
+    setVal('Email', payload.email);
+    setVal('Category', payload.category);
+    setVal('T-Shirt Size', payload.tshirtSize);
+    setVal('Status', 'Confirmed');
+    
+    sheet.appendRow(row);
+    CacheService.getScriptCache().remove('dashboard_stats');
+    CacheService.getScriptCache().remove('participants_data');
+  } finally {
+    lock.releaseLock();
   }
   return { success: true, id };
 }
@@ -538,64 +587,37 @@ function checkInParticipant(payload) {
   const tf = sheet.createTextFinder(id).matchEntireCell(true).findNext();
   if (!tf) throw new Error("Registration not found");
   
-
   const rowIndex = tf.getRow();
   const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
   const statusIdx = headers.findIndex(h => String(h).toLowerCase() === 'status');
   const rowData = sheet.getRange(rowIndex, 1, 1, sheet.getLastColumn()).getValues()[0];
   
-  if (statusIdx !== -1) {
-    const currentStatus = String(rowData[statusIdx] || '').trim();
-    if (currentStatus.toLowerCase() === 'checked in') {
-      throw new Error("ALREADY_CHECKED_IN");
-    }
+  const adminEmail = payload._authenticatedEmail;
+  if (!adminEmail) {
+    throw new Error("Unauthorized access. Admin validation failed.");
   }
-
-  // Authorization checks
-  const role = payload.role || 'ADMIN'; // Frontend should pass this if possible, or we look it up.
-  // Actually, wait, let's lookup the role based on adminId (email)
-  let adminRole = 'ADMIN';
-  const adminEmail = String(payload.adminId || '').trim().toLowerCase();
-  if (adminEmail) {
-    const adminSheet = ss.getSheetByName('Admins');
-    if (adminSheet) {
-      const adminData = adminSheet.getDataRange().getDisplayValues();
-      for (let i = 1; i < adminData.length; i++) {
-        if (String(adminData[i][0] || '').trim().toLowerCase() === adminEmail) {
-          adminRole = String(adminData[i][2] || 'ADMIN').toUpperCase();
-          break;
-        }
-      }
-    }
-  }
-
-  if (adminRole === 'VOLUNTEER') {
-    // Check if it's Sep 6, 2026 in IST
-    const now = new Date();
-    // format to IST
-    const formatter = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Kolkata', year: 'numeric', month: 'numeric', day: 'numeric' });
-    const parts = formatter.formatToParts(now);
-    let month = '', day = '', year = '';
-    parts.forEach(p => {
-      if (p.type === 'month') month = p.value;
-      if (p.type === 'day') day = p.value;
-      if (p.type === 'year') year = p.value;
-    });
-    // Sep 6 2026 => month 9, day 6, year 2026
-    if (!(year === '2026' && month === '9' && day === '6')) {
-      throw new Error("Volunteers can only check in participants on the event day (6 September 2026).");
-    }
+  
+  // Event Date Validation for ALL check-ins to be safe, or just volunteers if requested
+  // "Check-in must only be permitted on 6 September 2026 in IST. Enforce this AFTER authentication"
+  const now = new Date();
+  const formatter = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Kolkata', year: 'numeric', month: 'numeric', day: 'numeric' });
+  const parts = formatter.formatToParts(now);
+  let month = '', day = '', year = '';
+  parts.forEach(p => {
+    if (p.type === 'month') month = p.value;
+    if (p.type === 'day') day = p.value;
+    if (p.type === 'year') year = p.value;
+  });
+  if (!(year === '2026' && month === '9' && day === '6')) {
+    throw new Error("Check-in is only permitted on the event day (6 September 2026 IST).");
   }
 
   const details = {};
-
-  
   const toCamelCase = (str) => {
     return str.replace(/(?:^\w|[A-Z]| \w)/g, (word, index) => {
       return index === 0 ? word.toLowerCase() : word.toUpperCase();
     }).replace(/\s+/g, '');
   };
-
   headers.forEach((h, i) => {
     let key = String(h).trim();
     if (key.toLowerCase() === 't-shirt size') key = 'tshirtSize';
@@ -606,21 +628,27 @@ function checkInParticipant(payload) {
   });
   details.status = 'Checked In';
 
-  let historySheet = ss.getSheetByName('ScanHistory');
-  if (!historySheet) {
-    historySheet = ss.insertSheet('ScanHistory');
-    historySheet.appendRow(['Registration ID', 'Timestamp', 'Admin ID', 'Scan Type']);
-  }
-
   const lock = LockService.getScriptLock();
-  if (!lock.tryLock(5000)) {
+  if (!lock.tryLock(30000)) {
     throw new Error("System is busy (high traffic). Please scan again.");
   }
+  
   try {
+    // Re-read status inside lock
     if (statusIdx !== -1) {
+      const currentStatus = String(sheet.getRange(rowIndex, statusIdx + 1).getValue() || '').trim();
+      if (currentStatus.toLowerCase() === 'checked in') {
+        throw new Error("ALREADY_CHECKED_IN");
+      }
       sheet.getRange(rowIndex, statusIdx + 1).setValue('Checked In');
     }
-    historySheet.appendRow([id, new Date().toISOString(), payload.adminId || 'Unknown', 'INDIVIDUAL']);
+    
+    let historySheet = ss.getSheetByName('ScanHistory');
+    if (!historySheet) {
+      historySheet = ss.insertSheet('ScanHistory');
+      historySheet.appendRow(['Registration ID', 'Timestamp', 'Admin ID', 'Scan Type']);
+    }
+    historySheet.appendRow([id, new Date().toISOString(), payload._authenticatedEmail || 'Unknown', 'INDIVIDUAL']);
   } finally {
     lock.releaseLock();
   }
@@ -647,7 +675,7 @@ function logScan(payload) {
     throw new Error("Could not acquire lock to log scan due to high traffic. Please try again.");
   }
   try {
-    sheet.appendRow([id, new Date().toISOString(), payload.adminId || 'Unknown', scanType]);
+    sheet.appendRow([id, new Date().toISOString(), payload._authenticatedEmail || 'Unknown', scanType]);
   } finally {
     lock.releaseLock();
   }

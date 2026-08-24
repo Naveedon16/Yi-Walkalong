@@ -141,7 +141,15 @@ export function AdminScanner() {
                   <div className="w-16 h-16 rounded-full bg-green-100 dark:bg-green-800/30 flex items-center justify-center mb-4">
                     <CheckCircle2 className="w-8 h-8 text-green-600 dark:text-green-400" />
                   </div>
-                  <h3 className="text-xl font-bold text-green-800 dark:text-green-300 mb-6">CHECK-IN CONFIRMED</h3>
+                  <h3 className="text-xl font-bold text-green-800 dark:text-green-300 mb-2">
+                    {scanResult.details?.name === 'Pending Sync' ? 'CHECK-IN QUEUED' : 'CHECK-IN CONFIRMED'}
+                  </h3>
+                  {scanResult.details?.name === 'Pending Sync' && (
+                    <p className="text-sm text-green-700 dark:text-green-400 mb-4 font-medium px-4">
+                      You are offline. This scan has been saved locally and will sync when your connection returns.
+                    </p>
+                  )}
+                  <div className="mb-6"></div>
                   
                   <div className="w-full bg-white dark:bg-[#1e1e1e] rounded-xl p-4 mb-6 shadow-sm border border-green-100 dark:border-green-800/30">
                     <div className="grid grid-cols-2 gap-4 text-left">

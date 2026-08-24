@@ -58,7 +58,7 @@ export function RegistrationQRCode({ registrationId, size = 150 }: RegistrationQ
           value={registrationId}
           size={size}
           level="M"
-          includeMargin={false}
+          includeMargin={true}
           className="w-full h-auto"
           style={{ height: "auto", maxWidth: "100%", width: "100%" }}
         />
