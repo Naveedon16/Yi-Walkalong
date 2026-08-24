@@ -33,7 +33,6 @@ export function Layout() {
         <nav className="hidden md:flex gap-8">
           {[
             { name: 'Registration', path: '/' },
-            { name: 'Status Check', path: '/status-check' },
           ].map((item) => {
             const isActive = location.pathname === item.path || (item.path !== '/' && location.pathname.startsWith(item.path));
             return (

@@ -96,7 +96,8 @@ export function QRScanner({ onScanSuccess, onScanError, onClose }: QRScannerProp
       
     } catch (err: any) {
       console.error("Error starting scanner", err);
-      setCameraError(err.message || "Failed to start camera.");
+      const msg = typeof err === 'string' ? err : (err?.message || "Failed to start camera.");
+      setCameraError(msg);
     } finally {
       isStartingRef.current = false;
     }
@@ -108,15 +109,28 @@ export function QRScanner({ onScanSuccess, onScanError, onClose }: QRScannerProp
     const initCamera = async () => {
       if (!mounted) return;
       try {
+        // Explicitly request camera permissions first. This helps in iframe environments
+        // to ensure the browser's permission prompt is triggered cleanly.
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+          try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            // Immediately stop the tracks since html5-qrcode will manage its own stream
+            stream.getTracks().forEach(track => track.stop());
+          } catch (streamErr: any) {
+            console.warn("Initial getUserMedia failed:", streamErr);
+            // We don't throw here, let html5-qrcode try and handle/report its own specific errors.
+          }
+        }
+        
         const savedCameraId = sessionStorage.getItem('selectedCameraId');
         if (savedCameraId) {
           await startScanning(savedCameraId);
         } else {
-          await startScanning({ facingMode: { ideal: "environment" } });
+          await startScanning({ facingMode: "environment" });
         }
       } catch (err: any) {
         if (mounted) {
-          setCameraError("Camera permission denied or camera not accessible.");
+          setCameraError(err?.message || "Camera permission denied or camera not accessible.");
         }
       }
     };
@@ -147,31 +161,52 @@ export function QRScanner({ onScanSuccess, onScanError, onClose }: QRScannerProp
 
   return (
     <div className="flex flex-col items-center w-full">
-      {cameraError ? (
-        <div className="text-red-600 text-sm mb-4">{cameraError}</div>
-      ) : (
-        <>
-          {cameras.length > 1 && (
-            <div className="mb-4 w-full max-w-sm">
-              <label className="block text-sm font-medium text-[#49454f] dark:text-gray-300 mb-1 text-left">
-                Select Camera
-              </label>
-              <select 
-                value={selectedCameraId} 
-                onChange={handleCameraChange}
-                className="w-full rounded-md border border-[#cac4d0] dark:border-gray-700 bg-white dark:bg-[#1e1e1e] px-3 py-2 text-sm text-[#1d1b20] dark:text-white"
-              >
-                {cameras.map((c, i) => (
-                  <option key={c.id} value={c.id}>
-                    {getCameraLabel(c.label, i)}
-                  </option>
-                ))}
-              </select>
-            </div>
-          )}
-          <div id="custom-reader" className="w-full max-w-sm bg-black dark:bg-[#1e1e1e] rounded-lg overflow-hidden mb-4 border border-[#e1e2ec] dark:border-gray-700 min-h-[250px]"></div>
-        </>
+      {cameraError && (
+        <div className="text-red-600 text-sm mb-4 text-center max-w-sm flex flex-col items-center">
+          <p>{cameraError}</p>
+          <p className="mt-2 text-xs text-gray-500 mb-3">
+            Please ensure you have granted camera permissions in your browser.
+          </p>
+          <Button 
+            type="button" 
+            variant="outline" 
+            size="sm"
+            onClick={() => {
+              setCameraError('');
+              const savedCameraId = sessionStorage.getItem('selectedCameraId');
+              if (savedCameraId) {
+                startScanning(savedCameraId);
+              } else {
+                startScanning({ facingMode: "environment" });
+              }
+            }}
+          >
+            Retry Camera
+          </Button>
+        </div>
       )}
+      
+      {cameras.length > 1 && (
+        <div className="mb-4 w-full max-w-sm">
+          <label className="block text-sm font-medium text-[#49454f] dark:text-gray-300 mb-1 text-left">
+            Select Camera
+          </label>
+          <select 
+            value={selectedCameraId} 
+            onChange={handleCameraChange}
+            className="w-full rounded-md border border-[#cac4d0] dark:border-gray-700 bg-white dark:bg-[#1e1e1e] px-3 py-2 text-sm text-[#1d1b20] dark:text-white"
+          >
+            {cameras.map((c, i) => (
+              <option key={c.id} value={c.id}>
+                {getCameraLabel(c.label, i)}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
+      
+      <div id="custom-reader" className="w-full max-w-sm bg-black dark:bg-[#1e1e1e] rounded-lg overflow-hidden mb-4 border border-[#e1e2ec] dark:border-gray-700 min-h-[250px]" style={{ display: cameraError ? 'none' : 'block' }}></div>
+      
       <Button type="button" variant="outline" onClick={onClose} aria-label="Close QR scanner">
         Cancel Scanner
       </Button>

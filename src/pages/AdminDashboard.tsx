@@ -138,9 +138,9 @@ export function AdminDashboard() {
           <Button variant="outline" size="sm" onClick={handleExportSummary} disabled={!stats} className="dark:text-blue-300 dark:border-blue-800">
             <Download className="w-4 h-4 mr-2" /> Export Summary
           </Button>
-          <Link to="/admin/scanner">
+          {/* <Link to="/admin/scanner">
             <Button variant="primary" size="sm" className="bg-[#6750a4]">Scanner</Button>
-          </Link>
+          </Link> */}
           <Link to="/admin/participants">
             <Button variant="outline" size="sm">Manage Participants</Button>
           </Link>

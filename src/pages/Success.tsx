@@ -4,7 +4,6 @@ import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { CheckCircle2, Copy, Check } from 'lucide-react';
 import { motion } from 'motion/react';
-import { RegistrationQRCode } from '../components/RegistrationQRCode';
 
 export function Success() {
   const [searchParams] = useSearchParams();
@@ -68,17 +67,9 @@ export function Success() {
                 {copied ? <Check className="w-5 h-5 text-green-700" /> : <Copy className="w-5 h-5" />}
               </button>
             </div>
-            {type !== 'institution' && (
-              <div className="mt-6 flex justify-center">
-                <RegistrationQRCode registrationId={id} />
-              </div>
-            )}
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="outline" onClick={() => navigate('/status-check')} className="w-full sm:w-auto">
-              View Pass
-            </Button>
             <Button onClick={() => navigate('/')} className="w-full sm:w-auto">
               Back to Home
             </Button>

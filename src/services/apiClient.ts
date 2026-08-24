@@ -71,6 +71,10 @@ export const apiClient = {
     }
     
     if (data.error || data.success === false) {
+      if (data.code === 'UNAUTHORIZED') {
+        localStorage.removeItem('walkalong_admin_session');
+        if (window.location.pathname.startsWith('/admin') && window.location.pathname !== '/admin/login') { window.location.href = '/admin/login'; }
+      }
       const errorMsg = data.error || 'Unknown error occurred';
       if (isConfigError(errorMsg)) {
         throw new ApiError('The registration service is temporarily unavailable. Please try again shortly.', 'CONFIGURATION_ERROR');
@@ -131,6 +135,10 @@ export const apiClient = {
     }
     
     if (data.error || data.success === false) {
+      if (data.code === 'UNAUTHORIZED') {
+        localStorage.removeItem('walkalong_admin_session');
+        if (window.location.pathname.startsWith('/admin') && window.location.pathname !== '/admin/login') { window.location.href = '/admin/login'; }
+      }
       const errorMsg = data.error || 'Unknown error occurred';
       if (isConfigError(errorMsg)) {
         throw new ApiError('The registration service is temporarily unavailable. Please try again shortly.', 'CONFIGURATION_ERROR');
