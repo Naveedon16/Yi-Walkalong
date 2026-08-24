@@ -34,11 +34,11 @@ export function ParticipantDetails({ participant, onClose, onUpdate }: Participa
 
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="participant-modal-title">
-      <div className="bg-white dark:bg-[#1e1e1e] rounded-3xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-xl overflow-hidden" tabIndex={-1}>
-        <div className="flex justify-between items-center p-6 border-b border-[#cac4d0] dark:border-gray-700">
-          <h2 id="participant-modal-title" className="text-2xl font-bold text-[#1d1b20] dark:text-white">Participant Details</h2>
-          <button onClick={onClose} autoFocus aria-label="Close participant details" className="p-2 hover:bg-[#f3edf7] dark:hover:bg-gray-800 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#6750a4]">
-            <X className="w-6 h-6 text-[#49454f] dark:text-gray-300" />
+      <div className="bg-white  rounded-3xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-xl overflow-hidden" tabIndex={-1}>
+        <div className="flex justify-between items-center p-6 border-b border-[#cac4d0] ">
+          <h2 id="participant-modal-title" className="text-2xl font-bold text-[#1d1b20] ">Participant Details</h2>
+          <button onClick={onClose} autoFocus aria-label="Close participant details" className="p-2 hover:bg-[#f3edf7]  rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#6750a4]">
+            <X className="w-6 h-6 text-[#49454f] " />
           </button>
         </div>
         
@@ -48,16 +48,16 @@ export function ParticipantDetails({ participant, onClose, onUpdate }: Participa
               if (!value || key === 'timestamp') return null;
               return (
                 <div key={key} className="flex flex-col">
-                  <span className="text-sm font-medium text-[#49454f] dark:text-gray-300 dark:text-gray-300">{formatKey(key)}</span>
-                  <span className="text-base text-[#1d1b20] dark:text-white">{String(value)}</span>
+                  <span className="text-sm font-medium text-[#49454f]  ">{formatKey(key)}</span>
+                  <span className="text-base text-[#1d1b20] ">{String(value)}</span>
                 </div>
               );
             })}
           </div>
         </div>
 
-        <div className="p-6 border-t border-[#cac4d0] dark:border-gray-700 bg-[#f8f9ff] dark:bg-[#121212]">
-          <h3 className="text-lg font-bold text-[#1d1b20] dark:text-white mb-4">Manage Status</h3>
+        <div className="p-6 border-t border-[#cac4d0]  bg-[#f8f9ff] ">
+          <h3 className="text-lg font-bold text-[#1d1b20]  mb-4">Manage Status</h3>
           <div className="flex flex-col sm:flex-row items-start sm:items-end gap-4">
             <div className="flex-1 w-full">
               <Select

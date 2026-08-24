@@ -49,7 +49,7 @@ export function RegistrationQRCode({ registrationId, size = 150 }: RegistrationQ
   return (
     <QRErrorBoundary fallback={fallbackUI}>
       <div 
-        className="bg-white dark:bg-[#1e1e1e] p-3 rounded-xl shadow-sm mx-auto flex items-center justify-center" 
+        className="bg-white  p-3 rounded-xl shadow-sm mx-auto flex items-center justify-center" 
         style={{ width: size + 24, height: size + 24 }}
         aria-label={`QR code for registration ${registrationId}`}
         title={`QR code for registration ${registrationId}`}

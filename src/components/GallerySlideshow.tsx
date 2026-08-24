@@ -27,7 +27,7 @@ export function GallerySlideshow() {
 
   return (
     <div 
-      className="relative overflow-hidden rounded-[32px] border border-[#eaddff] bg-[#f3edf7] dark:bg-purple-900/20 aspect-[4/3] md:aspect-[21/9] w-full group"
+      className="relative overflow-hidden rounded-[32px] border border-[#eaddff] bg-[#f3edf7]  aspect-[4/3] md:aspect-[21/9] w-full group"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

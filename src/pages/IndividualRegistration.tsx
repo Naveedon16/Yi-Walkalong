@@ -215,19 +215,19 @@ export function IndividualRegistration() {
   return (
     <div className="max-w-3xl mx-auto w-full">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-[#1d1b20] dark:text-white">Individual Registration</h1>
-        <p className="text-[#49454f] dark:text-gray-300 mt-2">Fill in your details to register for the walkathon.</p>
+        <h1 className="text-3xl font-bold text-[#1d1b20] ">Individual Registration</h1>
+        <p className="text-[#49454f]  mt-2">Fill in your details to register for the walkathon.</p>
       </div>
 
       <div className="flex items-center gap-4 mb-8">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-full bg-[#6750a4] text-white flex items-center justify-center font-medium text-sm">1</div>
-          <span className="font-medium text-[#1d1b20] dark:text-white">Details</span>
+          <span className="font-medium text-[#1d1b20] ">Details</span>
         </div>
         <div className="h-px bg-[#e1e2ec] flex-1"></div>
         <div className="flex items-center gap-2">
-          <div className={`w-8 h-8 rounded-full flex items-center justify-center font-medium text-sm transition-colors ${step === 2 ? 'bg-[#6750a4] text-white' : 'bg-[#f1f3f4] dark:bg-gray-800 text-[#79747e]'}`}>2</div>
-          <span className={`font-medium ${step === 2 ? 'text-[#1d1b20] dark:text-white' : 'text-[#79747e]'}`}>Review</span>
+          <div className={`w-8 h-8 rounded-full flex items-center justify-center font-medium text-sm transition-colors ${step === 2 ? 'bg-[#6750a4] text-white' : 'bg-[#f1f3f4]  text-[#79747e]'}`}>2</div>
+          <span className={`font-medium ${step === 2 ? 'text-[#1d1b20] ' : 'text-[#79747e]'}`}>Review</span>
         </div>
       </div>
 
@@ -253,7 +253,7 @@ export function IndividualRegistration() {
               <form className="space-y-8">
                 {/* Category Selection */}
                 <div className="space-y-4">
-                  <h3 className="text-lg font-bold text-[#1d1b20] dark:text-white border-b border-[#e1e2ec] dark:border-gray-700 pb-2">Participant Category</h3>
+                  <h3 className="text-lg font-bold text-[#1d1b20]  border-b border-[#e1e2ec]  pb-2">Participant Category</h3>
                   <Controller
                     name="category"
                     control={control}
@@ -272,7 +272,7 @@ export function IndividualRegistration() {
 
                 {/* Common Fields */}
                 <div className="space-y-4">
-                  <h3 className="text-lg font-bold text-[#1d1b20] dark:text-white border-b border-[#e1e2ec] dark:border-gray-700 pb-2">Basic Information</h3>
+                  <h3 className="text-lg font-bold text-[#1d1b20]  border-b border-[#e1e2ec]  pb-2">Basic Information</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <Input label="Full Name" {...register('name')} error={errors.name?.message} required />
                     <Input label="Age" type="text" inputMode="numeric" pattern="[0-9]*" {...register('age')} error={errors.age?.message} required />
@@ -303,7 +303,7 @@ export function IndividualRegistration() {
                 </div>
 
                 <div className="space-y-4">
-                  <h3 className="text-lg font-bold text-[#1d1b20] dark:text-white border-b border-[#e1e2ec] dark:border-gray-700 pb-2">Contact Details</h3>
+                  <h3 className="text-lg font-bold text-[#1d1b20]  border-b border-[#e1e2ec]  pb-2">Contact Details</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <Input label="Phone Number" type="tel" {...register('phone')} error={errors.phone?.message} required />
                     <Input label="Email Address (Optional)" type="email" {...register('email')} error={errors.email?.message} />
@@ -312,7 +312,7 @@ export function IndividualRegistration() {
 
                 {/* Dynamic Fields based on category */}
                 {selectedCategory === 'PWD' && (
-                  <div className="space-y-4 bg-[#f8f9ff] dark:bg-gray-800/50 p-6 rounded-[24px] border border-[#e1e2ec] dark:border-gray-700">
+                  <div className="space-y-4 bg-[#f8f9ff]  p-6 rounded-[24px] border border-[#e1e2ec] ">
                     <h3 className="text-lg font-bold text-[#6750a4]">PWD Specific Details</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <Select
@@ -336,7 +336,7 @@ export function IndividualRegistration() {
                 )}
 
                 {selectedCategory === 'YI_MEMBER' && (
-                  <div className="space-y-4 bg-[#f8f9ff] dark:bg-gray-800/50 p-6 rounded-[24px] border border-[#e1e2ec] dark:border-gray-700">
+                  <div className="space-y-4 bg-[#f8f9ff]  p-6 rounded-[24px] border border-[#e1e2ec] ">
                     <h3 className="text-lg font-bold text-[#6750a4]">Yi Member Details</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <Input label="Employer / Business Name" {...register('employer')} error={errors.employer?.message} required />
@@ -365,37 +365,37 @@ export function IndividualRegistration() {
             <Card>
               <div className="space-y-8">
                 <div>
-                  <h3 className="text-xl font-bold text-[#1d1b20] dark:text-white mb-6">Review your information</h3>
+                  <h3 className="text-xl font-bold text-[#1d1b20]  mb-6">Review your information</h3>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 text-sm">
-                    <div className="border-b border-[#e1e2ec] dark:border-gray-700 pb-2">
-                      <p className="text-[#49454f] dark:text-gray-300 mb-1 font-medium">Category</p>
-                      <p className="font-bold text-[#1d1b20] dark:text-white">{settings.categories.find(c => c.value === formData.category)?.label}</p>
+                    <div className="border-b border-[#e1e2ec]  pb-2">
+                      <p className="text-[#49454f]  mb-1 font-medium">Category</p>
+                      <p className="font-bold text-[#1d1b20] ">{settings.categories.find(c => c.value === formData.category)?.label}</p>
                     </div>
-                    <div className="border-b border-[#e1e2ec] dark:border-gray-700 pb-2">
-                      <p className="text-[#49454f] dark:text-gray-300 mb-1 font-medium">Full Name</p>
-                      <p className="font-bold text-[#1d1b20] dark:text-white">{formData.name}</p>
+                    <div className="border-b border-[#e1e2ec]  pb-2">
+                      <p className="text-[#49454f]  mb-1 font-medium">Full Name</p>
+                      <p className="font-bold text-[#1d1b20] ">{formData.name}</p>
                     </div>
-                    <div className="border-b border-[#e1e2ec] dark:border-gray-700 pb-2">
-                      <p className="text-[#49454f] dark:text-gray-300 mb-1 font-medium">Email</p>
-                      <p className="font-bold text-[#1d1b20] dark:text-white">{formData.email || 'N/A'}</p>
+                    <div className="border-b border-[#e1e2ec]  pb-2">
+                      <p className="text-[#49454f]  mb-1 font-medium">Email</p>
+                      <p className="font-bold text-[#1d1b20] ">{formData.email || 'N/A'}</p>
                     </div>
-                    <div className="border-b border-[#e1e2ec] dark:border-gray-700 pb-2">
-                      <p className="text-[#49454f] dark:text-gray-300 mb-1 font-medium">Phone</p>
-                      <p className="font-bold text-[#1d1b20] dark:text-white">{formData.phone}</p>
+                    <div className="border-b border-[#e1e2ec]  pb-2">
+                      <p className="text-[#49454f]  mb-1 font-medium">Phone</p>
+                      <p className="font-bold text-[#1d1b20] ">{formData.phone}</p>
                     </div>
-                    <div className="border-b border-[#e1e2ec] dark:border-gray-700 pb-2">
-                      <p className="text-[#49454f] dark:text-gray-300 mb-1 font-medium">Age & Gender</p>
-                      <p className="font-bold text-[#1d1b20] dark:text-white">{formData.age} yrs, {formData.gender}</p>
+                    <div className="border-b border-[#e1e2ec]  pb-2">
+                      <p className="text-[#49454f]  mb-1 font-medium">Age & Gender</p>
+                      <p className="font-bold text-[#1d1b20] ">{formData.age} yrs, {formData.gender}</p>
                     </div>
-                    <div className="border-b border-[#e1e2ec] dark:border-gray-700 pb-2">
-                      <p className="text-[#49454f] dark:text-gray-300 mb-1 font-medium">T-Shirt Size</p>
-                      <p className="font-bold text-[#1d1b20] dark:text-white">{formData.tshirtSize}</p>
+                    <div className="border-b border-[#e1e2ec]  pb-2">
+                      <p className="text-[#49454f]  mb-1 font-medium">T-Shirt Size</p>
+                      <p className="font-bold text-[#1d1b20] ">{formData.tshirtSize}</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-[#f1f3f4] dark:bg-gray-800 p-4 rounded-xl text-sm text-[#49454f] dark:text-gray-300">
+                <div className="bg-[#f1f3f4]  p-4 rounded-xl text-sm text-[#49454f] ">
                   By submitting this form, you agree to our Terms of Service and Privacy Policy. You confirm that all information provided is accurate.
                 </div>
 
@@ -423,9 +423,9 @@ export function IndividualRegistration() {
 
       {duplicateWarning && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white dark:bg-[#1e1e1e] rounded-2xl p-6 max-w-md w-full shadow-xl">
-            <h3 className="text-xl font-bold text-[#1d1b20] dark:text-white mb-2">Duplicate Registration Detected</h3>
-            <p className="text-[#49454f] dark:text-gray-300 mb-6">
+          <div className="bg-white  rounded-2xl p-6 max-w-md w-full shadow-xl">
+            <h3 className="text-xl font-bold text-[#1d1b20]  mb-2">Duplicate Registration Detected</h3>
+            <p className="text-[#49454f]  mb-6">
               This participant appears to have already been registered. Would you like to continue?
             </p>
             <div className="flex justify-end gap-3">

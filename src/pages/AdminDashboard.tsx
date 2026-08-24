@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useTheme } from '../context/ThemeContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
@@ -12,7 +11,6 @@ export function AdminDashboard() {
   const navigate = useNavigate();
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
-  const { theme } = useTheme();
   const [user, setUser] = useState<AdminUser | null>(null);
   
                 const [isExportingCSV, setIsExportingCSV] = useState(false);
@@ -128,14 +126,14 @@ export function AdminDashboard() {
     <div className="max-w-7xl mx-auto w-full px-4 py-8">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-[#1d1b20] dark:text-white">Admin Dashboard</h1>
-          <p className="text-[#49454f] dark:text-gray-300">Welcome back, {user.name} ({user.role})</p>
+          <h1 className="text-3xl font-bold text-[#1d1b20] ">Admin Dashboard</h1>
+          <p className="text-[#49454f] ">Welcome back, {user.name} ({user.role})</p>
         </div>
         <div className="flex gap-4 flex-wrap justify-end">
-                    <Button variant="outline" size="sm" onClick={handleExportParticipantsCSV} disabled={isExportingCSV} className="dark:text-green-300 dark:border-green-800">
+                    <Button variant="outline" size="sm" onClick={handleExportParticipantsCSV} disabled={isExportingCSV} className=" ">
             <FileSpreadsheet className="w-4 h-4 mr-2" /> {isExportingCSV ? 'Preparing CSV...' : 'Download CSV'}
           </Button>
-          <Button variant="outline" size="sm" onClick={handleExportSummary} disabled={!stats} className="dark:text-blue-300 dark:border-blue-800">
+          <Button variant="outline" size="sm" onClick={handleExportSummary} disabled={!stats} className=" ">
             <Download className="w-4 h-4 mr-2" /> Export Summary
           </Button>
           {/* <Link to="/admin/scanner">
@@ -144,7 +142,7 @@ export function AdminDashboard() {
           <Link to="/admin/participants">
             <Button variant="outline" size="sm">Manage Participants</Button>
           </Link>
-                    <Button variant="outline" size="sm" onClick={handleLogout} className="text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30">
+                    <Button variant="outline" size="sm" onClick={handleLogout} className="text-red-600 hover:bg-red-50 ">
             <LogOut className="w-4 h-4 mr-2" /> Logout
           </Button>
         </div>
@@ -157,62 +155,62 @@ export function AdminDashboard() {
       ) : stats ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 mb-8">
           <Card className="flex items-center gap-4 p-4 focus-within:ring-2 focus-within:ring-[#6750a4]" tabIndex={0} aria-label="Metric card">
-            <div className="w-10 h-10 rounded-full bg-[#f3edf7] dark:bg-purple-900/30 flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 rounded-full bg-[#f3edf7]  flex items-center justify-center shrink-0">
               <Users className="w-5 h-5 text-[#6750a4]" />
             </div>
             <div>
-              <p className="text-xs font-medium text-[#49454f] dark:text-gray-300">Registrations</p>
-              <p className="text-xl font-bold text-[#1d1b20] dark:text-white">{stats.totalRegistrations}</p>
+              <p className="text-xs font-medium text-[#49454f] ">Registrations</p>
+              <p className="text-xl font-bold text-[#1d1b20] ">{stats.totalRegistrations}</p>
             </div>
           </Card>
           
           <Card className="flex items-center gap-4 p-4 focus-within:ring-2 focus-within:ring-[#6750a4]" tabIndex={0} aria-label="Metric card">
-            <div className="w-10 h-10 rounded-full bg-orange-50 dark:bg-orange-900/30 flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 rounded-full bg-orange-50  flex items-center justify-center shrink-0">
               <Users className="w-5 h-5 text-orange-600" />
             </div>
             <div>
-              <p className="text-xs font-medium text-[#49454f] dark:text-gray-300">Participants</p>
-              <p className="text-xl font-bold text-[#1d1b20] dark:text-white">{stats.totalParticipants}</p>
+              <p className="text-xs font-medium text-[#49454f] ">Participants</p>
+              <p className="text-xl font-bold text-[#1d1b20] ">{stats.totalParticipants}</p>
             </div>
           </Card>
 
           <Card className="flex items-center gap-4 p-4 focus-within:ring-2 focus-within:ring-[#6750a4]" tabIndex={0} aria-label="Metric card">
-            <div className="w-10 h-10 rounded-full bg-[#eaddff] dark:bg-purple-900/40 flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 rounded-full bg-[#eaddff]  flex items-center justify-center shrink-0">
               <Users className="w-5 h-5 text-[#21005d]" />
             </div>
             <div>
-              <p className="text-xs font-medium text-[#49454f] dark:text-gray-300">Individuals</p>
-              <p className="text-xl font-bold text-[#1d1b20] dark:text-white">{stats.individualRegistrations}</p>
+              <p className="text-xs font-medium text-[#49454f] ">Individuals</p>
+              <p className="text-xl font-bold text-[#1d1b20] ">{stats.individualRegistrations}</p>
             </div>
           </Card>
           
           <Card className="flex items-center gap-4 p-4 focus-within:ring-2 focus-within:ring-[#6750a4]" tabIndex={0} aria-label="Metric card">
-            <div className="w-10 h-10 rounded-full bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 rounded-full bg-blue-50  flex items-center justify-center shrink-0">
               <FileSpreadsheet className="w-5 h-5 text-blue-700" />
             </div>
             <div>
-              <p className="text-xs font-medium text-[#49454f] dark:text-gray-300">Institutions</p>
-              <p className="text-xl font-bold text-[#1d1b20] dark:text-white">{stats.institutionRegistrations}</p>
+              <p className="text-xs font-medium text-[#49454f] ">Institutions</p>
+              <p className="text-xl font-bold text-[#1d1b20] ">{stats.institutionRegistrations}</p>
             </div>
           </Card>
 
           <Card className="flex items-center gap-4 p-4 focus-within:ring-2 focus-within:ring-[#6750a4]" tabIndex={0} aria-label="Metric card">
-            <div className="w-10 h-10 rounded-full bg-green-50 dark:bg-green-900/30 flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 rounded-full bg-green-50  flex items-center justify-center shrink-0">
               <CheckCircle className="w-5 h-5 text-green-700" />
             </div>
             <div>
-              <p className="text-xs font-medium text-[#49454f] dark:text-gray-300">Confirmed</p>
-              <p className="text-xl font-bold text-[#1d1b20] dark:text-white">{stats.confirmedRegistrations}</p>
+              <p className="text-xs font-medium text-[#49454f] ">Confirmed</p>
+              <p className="text-xl font-bold text-[#1d1b20] ">{stats.confirmedRegistrations}</p>
             </div>
           </Card>
 
           <Card className="flex items-center gap-4 p-4 focus-within:ring-2 focus-within:ring-[#6750a4]" tabIndex={0} aria-label="Metric card">
-            <div className="w-10 h-10 rounded-full bg-yellow-50 dark:bg-yellow-900/30 flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 rounded-full bg-yellow-50  flex items-center justify-center shrink-0">
               <Activity className="w-5 h-5 text-yellow-700" />
             </div>
             <div>
-              <p className="text-xs font-medium text-[#49454f] dark:text-gray-300">Pending</p>
-              <p className="text-xl font-bold text-[#1d1b20] dark:text-white">{stats.pendingValidation}</p>
+              <p className="text-xs font-medium text-[#49454f] ">Pending</p>
+              <p className="text-xl font-bold text-[#1d1b20] ">{stats.pendingValidation}</p>
             </div>
           </Card>
         </div>
@@ -229,25 +227,25 @@ export function AdminDashboard() {
             <div className="sr-only">
               Registration trend: {stats.totalRegistrations} total registrations. The highest activity was on {stats.trends?.[stats.trends.length - 1]?.date || 'a recent date'}.
             </div>
-            <h3 className="text-lg font-bold text-[#1d1b20] dark:text-white mb-4">Registration Trends (Daily)</h3>
+            <h3 className="text-lg font-bold text-[#1d1b20]  mb-4">Registration Trends (Daily)</h3>
             {stats.trends && stats.trends.length > 0 ? (
               <div className="h-72 w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={stats.trends} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke={theme === 'dark' ? '#374151' : '#e1e2ec'} />
+                    <CartesianGrid strokeDasharray="3 3" stroke={'#e1e2ec'} />
                     <XAxis 
                       dataKey="date" 
-                      tick={{ fill: theme === 'dark' ? '#d1d5db' : '#49454f' }} 
+                      tick={{ fill: '#49454f' }} 
                       tickFormatter={(val) => {
                         if (val === 'Unknown') return 'Unknown';
                         const d = new Date(val);
                         return d.toLocaleDateString(undefined, { day: 'numeric', month: 'short' });
                       }}
-                      className="dark:text-gray-300"
+                      className=""
                     />
-                    <YAxis tick={{ fill: theme === 'dark' ? '#d1d5db' : '#49454f' }} allowDecimals={false} className="dark:text-gray-300" />
+                    <YAxis tick={{ fill: '#49454f' }} allowDecimals={false} className="" />
                     <Tooltip 
-                      contentStyle={{ backgroundColor: theme === 'dark' ? '#1e1e1e' : 'white', borderRadius: '8px', border: `1px solid ${theme === 'dark' ? '#374151' : '#cac4d0'}`, color: theme === 'dark' ? '#f3f4f6' : '#1d1b20' }}
+                      contentStyle={{ backgroundColor: 'white', borderRadius: '8px', border: `1px solid ${'#cac4d0'}`, color: '#1d1b20' }}
                       labelFormatter={(val) => {
                         if (val === 'Unknown') return 'Unknown Date';
                         return new Date(val).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' });
@@ -259,14 +257,14 @@ export function AdminDashboard() {
                 </ResponsiveContainer>
               </div>
             ) : (
-              <div className="h-72 flex items-center justify-center text-[#49454f] dark:text-gray-400">
+              <div className="h-72 flex items-center justify-center text-[#49454f] ">
                 No registration activity yet.
               </div>
             )}
           </Card>
           
           <Card>
-            <h3 className="text-lg font-bold text-[#1d1b20] dark:text-white mb-4">Registration Breakdown</h3>
+            <h3 className="text-lg font-bold text-[#1d1b20]  mb-4">Registration Breakdown</h3>
             <div className="h-72 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
@@ -286,7 +284,7 @@ export function AdminDashboard() {
                     <Cell key="cell-1" fill="#b3261e" />
                   </Pie>
                   <Tooltip 
-                    contentStyle={{ backgroundColor: theme === 'dark' ? '#1e1e1e' : 'white', borderRadius: '8px', border: `1px solid ${theme === 'dark' ? '#374151' : '#cac4d0'}`, color: theme === 'dark' ? '#f3f4f6' : '#1d1b20' }}
+                    contentStyle={{ backgroundColor: 'white', borderRadius: '8px', border: `1px solid ${'#cac4d0'}`, color: '#1d1b20' }}
                   />
                   <Legend />
                 </PieChart>
@@ -299,43 +297,43 @@ export function AdminDashboard() {
       {stats && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           <Card>
-            <h3 className="text-lg font-bold text-[#1d1b20] dark:text-white mb-4">Individual Categories</h3>
+            <h3 className="text-lg font-bold text-[#1d1b20]  mb-4">Individual Categories</h3>
             <div className="space-y-3">
               {stats.individualCategories ? Object.entries(stats.individualCategories).map(([cat, count]) => (
                 <div key={`ind-${cat}`} className="flex justify-between items-center">
-                  <span className="text-[#49454f] dark:text-gray-300">{cat}</span>
-                  <span className="font-medium text-[#1d1b20] dark:text-white">{count}</span>
+                  <span className="text-[#49454f] ">{cat}</span>
+                  <span className="font-medium text-[#1d1b20] ">{count}</span>
                 </div>
               )) : Object.entries(stats.byCategory).map(([cat, count]) => (
                 <div key={cat} className="flex justify-between items-center">
-                  <span className="text-[#49454f] dark:text-gray-300">{cat}</span>
-                  <span className="font-medium text-[#1d1b20] dark:text-white">{count}</span>
+                  <span className="text-[#49454f] ">{cat}</span>
+                  <span className="font-medium text-[#1d1b20] ">{count}</span>
                 </div>
               ))}
             </div>
           </Card>
           
           <Card>
-            <h3 className="text-lg font-bold text-[#1d1b20] dark:text-white mb-4">Institution Categories</h3>
+            <h3 className="text-lg font-bold text-[#1d1b20]  mb-4">Institution Categories</h3>
             <div className="space-y-3">
               {stats.institutionCategories ? Object.entries(stats.institutionCategories).map(([cat, count]) => (
                 <div key={`inst-${cat}`} className="flex justify-between items-center">
-                  <span className="text-[#49454f] dark:text-gray-300">{cat}</span>
-                  <span className="font-medium text-[#1d1b20] dark:text-white">{count}</span>
+                  <span className="text-[#49454f] ">{cat}</span>
+                  <span className="font-medium text-[#1d1b20] ">{count}</span>
                 </div>
               )) : (
-                <div className="text-[#49454f] dark:text-gray-300">No institution data</div>
+                <div className="text-[#49454f] ">No institution data</div>
               )}
             </div>
           </Card>
 
           <Card className="lg:col-span-2">
-            <h3 className="text-lg font-bold text-[#1d1b20] dark:text-white mb-4">Registrations by T-Shirt Size</h3>
+            <h3 className="text-lg font-bold text-[#1d1b20]  mb-4">Registrations by T-Shirt Size</h3>
             <div className="space-y-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {Object.entries(stats.byTshirtSize).map(([size, count]) => (
-                <div key={size} className="flex justify-between items-center bg-[#f8f9ff] dark:bg-gray-800/50 p-3 rounded-lg border border-[#e1e2ec] dark:border-gray-700">
-                  <span className="text-[#49454f] dark:text-gray-300 font-medium">{size}</span>
-                  <span className="font-bold text-[#1d1b20] dark:text-white text-lg">{count}</span>
+                <div key={size} className="flex justify-between items-center bg-[#f8f9ff]  p-3 rounded-lg border border-[#e1e2ec] ">
+                  <span className="text-[#49454f]  font-medium">{size}</span>
+                  <span className="font-bold text-[#1d1b20]  text-lg">{count}</span>
                 </div>
               ))}
             </div>

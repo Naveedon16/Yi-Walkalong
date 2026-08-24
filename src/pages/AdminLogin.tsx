@@ -54,8 +54,8 @@ export function AdminLogin() {
     <div className="max-w-md mx-auto mt-20 w-full">
       <Card>
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-[#1d1b20] dark:text-white">Admin Login</h1>
-          <p className="text-[#49454f] dark:text-gray-300 mt-2">Sign in to manage WalkAlong registrations.</p>
+          <h1 className="text-2xl font-bold text-[#1d1b20] ">Admin Login</h1>
+          <p className="text-[#49454f]  mt-2">Sign in to manage WalkAlong registrations.</p>
         </div>
         
         <form onSubmit={handleLogin} className="space-y-6">

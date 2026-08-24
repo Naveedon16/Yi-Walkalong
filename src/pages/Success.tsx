@@ -48,17 +48,17 @@ export function Success() {
             <CheckCircle2 className="w-10 h-10 text-green-700" />
           </div>
           
-          <h1 className="text-3xl font-bold text-[#1d1b20] dark:text-white mb-2">Registration Successful!</h1>
-          <p className="text-[#49454f] dark:text-gray-300 mb-8">
+          <h1 className="text-3xl font-bold text-[#1d1b20]  mb-2">Registration Successful!</h1>
+          <p className="text-[#49454f]  mb-8">
             {type === 'institution' 
               ? 'Your institution registration has been submitted successfully.'
               : 'Thank you for registering for Yi WalkAlong 2026.'}
           </p>
 
-          <div className="bg-[#f1f3f4] dark:bg-gray-800 rounded-2xl p-6 mb-8 border border-[#cac4d0]">
-            <p className="text-sm text-[#49454f] dark:text-gray-300 mb-2 font-bold uppercase tracking-widest">Your Registration ID</p>
+          <div className="bg-[#f1f3f4]  rounded-2xl p-6 mb-8 border border-[#cac4d0]">
+            <p className="text-sm text-[#49454f]  mb-2 font-bold uppercase tracking-widest">Your Registration ID</p>
             <div className="flex items-center justify-center gap-3">
-              <span className="text-3xl font-black text-[#1d1b20] dark:text-white tracking-wider">{id}</span>
+              <span className="text-3xl font-black text-[#1d1b20]  tracking-wider">{id}</span>
               <button 
                 onClick={copyToClipboard}
                 className="p-2 hover:bg-[#e1e2ec] rounded-full transition-colors text-[#6750a4]"

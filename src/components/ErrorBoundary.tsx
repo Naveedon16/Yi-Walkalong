@@ -29,13 +29,13 @@ export class ErrorBoundary extends Component<Props, State> {
   public render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen bg-[#f3edf7] dark:bg-[#121212] flex items-center justify-center p-4">
+        <div className="min-h-screen bg-[#f3edf7]  flex items-center justify-center p-4">
           <Card className="max-w-xl w-full text-center">
-            <div className="w-16 h-16 bg-red-100 dark:bg-red-900/30 text-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="w-16 h-16 bg-red-100  text-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
               <AlertOctagon className="w-8 h-8" />
             </div>
-            <h1 className="text-2xl font-bold text-[#1d1b20] dark:text-white mb-4">Something went wrong</h1>
-            <div className="bg-[#f8f9ff] dark:bg-gray-800/50 p-4 rounded-xl border border-[#e1e2ec] dark:border-gray-700 text-left mb-6 overflow-auto max-h-48 text-sm font-mono text-red-600 dark:text-red-400">
+            <h1 className="text-2xl font-bold text-[#1d1b20]  mb-4">Something went wrong</h1>
+            <div className="bg-[#f8f9ff]  p-4 rounded-xl border border-[#e1e2ec]  text-left mb-6 overflow-auto max-h-48 text-sm font-mono text-red-600 ">
               {this.state.error?.message || 'Unknown error'}
             </div>
             <Button onClick={() => window.location.href = '/'}>

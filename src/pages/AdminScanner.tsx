@@ -82,11 +82,11 @@ export function AdminScanner() {
   return (
     <div className="max-w-xl mx-auto w-full pt-8">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-[#1d1b20] dark:text-white mb-2">Check-In Scanner</h1>
-        <p className="text-[#49454f] dark:text-gray-300">Scan participant QR codes or enter Registration ID manually.</p>
+        <h1 className="text-3xl font-bold text-[#1d1b20]  mb-2">Check-In Scanner</h1>
+        <p className="text-[#49454f] ">Scan participant QR codes or enter Registration ID manually.</p>
       </div>
 
-      <Card className="mb-6 border-[#cac4d0] dark:border-gray-700">
+      <Card className="mb-6 border-[#cac4d0] ">
         {!showScanner ? (
           <div className="flex flex-col items-center py-6">
             <Button onClick={startScanner} size="lg" className="w-full sm:w-64 gap-2 mb-8 bg-[#6750a4]">
@@ -96,9 +96,9 @@ export function AdminScanner() {
             
             <div className="w-full relative flex items-center justify-center mb-8">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-[#cac4d0] dark:border-gray-700"></div>
+                <div className="w-full border-t border-[#cac4d0] "></div>
               </div>
-              <div className="relative bg-white dark:bg-[#1e1e1e] px-4 text-sm text-[#79747e] dark:text-gray-400 font-medium">OR</div>
+              <div className="relative bg-white  px-4 text-sm text-[#79747e]  font-medium">OR</div>
             </div>
 
             <form onSubmit={handleManualSubmit} className="w-full">
@@ -117,7 +117,7 @@ export function AdminScanner() {
           </div>
         ) : (
           <div className="flex flex-col items-center">
-            <h3 className="font-medium text-[#1d1b20] dark:text-white mb-4">Point camera at QR code</h3>
+            <h3 className="font-medium text-[#1d1b20]  mb-4">Point camera at QR code</h3>
             <QRScanner 
               onScanSuccess={handleScanSuccess} 
               onClose={stopScanner} 
@@ -136,38 +136,38 @@ export function AdminScanner() {
             transition={{ duration: 0.3 }}
           >
             {scanResult.type === 'success' && (
-              <Card className="border-t-4 border-t-green-600 bg-green-50 dark:bg-green-900/10">
+              <Card className="border-t-4 border-t-green-600 bg-green-50 ">
                 <div className="flex flex-col items-center text-center">
-                  <div className="w-16 h-16 rounded-full bg-green-100 dark:bg-green-800/30 flex items-center justify-center mb-4">
-                    <CheckCircle2 className="w-8 h-8 text-green-600 dark:text-green-400" />
+                  <div className="w-16 h-16 rounded-full bg-green-100  flex items-center justify-center mb-4">
+                    <CheckCircle2 className="w-8 h-8 text-green-600 " />
                   </div>
-                  <h3 className="text-xl font-bold text-green-800 dark:text-green-300 mb-2">
+                  <h3 className="text-xl font-bold text-green-800  mb-2">
                     {scanResult.details?.name === 'Pending Sync' ? 'CHECK-IN QUEUED' : 'CHECK-IN CONFIRMED'}
                   </h3>
                   {scanResult.details?.name === 'Pending Sync' && (
-                    <p className="text-sm text-green-700 dark:text-green-400 mb-4 font-medium px-4">
+                    <p className="text-sm text-green-700  mb-4 font-medium px-4">
                       You are offline. This scan has been saved locally and will sync when your connection returns.
                     </p>
                   )}
                   <div className="mb-6"></div>
                   
-                  <div className="w-full bg-white dark:bg-[#1e1e1e] rounded-xl p-4 mb-6 shadow-sm border border-green-100 dark:border-green-800/30">
+                  <div className="w-full bg-white  rounded-xl p-4 mb-6 shadow-sm border border-green-100 ">
                     <div className="grid grid-cols-2 gap-4 text-left">
                       <div>
-                        <p className="text-xs text-[#79747e] dark:text-gray-400 uppercase font-bold tracking-wider mb-1">Name</p>
-                        <p className="font-medium text-[#1d1b20] dark:text-white">{scanResult.details?.name}</p>
+                        <p className="text-xs text-[#79747e]  uppercase font-bold tracking-wider mb-1">Name</p>
+                        <p className="font-medium text-[#1d1b20] ">{scanResult.details?.name}</p>
                       </div>
                       <div>
-                        <p className="text-xs text-[#79747e] dark:text-gray-400 uppercase font-bold tracking-wider mb-1">Registration ID</p>
-                        <p className="font-medium text-[#1d1b20] dark:text-white">{scanResult.details?.id}</p>
+                        <p className="text-xs text-[#79747e]  uppercase font-bold tracking-wider mb-1">Registration ID</p>
+                        <p className="font-medium text-[#1d1b20] ">{scanResult.details?.id}</p>
                       </div>
                       <div>
-                        <p className="text-xs text-[#79747e] dark:text-gray-400 uppercase font-bold tracking-wider mb-1">Category</p>
-                        <p className="font-medium text-[#1d1b20] dark:text-white">{scanResult.details?.category}</p>
+                        <p className="text-xs text-[#79747e]  uppercase font-bold tracking-wider mb-1">Category</p>
+                        <p className="font-medium text-[#1d1b20] ">{scanResult.details?.category}</p>
                       </div>
                       <div>
-                        <p className="text-xs text-[#79747e] dark:text-gray-400 uppercase font-bold tracking-wider mb-1">T-Shirt Size</p>
-                        <p className="font-medium text-[#1d1b20] dark:text-white">{scanResult.details?.tshirtSize}</p>
+                        <p className="text-xs text-[#79747e]  uppercase font-bold tracking-wider mb-1">T-Shirt Size</p>
+                        <p className="font-medium text-[#1d1b20] ">{scanResult.details?.tshirtSize}</p>
                       </div>
                     </div>
                   </div>
@@ -177,28 +177,28 @@ export function AdminScanner() {
             )}
 
             {scanResult.type === 'duplicate' && (
-              <Card className="border-t-4 border-t-amber-500 bg-amber-50 dark:bg-amber-900/10">
+              <Card className="border-t-4 border-t-amber-500 bg-amber-50 ">
                 <div className="flex flex-col items-center text-center">
-                  <div className="w-16 h-16 rounded-full bg-amber-100 dark:bg-amber-800/30 flex items-center justify-center mb-4">
-                    <AlertTriangle className="w-8 h-8 text-amber-600 dark:text-amber-400" />
+                  <div className="w-16 h-16 rounded-full bg-amber-100  flex items-center justify-center mb-4">
+                    <AlertTriangle className="w-8 h-8 text-amber-600 " />
                   </div>
-                  <h3 className="text-xl font-bold text-amber-800 dark:text-amber-300 mb-2">ALREADY CHECKED IN</h3>
-                  <p className="text-amber-700 dark:text-amber-400 mb-6">{scanResult.message}</p>
+                  <h3 className="text-xl font-bold text-amber-800  mb-2">ALREADY CHECKED IN</h3>
+                  <p className="text-amber-700  mb-6">{scanResult.message}</p>
                   <Button onClick={() => { setScanResult(null); startScanner(); }} variant="outline" className="w-full border-amber-300 text-amber-700 hover:bg-amber-100">Scan Next</Button>
                 </div>
               </Card>
             )}
 
             {(scanResult.type === 'invalid' || scanResult.type === 'error') && (
-              <Card className="border-t-4 border-t-red-600 bg-red-50 dark:bg-red-900/10">
+              <Card className="border-t-4 border-t-red-600 bg-red-50 ">
                 <div className="flex flex-col items-center text-center">
-                  <div className="w-16 h-16 rounded-full bg-red-100 dark:bg-red-800/30 flex items-center justify-center mb-4">
-                    <XCircle className="w-8 h-8 text-red-600 dark:text-red-400" />
+                  <div className="w-16 h-16 rounded-full bg-red-100  flex items-center justify-center mb-4">
+                    <XCircle className="w-8 h-8 text-red-600 " />
                   </div>
-                  <h3 className="text-xl font-bold text-red-800 dark:text-red-300 mb-2">
+                  <h3 className="text-xl font-bold text-red-800  mb-2">
                     {scanResult.type === 'invalid' ? 'REGISTRATION NOT FOUND' : 'ERROR'}
                   </h3>
-                  <p className="text-red-700 dark:text-red-400 mb-6">{scanResult.message}</p>
+                  <p className="text-red-700  mb-6">{scanResult.message}</p>
                   <Button onClick={() => { setScanResult(null); startScanner(); }} variant="outline" className="w-full border-red-300 text-red-700 hover:bg-red-100">Scan Next</Button>
                 </div>
               </Card>

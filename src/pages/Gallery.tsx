@@ -36,8 +36,8 @@ export function Gallery() {
         <Link to="/" className="inline-flex items-center text-[#6750a4] hover:underline font-medium mb-6">
           <ArrowLeft className="w-4 h-4 mr-2" /> Back to Home
         </Link>
-        <h1 className="text-4xl lg:text-5xl font-bold text-[#1d1b20] dark:text-white mb-4">Moments of Joy</h1>
-        <p className="text-[#49454f] dark:text-gray-300 text-xl">Glimpses from our previous editions.</p>
+        <h1 className="text-4xl lg:text-5xl font-bold text-[#1d1b20]  mb-4">Moments of Joy</h1>
+        <p className="text-[#49454f]  text-xl">Glimpses from our previous editions.</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -45,7 +45,7 @@ export function Gallery() {
           <div
             key={src}
             onClick={() => setSelectedIndex(i)}
-            className="relative overflow-hidden rounded-[32px] border border-[#eaddff] dark:border-gray-700 bg-[#f3edf7] dark:bg-purple-900/20 group cursor-pointer aspect-[4/3] focus:outline-none focus:ring-4 focus:ring-[#6750a4]" tabIndex={0} onKeyDown={(e) => { if(e.key === 'Enter') setSelectedIndex(i); }}
+            className="relative overflow-hidden rounded-[32px] border border-[#eaddff]  bg-[#f3edf7]  group cursor-pointer aspect-[4/3] focus:outline-none focus:ring-4 focus:ring-[#6750a4]" tabIndex={0} onKeyDown={(e) => { if(e.key === 'Enter') setSelectedIndex(i); }}
           >
             <GalleryImage
               src={src}

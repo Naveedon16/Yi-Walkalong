@@ -5,7 +5,6 @@ import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
 import { Select } from '../components/ui/Select';
 import { AdminService, AdminUser, Participant } from '../services';
-import { useTheme } from '../context/ThemeContext';
 import { ParticipantDetails } from '../components/admin/ParticipantDetails';
 import { Search, Download, ArrowLeft } from 'lucide-react';
 
@@ -198,8 +197,8 @@ export function AdminParticipants() {
               <ArrowLeft className="w-4 h-4 mr-1" /> Back to Dashboard
             </Link>
           </div>
-          <h1 className="text-3xl font-bold text-[#1d1b20] dark:text-white">Manage Participants</h1>
-          <p className="text-[#49454f] dark:text-gray-300">View and filter all registrations.</p>
+          <h1 className="text-3xl font-bold text-[#1d1b20] ">Manage Participants</h1>
+          <p className="text-[#49454f] ">View and filter all registrations.</p>
         </div>
         <Button onClick={exportCSV} className="flex items-center gap-2">
           <Download className="w-4 h-4" /> Export to CSV
@@ -209,9 +208,9 @@ export function AdminParticipants() {
       <Card className="mb-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div>
-            <label className="block text-sm font-medium text-[#1d1b20] dark:text-white mb-1">Search</label>
+            <label className="block text-sm font-medium text-[#1d1b20]  mb-1">Search</label>
             <div className="relative">
-              <Search className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-[#49454f] dark:text-gray-300" />
+              <Search className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-[#49454f] " />
               <input
                 type="text"
                 placeholder="Name, ID, or Phone..."
@@ -258,9 +257,9 @@ export function AdminParticipants() {
           </div>
         </div>
         
-        <div className="mt-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pt-4 border-t border-[#e1e2ec] dark:border-gray-700">
+        <div className="mt-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pt-4 border-t border-[#e1e2ec] ">
           <div className="flex items-center gap-4 text-sm">
-            <span className="font-medium text-[#1d1b20] dark:text-white">Status Legend:</span>
+            <span className="font-medium text-[#1d1b20] ">Status Legend:</span>
             <div className="flex gap-3">
               <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-green-500"></span> Confirmed</span>
               <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-blue-500"></span> Checked In</span>
@@ -269,7 +268,7 @@ export function AdminParticipants() {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <label className="text-sm text-[#49454f] dark:text-gray-300 flex items-center gap-2 cursor-pointer">
+            <label className="text-sm text-[#49454f]  flex items-center gap-2 cursor-pointer">
               <input 
                 type="checkbox" 
                 checked={compactView} 
@@ -281,18 +280,18 @@ export function AdminParticipants() {
           </div>
         </div>
         {filteredParticipants.length === 0 && exportSuccess === false && (
-          <div className="mt-2 text-sm text-[#49454f] dark:text-gray-300">No participants available to export.</div>
+          <div className="mt-2 text-sm text-[#49454f] ">No participants available to export.</div>
         )}
       </Card>
       
       {selectedIds.size > 0 && (
-        <Card className="mb-6 bg-[#f3edf7] dark:bg-purple-900/20 border-[#eaddff] dark:border-purple-800">
+        <Card className="mb-6 bg-[#f3edf7]  border-[#eaddff] ">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div className="text-sm font-medium text-[#6750a4] dark:text-purple-300">
+            <div className="text-sm font-medium text-[#6750a4] ">
               {selectedIds.size} participant{selectedIds.size !== 1 ? 's' : ''} selected
             </div>
             <div className="flex flex-wrap items-center gap-2">
-              <span className="text-sm text-[#49454f] dark:text-gray-300">Bulk action:</span>
+              <span className="text-sm text-[#49454f] ">Bulk action:</span>
               <Button size="sm" variant="outline" onClick={() => handleBulkUpdate('Confirmed')} disabled={bulkUpdating} className="border-green-200 text-green-700 hover:bg-green-50">
                 Confirm
               </Button>
@@ -308,11 +307,11 @@ export function AdminParticipants() {
         </Card>
       )}
 
-      <Card className="p-0 overflow-hidden border-[#cac4d0] dark:border-gray-700">
+      <Card className="p-0 overflow-hidden border-[#cac4d0] ">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-[#f1f3f4] dark:bg-gray-800 border-b border-[#cac4d0] dark:border-gray-700">
+              <tr className="bg-[#f1f3f4]  border-b border-[#cac4d0] ">
                 <th className="px-6 py-4 w-12 text-center">
                   <input 
                     type="checkbox"
@@ -321,12 +320,12 @@ export function AdminParticipants() {
                     className="w-4 h-4 rounded border-gray-300 text-[#6750a4] focus:ring-[#6750a4]"
                   />
                 </th>
-                <th className={`px-6 font-bold text-[#1d1b20] dark:text-white text-sm ${compactView ? 'py-2' : 'py-4'}`}>ID</th>
-                <th className={`px-6 font-bold text-[#1d1b20] dark:text-white text-sm ${compactView ? 'py-2' : 'py-4'}`}>Name</th>
-                <th className={`px-6 font-bold text-[#1d1b20] dark:text-white text-sm ${compactView ? 'py-2' : 'py-4'}`}>Category</th>
-                <th className={`px-6 font-bold text-[#1d1b20] dark:text-white text-sm ${compactView ? 'py-2' : 'py-4'}`}>Phone</th>
-                <th className={`px-6 font-bold text-[#1d1b20] dark:text-white text-sm ${compactView ? 'py-2' : 'py-4'}`}>T-Shirt</th>
-                <th className={`px-6 font-bold text-[#1d1b20] dark:text-white text-sm ${compactView ? 'py-2' : 'py-4'}`}>Status</th>
+                <th className={`px-6 font-bold text-[#1d1b20]  text-sm ${compactView ? 'py-2' : 'py-4'}`}>ID</th>
+                <th className={`px-6 font-bold text-[#1d1b20]  text-sm ${compactView ? 'py-2' : 'py-4'}`}>Name</th>
+                <th className={`px-6 font-bold text-[#1d1b20]  text-sm ${compactView ? 'py-2' : 'py-4'}`}>Category</th>
+                <th className={`px-6 font-bold text-[#1d1b20]  text-sm ${compactView ? 'py-2' : 'py-4'}`}>Phone</th>
+                <th className={`px-6 font-bold text-[#1d1b20]  text-sm ${compactView ? 'py-2' : 'py-4'}`}>T-Shirt</th>
+                <th className={`px-6 font-bold text-[#1d1b20]  text-sm ${compactView ? 'py-2' : 'py-4'}`}>Status</th>
               </tr>
             </thead>
             <tbody>
@@ -340,15 +339,15 @@ export function AdminParticipants() {
                 </tr>
               ) : participants.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="px-6 py-8 text-center text-[#49454f] dark:text-gray-300">No registrations found.</td>
+                  <td colSpan={7} className="px-6 py-8 text-center text-[#49454f] ">No registrations found.</td>
                 </tr>
               ) : filteredParticipants.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="px-6 py-8 text-center text-[#49454f] dark:text-gray-300">No participants match your search.</td>
+                  <td colSpan={7} className="px-6 py-8 text-center text-[#49454f] ">No participants match your search.</td>
                 </tr>
               ) : (
                 filteredParticipants.map((p, i) => (
-                  <tr key={p.id} className="border-b border-[#e1e2ec] dark:border-gray-700 hover:bg-[#f8f9ff] dark:bg-gray-800/50 transition-colors">
+                  <tr key={p.id} className="border-b border-[#e1e2ec]  hover:bg-[#f8f9ff]  transition-colors">
                     <td className="px-6 w-12 text-center" onClick={(e) => e.stopPropagation()}>
                       <input 
                         type="checkbox"
@@ -358,16 +357,16 @@ export function AdminParticipants() {
                       />
                     </td>
                     <td className={`px-6 text-sm font-medium text-[#6750a4] cursor-pointer ${compactView ? 'py-2' : 'py-4'}`} onClick={() => setSelectedParticipant(p)}>{p.id}</td>
-                    <td className={`px-6 text-sm text-[#1d1b20] dark:text-white cursor-pointer ${compactView ? 'py-2' : 'py-4'}`} onClick={() => setSelectedParticipant(p)}>{p.name}</td>
-                    <td className={`px-6 text-sm text-[#49454f] dark:text-gray-300 cursor-pointer ${compactView ? 'py-2' : 'py-4'}`} onClick={() => setSelectedParticipant(p)}>{p.category}</td>
-                    <td className={`px-6 text-sm text-[#49454f] dark:text-gray-300 cursor-pointer ${compactView ? 'py-2' : 'py-4'}`} onClick={() => setSelectedParticipant(p)}>{p.phone}</td>
-                    <td className={`px-6 text-sm text-[#49454f] dark:text-gray-300 cursor-pointer ${compactView ? 'py-2' : 'py-4'}`} onClick={() => setSelectedParticipant(p)}>{p.tshirtSize}</td>
+                    <td className={`px-6 text-sm text-[#1d1b20]  cursor-pointer ${compactView ? 'py-2' : 'py-4'}`} onClick={() => setSelectedParticipant(p)}>{p.name}</td>
+                    <td className={`px-6 text-sm text-[#49454f]  cursor-pointer ${compactView ? 'py-2' : 'py-4'}`} onClick={() => setSelectedParticipant(p)}>{p.category}</td>
+                    <td className={`px-6 text-sm text-[#49454f]  cursor-pointer ${compactView ? 'py-2' : 'py-4'}`} onClick={() => setSelectedParticipant(p)}>{p.phone}</td>
+                    <td className={`px-6 text-sm text-[#49454f]  cursor-pointer ${compactView ? 'py-2' : 'py-4'}`} onClick={() => setSelectedParticipant(p)}>{p.tshirtSize}</td>
                     <td className={`px-6 text-sm cursor-pointer ${compactView ? 'py-2' : 'py-4'}`} onClick={() => setSelectedParticipant(p)}>
                       <span className={`px-2 py-1 rounded-md font-medium text-xs ${
-                        p.status === 'Confirmed' ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300' :
-                        p.status === 'Checked In' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300' :
-                        p.status === 'Cancelled' ? 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300' :
-                        'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300'
+                        p.status === 'Confirmed' ? 'bg-green-100 text-green-800  ' :
+                        p.status === 'Checked In' ? 'bg-blue-100 text-blue-800  ' :
+                        p.status === 'Cancelled' ? 'bg-red-100 text-red-800  ' :
+                        'bg-yellow-100 text-yellow-800  '
                       }`}>
                         {p.status || 'Pending'}
                       </span>
@@ -378,7 +377,7 @@ export function AdminParticipants() {
             </tbody>
           </table>
         </div>
-        <div className="p-4 border-t border-[#cac4d0] dark:border-gray-700 bg-[#f8f9ff] dark:bg-gray-800/50 text-sm text-[#49454f] dark:text-gray-300 text-right flex justify-between items-center">
+        <div className="p-4 border-t border-[#cac4d0]  bg-[#f8f9ff]  text-sm text-[#49454f]  text-right flex justify-between items-center">
           <div>
             {selectedIds.size > 0 && <span>{selectedIds.size} selected</span>}
           </div>

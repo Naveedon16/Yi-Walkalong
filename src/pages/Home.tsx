@@ -11,30 +11,30 @@ import { Link } from 'react-router-dom';
 
 
 const HeroBanner = () => (
-  <div className="flex flex-col items-center justify-center space-y-6 sm:space-y-8 overflow-hidden relative mt-4 sm:mt-8 mb-8 lg:mb-12 w-full">
+  <div className="flex flex-col items-center justify-center space-y-4 sm:space-y-6 overflow-hidden relative mt-2 sm:mt-4 mb-4 lg:mb-8 w-full">
     {/* Top 4 logos */}
     <div className="w-full max-w-6xl flex flex-wrap justify-center sm:justify-between items-center gap-6 sm:gap-4 px-4 lg:px-8">
-      <img src="/partners/yi-logo.jpeg" alt="Yi Logo" className="w-24 h-12 sm:w-32 sm:h-16 lg:w-48 lg:h-20 object-contain mix-blend-multiply dark:mix-blend-normal dark:bg-white dark:p-1.5 dark:rounded-lg" />
-      <img src="/partners/theme-2026.jpeg" alt="One Bharat Spirit" className="w-24 h-12 sm:w-32 sm:h-16 lg:w-48 lg:h-20 object-contain mix-blend-multiply dark:mix-blend-normal dark:bg-white dark:p-1.5 dark:rounded-lg" />
-      <img src="/partners/chennai-day.png" alt="Chennai Day" className="w-24 h-12 sm:w-32 sm:h-16 lg:w-48 lg:h-20 object-contain mix-blend-multiply dark:mix-blend-normal dark:bg-white dark:p-1.5 dark:rounded-lg" />
-      <img src="/partners/cii.jpeg" alt="CII Logo" className="w-24 h-12 sm:w-32 sm:h-16 lg:w-48 lg:h-20 object-contain mix-blend-multiply dark:mix-blend-normal dark:bg-white dark:p-1.5 dark:rounded-lg" />
+      <img src="/partners/yi-logo.jpeg?v=3" alt="Yi Logo" className="w-24 h-12 sm:w-32 sm:h-16 lg:w-48 lg:h-24 object-contain mix-blend-multiply    " />
+      <img src="/partners/theme-2026.jpeg?v=3" alt="One Bharat Spirit" className="w-24 h-12 sm:w-32 sm:h-16 lg:w-48 lg:h-24 object-contain mix-blend-multiply    " />
+      <img src="/partners/chennai-day.png" alt="Chennai Day" className="w-24 h-12 sm:w-32 sm:h-16 lg:w-48 lg:h-20 object-contain mix-blend-multiply    " />
+      <img src="/partners/cii.jpeg" alt="CII Logo" className="w-24 h-12 sm:w-32 sm:h-16 lg:w-48 lg:h-20 object-contain mix-blend-multiply    " />
     </div>
 
     {/* Dalmia */}
-    <div className="pt-4 sm:pt-6">
-      <img src="/partners/dalmia.png" alt="Dalmia Bharat Cement" className="h-20 sm:h-28 lg:h-36 w-auto object-contain mix-blend-multiply dark:mix-blend-normal dark:bg-white dark:p-2 dark:rounded-xl" />
+    <div className="pt-2 sm:pt-4">
+      <img src="/partners/dalmia.png" alt="Dalmia Bharat Cement" className="h-28 sm:h-40 lg:h-52 w-auto object-contain mix-blend-multiply    " />
     </div>
 
     {/* Presents */}
     <div className="flex items-center justify-center w-full max-w-[200px] sm:max-w-[300px]">
-      <div className="flex-grow h-px bg-[#49454f]/30 dark:bg-gray-600"></div>
-      <span className="px-4 text-[10px] sm:text-xs font-bold text-[#49454f] dark:text-gray-400 tracking-[0.3em] uppercase">Presents</span>
-      <div className="flex-grow h-px bg-[#49454f]/30 dark:bg-gray-600"></div>
+      <div className="flex-grow h-px bg-[#49454f]/30 "></div>
+      <span className="px-4 text-[10px] sm:text-xs font-bold text-[#49454f]  tracking-[0.3em] uppercase">Presents</span>
+      <div className="flex-grow h-px bg-[#49454f]/30 "></div>
     </div>
 
     {/* WalkAlong */}
     <div className="pb-0">
-      <img src="/partners/walkalong.png" alt="Walk Along" className="h-16 sm:h-24 lg:h-32 w-auto object-contain mix-blend-multiply dark:mix-blend-normal dark:bg-white dark:p-2 dark:rounded-xl" />
+      <img src="/partners/walkalong.png" alt="Walk Along" className="h-16 sm:h-24 lg:h-32 w-auto object-contain mix-blend-multiply    " />
     </div>
   </div>
 );
@@ -46,27 +46,27 @@ export function Home() {
     <div className="flex flex-col gap-6">
       <div 
         onClick={() => navigate('/register/individual')}
-        className="bg-white dark:bg-[#1e1e1e] rounded-[32px] p-6 shadow-sm border border-[#e1e2ec] dark:border-gray-700 hover:border-[#6750a4] hover:bg-[#fef7ff] dark:hover:bg-purple-900/20 transition-all cursor-pointer group"
+        className="bg-white  rounded-[32px] p-6 shadow-sm border border-[#e1e2ec]  hover:border-[#6750a4] hover:bg-[#fef7ff]  transition-all cursor-pointer group"
       >
         <div className="flex gap-4">
-          <div className="w-14 h-14 rounded-2xl bg-[#f3edf7] dark:bg-purple-900/30 group-hover:bg-[#eaddff] flex items-center justify-center text-[#6750a4] transition-colors shrink-0">
+          <div className="w-14 h-14 rounded-2xl bg-[#f3edf7]  group-hover:bg-[#eaddff] flex items-center justify-center text-[#6750a4] transition-colors shrink-0">
             <User className="w-8 h-8" />
           </div>
           <div className="flex-1">
             <div className="flex justify-between items-center">
-              <h3 className="text-xl font-bold text-[#1d1b20] dark:text-white">Registration</h3>
+              <h3 className="text-xl font-bold text-[#1d1b20] ">Registration</h3>
               <span className="text-[#6750a4] font-bold text-xl">→</span>
             </div>
-            <p className="text-sm text-[#49454f] dark:text-gray-300 mt-1">
+            <p className="text-sm text-[#49454f]  mt-1">
               For PWD and Yi Members.
             </p>
           </div>
         </div>
       </div>
 
-      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/30 rounded-2xl p-4 flex gap-3 items-start sm:items-center">
-        <Info className="w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5 sm:mt-0" />
-        <p className="text-sm text-blue-800 dark:text-blue-300 font-medium">
+      <div className="bg-blue-50  border border-blue-200  rounded-2xl p-4 flex gap-3 items-start sm:items-center">
+        <Info className="w-5 h-5 text-blue-600  shrink-0 mt-0.5 sm:mt-0" />
+        <p className="text-sm text-blue-800  font-medium">
           Registrations for other categories will be opened soon.
         </p>
       </div>
@@ -74,69 +74,51 @@ export function Home() {
   );
 
   return (
-    <div className="space-y-32 pb-24">
-      <div className="space-y-8 lg:space-y-12">
+    <div className="space-y-16 pb-24">
+      <div className="space-y-4 lg:space-y-8">
         <HeroBanner />
         {/* Hero & Action Section */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 xl:gap-20">
           {/* Hero & Info Section */}
-          <section className="lg:col-span-7 flex flex-col justify-center gap-10">
-          <div className="space-y-6">
-            <span className="inline-block px-4 py-1.5 bg-[#d0bcff] text-[#381e72] rounded-full text-sm font-bold uppercase tracking-wider">
-              Event 2026
-            </span>
-            <h1 className="text-5xl lg:text-7xl xl:text-[80px] font-bold leading-[1.05] text-[#21005d] dark:text-white tracking-tight">
+          <section className="lg:col-span-7 flex flex-col justify-start gap-10 lg:pt-4">
+          <div className="space-y-6 order-3 lg:order-1">
+            <h1 className="text-5xl lg:text-7xl xl:text-[80px] font-bold leading-[1.05] text-[#21005d]  tracking-tight">
               Step Towards <br />
-              <span className="text-[#6750a4] dark:text-[#d0bcff]">Inclusivity.</span>
+              <span className="text-[#6750a4] ">Inclusivity.</span>
             </h1>
-            <p className="text-lg lg:text-xl text-[#49454f] dark:text-gray-300 max-w-xl leading-relaxed">
+            <p className="text-lg lg:text-xl text-[#49454f]  max-w-xl leading-relaxed">
               Join us for the Yi Chennai WalkAlong. A collective stride to foster awareness, support, and friendship with Persons with Disabilities.
             </p>
           </div>
 
           {/* Mobile Registration Cards */}
-          <div className="block lg:hidden">
+          <div className="block lg:hidden order-1">
             {registrationCards}
           </div>
 
-          <div className="bg-white dark:bg-[#1e1e1e] p-5 sm:p-8 rounded-3xl sm:rounded-[32px] border border-[#cac4d0] dark:border-gray-700 shadow-sm grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 divide-y sm:divide-y-0 sm:divide-x divide-[#cac4d0] dark:divide-gray-700">
+          <div className="bg-white  p-5 sm:p-8 rounded-3xl sm:rounded-[32px] border border-[#cac4d0]  shadow-sm grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 divide-y sm:divide-y-0 sm:divide-x divide-[#cac4d0]  order-2 lg:order-2">
             <div className="pb-4 sm:pb-0 sm:pr-4">
               <div className="text-[#6750a4] mb-2 sm:mb-4">
                 <Calendar className="w-6 h-6 sm:w-8 sm:h-8" />
               </div>
-              <div className="text-sm text-[#49454f] dark:text-gray-300 font-medium mb-1">Event Schedule</div>
-              <div className="text-base sm:text-lg font-bold text-[#1d1b20] dark:text-white leading-tight">
+              <div className="text-sm text-[#49454f]  font-medium mb-1">Event Schedule</div>
+              <div className="text-base sm:text-lg font-bold text-[#1d1b20]  leading-tight">
                 06 September 2026<br />
-                07:30 AM IST
+                07:00 AM IST
               </div>
             </div>
             <div className="pt-4 sm:pt-0 sm:pl-4">
               <div className="text-[#6750a4] mb-2 sm:mb-4">
                 <MapPin className="w-6 h-6 sm:w-8 sm:h-8" />
               </div>
-              <div className="text-sm text-[#49454f] dark:text-gray-300 font-medium mb-1">Venue</div>
-              <div className="text-base sm:text-lg font-bold text-[#1d1b20] dark:text-white">Marina Beach</div>
+              <div className="text-sm text-[#49454f]  font-medium mb-1">Venue</div>
+              <div className="text-base sm:text-lg font-bold text-[#1d1b20] ">Marina Beach</div>
             </div>
-          </div>
-
-          <div className="bg-[#f3edf7] dark:bg-purple-900/30 p-8 rounded-[32px] flex flex-col sm:flex-row sm:items-center justify-between border border-[#eaddff] dark:border-purple-800/50 gap-6">
-            <div className="flex items-center gap-6">
-              <div className="flex -space-x-4 shrink-0">
-                <div className="w-12 h-12 rounded-full border-[3px] border-[#f3edf7] dark:border-[#1e1e1e] bg-[#6750a4] flex items-center justify-center text-xs text-white font-bold">+800</div>
-                <div className="w-12 h-12 rounded-full border-[3px] border-[#f3edf7] dark:border-[#1e1e1e] bg-[#d0bcff] flex items-center justify-center text-xs text-[#21005d] font-bold">PWD</div>
-                <div className="w-12 h-12 rounded-full border-[3px] border-[#f3edf7] dark:border-[#1e1e1e] bg-[#e8def8] flex items-center justify-center text-xs text-[#1d192b] font-bold">YI</div>
-              </div>
-              <div>
-                <div className="text-base font-bold text-[#21005d] dark:text-[#d0bcff]">Join the movement</div>
-                <div className="text-sm text-[#49454f] dark:text-gray-300 mt-0.5">Currently accepting registrations</div>
-              </div>
-            </div>
-            <div className="text-sm font-bold text-[#6750a4] dark:text-[#d0bcff] hover:text-[#21005d] dark:hover:text-white underline cursor-pointer uppercase tracking-widest hidden sm:block transition-colors">View Gallery</div>
           </div>
         </section>
 
         {/* Registration Action Cards */}
-        <section className="lg:col-span-5 flex flex-col justify-start lg:justify-center gap-6">
+        <section className="lg:col-span-5 flex flex-col justify-start gap-6 lg:pt-4">
           {/* Desktop Registration Cards */}
           <div className="hidden lg:block">
             {registrationCards}
@@ -147,14 +129,14 @@ export function Home() {
       </div>
 
       {/* 3. Accessibility Features */}
-      <section className="bg-[#f8f9ff] dark:bg-gray-800/50 rounded-[32px] p-10 lg:p-16 xl:p-20 border border-[#e1e2ec] dark:border-gray-700 relative overflow-hidden">
+      <section className="bg-[#f8f9ff]  rounded-[32px] p-10 lg:p-16 xl:p-20 border border-[#e1e2ec]  relative overflow-hidden">
         <div className="absolute top-0 right-0 p-12 lg:p-20 opacity-5 pointer-events-none">
           <Accessibility className="w-64 h-64 lg:w-96 lg:h-96" />
         </div>
         <div className="relative z-10">
           <div className="max-w-3xl mb-12">
-            <h2 className="text-4xl lg:text-5xl font-bold text-[#1d1b20] dark:text-white mb-4">Accessibility First</h2>
-            <p className="text-[#49454f] dark:text-gray-300 text-xl">We ensure the event is fully accessible and comfortable for everyone.</p>
+            <h2 className="text-4xl lg:text-5xl font-bold text-[#1d1b20]  mb-4">Accessibility First</h2>
+            <p className="text-[#49454f]  text-xl">We ensure the event is fully accessible and comfortable for everyone.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {[
@@ -167,8 +149,8 @@ export function Home() {
                   {item.icon}
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-[#1d1b20] dark:text-white mb-2">{item.title}</h3>
-                  <p className="text-base text-[#49454f] dark:text-gray-300 leading-relaxed">{item.desc}</p>
+                  <h3 className="text-xl font-bold text-[#1d1b20]  mb-2">{item.title}</h3>
+                  <p className="text-base text-[#49454f]  leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -179,16 +161,16 @@ export function Home() {
             {/* 4. Partners & Sponsors */}
       <section className="space-y-16">
         <div className="text-center max-w-3xl mx-auto space-y-4">
-          <h2 className="text-4xl lg:text-5xl font-bold text-[#1d1b20] dark:text-white">Our Partners</h2>
-          <p className="text-[#49454f] dark:text-gray-300 text-xl">Supported by organizations committed to creating an inclusive society.</p>
+          <h2 className="text-4xl lg:text-5xl font-bold text-[#1d1b20] ">Our Partners</h2>
+          <p className="text-[#49454f]  text-xl">Supported by organizations committed to creating an inclusive society.</p>
         </div>
         
         <div className="space-y-12">
           {/* Title Partner */}
           <div>
-            <h3 className="text-sm font-bold text-[#79747e] dark:text-gray-400 uppercase tracking-widest text-center mb-8">Title Partner</h3>
+            <h3 className="text-sm font-bold text-[#79747e]  uppercase tracking-widest text-center mb-8">Title Partner</h3>
             <div className="flex justify-center">
-              <div className="w-72 h-36 bg-white dark:bg-white rounded-3xl border border-[#cac4d0] dark:border-[#cac4d0] flex items-center justify-center shadow-sm overflow-hidden p-2 hover:shadow-md transition-shadow">
+              <div className="w-72 h-36 bg-white  rounded-3xl border border-[#cac4d0]  flex items-center justify-center shadow-sm overflow-hidden p-2 hover:shadow-md transition-shadow">
                 <img src="/partners/dalmia.png" alt="Dalmia" className="max-w-full max-h-full object-contain scale-[1.3]" />
               </div>
             </div>
@@ -196,18 +178,18 @@ export function Home() {
 
           {/* Gold Partners */}
           <div>
-            <h3 className="text-sm font-bold text-[#79747e] dark:text-gray-400 uppercase tracking-widest text-center mb-6">Gold Partners</h3>
+            <h3 className="text-sm font-bold text-[#79747e]  uppercase tracking-widest text-center mb-6">Gold Partners</h3>
             <div className="flex flex-wrap justify-center gap-6">
-              <div className="w-48 h-24 bg-white dark:bg-white rounded-xl border border-[#cac4d0] dark:border-[#cac4d0] flex items-center justify-center shadow-sm overflow-hidden p-4 hover:shadow-md transition-shadow">
+              <div className="w-48 h-24 bg-white  rounded-xl border border-[#cac4d0]  flex items-center justify-center shadow-sm overflow-hidden p-4 hover:shadow-md transition-shadow">
                 <img src="/partners/armoraa.png" alt="Armora" className="max-w-full max-h-full object-contain" />
               </div>
-              <div className="w-48 h-24 bg-white dark:bg-white rounded-xl border border-[#cac4d0] dark:border-[#cac4d0] flex items-center justify-center shadow-sm overflow-hidden p-4 hover:shadow-md transition-shadow">
+              <div className="w-48 h-24 bg-white  rounded-xl border border-[#cac4d0]  flex items-center justify-center shadow-sm overflow-hidden p-4 hover:shadow-md transition-shadow">
                 <img src="/partners/lotte.png" alt="Lotte" className="max-w-full max-h-full object-contain" />
               </div>
-              <div className="w-48 h-24 bg-white dark:bg-white rounded-xl border border-[#cac4d0] dark:border-[#cac4d0] flex items-center justify-center shadow-sm overflow-hidden p-4 hover:shadow-md transition-shadow">
+              <div className="w-48 h-24 bg-white  rounded-xl border border-[#cac4d0]  flex items-center justify-center shadow-sm overflow-hidden p-4 hover:shadow-md transition-shadow">
                 <img src="/partners/pepero.png" alt="Pepero" className="max-w-full max-h-full object-contain" />
               </div>
-              <div className="w-48 h-24 bg-white dark:bg-white rounded-xl border border-[#cac4d0] dark:border-[#cac4d0] flex items-center justify-center shadow-sm overflow-hidden p-2 hover:shadow-md transition-shadow">
+              <div className="w-48 h-24 bg-white  rounded-xl border border-[#cac4d0]  flex items-center justify-center shadow-sm overflow-hidden p-2 hover:shadow-md transition-shadow">
                 <img src="/partners/rams.png" alt="RAMS" className="max-w-full max-h-full object-contain scale-[1.3]" />
               </div>
             </div>
@@ -215,9 +197,9 @@ export function Home() {
 
           {/* Support Partners */}
           <div>
-            <h3 className="text-sm font-bold text-[#79747e] dark:text-gray-400 uppercase tracking-widest text-center mb-6">Support Partner</h3>
+            <h3 className="text-sm font-bold text-[#79747e]  uppercase tracking-widest text-center mb-6">Support Partner</h3>
             <div className="flex justify-center">
-              <div className="w-48 h-24 bg-white dark:bg-white rounded-xl border border-[#cac4d0] dark:border-[#cac4d0] flex items-center justify-center shadow-sm overflow-hidden p-4 hover:shadow-md transition-shadow">
+              <div className="w-48 h-24 bg-white  rounded-xl border border-[#cac4d0]  flex items-center justify-center shadow-sm overflow-hidden p-4 hover:shadow-md transition-shadow">
                 <img src="/partners/tamil_matrimony.png" alt="Tamil Matrimony" className="max-w-full max-h-full object-contain" />
               </div>
             </div>
@@ -229,10 +211,10 @@ export function Home() {
       <section className="space-y-10">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-6">
           <div className="max-w-2xl">
-            <h2 className="text-4xl lg:text-5xl font-bold text-[#1d1b20] dark:text-white mb-4">Moments of Joy</h2>
-            <p className="text-[#49454f] dark:text-gray-300 text-xl">Glimpses from our previous editions.</p>
+            <h2 className="text-4xl lg:text-5xl font-bold text-[#1d1b20]  mb-4">Moments of Joy</h2>
+            <p className="text-[#49454f]  text-xl">Glimpses from our previous editions.</p>
           </div>
-          <Link to="/gallery" className="w-full sm:w-auto"><Button variant="outline" className="w-full border-[#79747e] text-[#49454f] dark:text-gray-300 hover:bg-[#6750a4]/6 hover:text-[#6750a4]">View All Photos</Button></Link>
+          <Link to="/gallery" className="w-full sm:w-auto"><Button variant="outline" className="w-full border-[#79747e] text-[#49454f]  hover:bg-[#6750a4]/6 hover:text-[#6750a4]">View All Photos</Button></Link>
         </div>
         <GallerySlideshow />
       </section>
@@ -240,7 +222,7 @@ export function Home() {
       {/* 6. Frequently Asked Questions */}
       <section className="max-w-4xl mx-auto space-y-10">
         <div className="text-center space-y-4">
-          <h2 className="text-4xl lg:text-5xl font-bold text-[#1d1b20] dark:text-white">Frequently Asked Questions</h2>
+          <h2 className="text-4xl lg:text-5xl font-bold text-[#1d1b20] ">Frequently Asked Questions</h2>
         </div>
         <div className="space-y-6">
           {[
@@ -249,14 +231,14 @@ export function Home() {
             { q: "Are T-shirts provided?", a: "Yes, complimentary T-shirts will be provided to all registered participants on a first-come, first-served basis at the venue." },
             { q: "Where can I park my vehicle?", a: "Designated parking areas are available near the venue. Detailed maps will be shared via email closer to the event date." }
           ].map((faq, i) => (
-            <details key={i} className="group bg-white dark:bg-[#1e1e1e] border border-[#cac4d0] dark:border-gray-700 rounded-3xl [&_summary::-webkit-details-marker]:hidden hover:border-[#6750a4] transition-colors">
-              <summary className="flex items-center justify-between cursor-pointer p-8 font-bold text-[#1d1b20] dark:text-white text-lg">
+            <details key={i} className="group bg-white  border border-[#cac4d0]  rounded-3xl [&_summary::-webkit-details-marker]:hidden hover:border-[#6750a4] transition-colors">
+              <summary className="flex items-center justify-between cursor-pointer p-8 font-bold text-[#1d1b20]  text-lg">
                 {faq.q}
-                <span className="transition group-open:rotate-180 text-[#49454f] dark:text-gray-300">
+                <span className="transition group-open:rotate-180 text-[#49454f] ">
                   <ChevronDown className="w-6 h-6" />
                 </span>
               </summary>
-              <div className="px-8 pb-8 text-[#49454f] dark:text-gray-300 leading-relaxed text-base">
+              <div className="px-8 pb-8 text-[#49454f]  leading-relaxed text-base">
                 {faq.a}
               </div>
             </details>

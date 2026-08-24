@@ -18,7 +18,6 @@ import { VolunteerScanner } from './pages/VolunteerScanner';
 import { AdminRoute } from './components/AdminRoute';
 import { VolunteerRoute } from './components/VolunteerRoute';
 import { SetupInstructions } from './components/SetupInstructions';
-import { ThemeProvider } from './context/ThemeContext';
 import { ErrorBoundary } from './components/ErrorBoundary';
 
 export default function App() {
@@ -29,7 +28,7 @@ export default function App() {
   }
 
     return (
-    <ThemeProvider>
+    
       <ErrorBoundary>
         <Router>
           <Routes>
@@ -48,6 +47,6 @@ export default function App() {
           </Routes>
         </Router>
       </ErrorBoundary>
-    </ThemeProvider>
+    
   );
 }

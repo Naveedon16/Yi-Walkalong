@@ -20,7 +20,7 @@ export function NetworkStatus() {
   if (isOnline) return null; // Only show when offline to be non-intrusive
 
   return (
-    <div className="flex items-center gap-2 px-3 py-1.5 bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-400 rounded-full text-xs font-medium border border-red-200 dark:border-red-800/50" title="You are offline. Submissions will be synced when connection is restored.">
+    <div className="flex items-center gap-2 px-3 py-1.5 bg-red-50 text-red-700   rounded-full text-xs font-medium border border-red-200 " title="You are offline. Submissions will be synced when connection is restored.">
       <WifiOff className="w-3.5 h-3.5" />
       <span className="hidden sm:inline">Offline Mode</span>
     </div>

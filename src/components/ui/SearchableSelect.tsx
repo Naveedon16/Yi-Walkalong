@@ -49,16 +49,16 @@ export function SearchableSelect({
   return (
     <div className={cn("flex flex-col gap-1.5 w-full relative", className)} ref={wrapperRef}>
       {label && (
-        <label className="text-sm font-medium text-[#1d1b20] dark:text-gray-100">
-          {label} {required && <span className="text-[#b3261e] dark:text-red-400">*</span>}
+        <label className="text-sm font-medium text-[#1d1b20] ">
+          {label} {required && <span className="text-[#b3261e] ">*</span>}
         </label>
       )}
       
       <div 
         className={cn(
-          "flex items-center min-h-[48px] w-full rounded-xl border bg-white dark:bg-[#1e1e1e] px-4 py-2 text-sm transition-shadow cursor-pointer",
-          isOpen ? "border-[#6750a4] ring-2 ring-[#6750a4] dark:ring-purple-500 dark:border-purple-500" : "border-[#cac4d0] dark:border-gray-700",
-          error ? "border-[#b3261e] ring-[#b3261e] dark:border-red-500 dark:ring-red-500" : "",
+          "flex items-center min-h-[48px] w-full rounded-xl border bg-white  px-4 py-2 text-sm transition-shadow cursor-pointer",
+          isOpen ? "border-[#6750a4] ring-2 ring-[#6750a4]  " : "border-[#cac4d0] ",
+          error ? "border-[#b3261e] ring-[#b3261e]  " : "",
         )}
         onClick={() => setIsOpen(true)}
         tabIndex={0}
@@ -69,19 +69,19 @@ export function SearchableSelect({
           }
         }}
       >
-        <div className="flex-1 truncate text-[#1d1b20] dark:text-white">
-          {selectedOption ? selectedOption.label : <span className="text-[#49454f] dark:text-gray-400">Select an option</span>}
+        <div className="flex-1 truncate text-[#1d1b20] ">
+          {selectedOption ? selectedOption.label : <span className="text-[#49454f] ">Select an option</span>}
         </div>
-        <ChevronDown className="h-5 w-5 text-[#49454f] dark:text-gray-300 ml-2 shrink-0" />
+        <ChevronDown className="h-5 w-5 text-[#49454f]  ml-2 shrink-0" />
       </div>
 
       {isOpen && (
-        <div className="absolute z-50 top-full left-0 right-0 mt-1 bg-white dark:bg-[#1e1e1e] rounded-xl shadow-lg border border-[#e1e2ec] dark:border-gray-700 overflow-hidden">
-          <div className="p-2 border-b border-[#e1e2ec] dark:border-gray-700 flex items-center gap-2">
-            <Search className="w-4 h-4 text-[#79747e] dark:text-gray-400" />
+        <div className="absolute z-50 top-full left-0 right-0 mt-1 bg-white  rounded-xl shadow-lg border border-[#e1e2ec]  overflow-hidden">
+          <div className="p-2 border-b border-[#e1e2ec]  flex items-center gap-2">
+            <Search className="w-4 h-4 text-[#79747e] " />
             <input
               type="text"
-              className="flex-1 bg-transparent outline-none text-sm text-[#1d1b20] dark:text-white placeholder:text-gray-400"
+              className="flex-1 bg-transparent outline-none text-sm text-[#1d1b20]  placeholder:text-gray-400"
               placeholder="Search..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
@@ -89,13 +89,13 @@ export function SearchableSelect({
             />
             {query && (
               <button onClick={(e) => { e.stopPropagation(); setQuery(''); }}>
-                <X className="w-4 h-4 text-[#79747e] dark:text-gray-400" />
+                <X className="w-4 h-4 text-[#79747e] " />
               </button>
             )}
           </div>
           <div className="max-h-60 overflow-y-auto p-1">
             {filteredOptions.length === 0 ? (
-              <div className="p-3 text-sm text-[#49454f] dark:text-gray-400 text-center">No results found</div>
+              <div className="p-3 text-sm text-[#49454f]  text-center">No results found</div>
             ) : (
               filteredOptions.map((option) => (
                 <div
@@ -103,8 +103,8 @@ export function SearchableSelect({
                   className={cn(
                     "px-3 py-2 text-sm rounded-lg cursor-pointer transition-colors",
                     option.value === value 
-                      ? "bg-[#eaddff] text-[#21005d] dark:bg-purple-900/50 dark:text-purple-100 font-bold" 
-                      : "hover:bg-[#f3edf7] text-[#1d1b20] dark:hover:bg-gray-800 dark:text-gray-200"
+                      ? "bg-[#eaddff] text-[#21005d]   font-bold" 
+                      : "hover:bg-[#f3edf7] text-[#1d1b20]  "
                   )}
                   onClick={() => {
                     onChange(option.value);
@@ -119,7 +119,7 @@ export function SearchableSelect({
           </div>
         </div>
       )}
-      {error && <span className="text-xs text-[#b3261e] dark:text-red-400 font-medium">{error}</span>}
+      {error && <span className="text-xs text-[#b3261e]  font-medium">{error}</span>}
     </div>
   );
 }

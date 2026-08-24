@@ -14,8 +14,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     return (
       <div className="flex flex-col gap-1.5 w-full">
         {label && (
-          <label className="flex items-center text-sm font-medium text-[#1d1b20] dark:text-gray-100">
-            <span className="flex-1">{label} {props.required && <span className="text-[#b3261e] dark:text-red-400">*</span>}</span>
+          <label className="flex items-center text-sm font-medium text-[#1d1b20] ">
+            <span className="flex-1">{label} {props.required && <span className="text-[#b3261e] ">*</span>}</span>
             {labelAction && <span className="ml-2">{labelAction}</span>}
           </label>
         )}
@@ -23,8 +23,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           <select
             ref={ref}
             className={cn(
-              "flex h-12 w-full appearance-none rounded-xl border border-[#cac4d0] dark:border-gray-700 bg-white dark:bg-[#1e1e1e] px-4 py-2 pr-10 text-sm ring-offset-white dark:ring-offset-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6750a4] dark:focus-visible:ring-purple-500 disabled:cursor-not-allowed disabled:opacity-50 transition-shadow text-[#1d1b20] dark:text-white",
-              error && "border-[#b3261e] dark:border-red-500 focus-visible:ring-[#b3261e] dark:focus-visible:ring-red-500",
+              "flex h-12 w-full appearance-none rounded-xl border border-[#cac4d0]  bg-white  px-4 py-2 pr-10 text-sm ring-offset-white  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6750a4]  disabled:cursor-not-allowed disabled:opacity-50 transition-shadow text-[#1d1b20] ",
+              error && "border-[#b3261e]  focus-visible:ring-[#b3261e] ",
               className
             )}
             {...props}
@@ -36,9 +36,9 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
               </option>
             ))}
           </select>
-          <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-[#49454f] dark:text-gray-300 pointer-events-none" />
+          <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-[#49454f]  pointer-events-none" />
         </div>
-        {error && <span className="text-xs text-[#b3261e] dark:text-red-400 font-medium">{error}</span>}
+        {error && <span className="text-xs text-[#b3261e]  font-medium">{error}</span>}
       </div>
     );
   }

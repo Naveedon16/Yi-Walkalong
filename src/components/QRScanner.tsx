@@ -188,13 +188,13 @@ export function QRScanner({ onScanSuccess, onScanError, onClose }: QRScannerProp
       
       {cameras.length > 1 && (
         <div className="mb-4 w-full max-w-sm">
-          <label className="block text-sm font-medium text-[#49454f] dark:text-gray-300 mb-1 text-left">
+          <label className="block text-sm font-medium text-[#49454f]  mb-1 text-left">
             Select Camera
           </label>
           <select 
             value={selectedCameraId} 
             onChange={handleCameraChange}
-            className="w-full rounded-md border border-[#cac4d0] dark:border-gray-700 bg-white dark:bg-[#1e1e1e] px-3 py-2 text-sm text-[#1d1b20] dark:text-white"
+            className="w-full rounded-md border border-[#cac4d0]  bg-white  px-3 py-2 text-sm text-[#1d1b20] "
           >
             {cameras.map((c, i) => (
               <option key={c.id} value={c.id}>
@@ -205,7 +205,7 @@ export function QRScanner({ onScanSuccess, onScanError, onClose }: QRScannerProp
         </div>
       )}
       
-      <div id="custom-reader" className="w-full max-w-sm bg-black dark:bg-[#1e1e1e] rounded-lg overflow-hidden mb-4 border border-[#e1e2ec] dark:border-gray-700 min-h-[250px]" style={{ display: cameraError ? 'none' : 'block' }}></div>
+      <div id="custom-reader" className="w-full max-w-sm bg-black  rounded-lg overflow-hidden mb-4 border border-[#e1e2ec]  min-h-[250px]" style={{ display: cameraError ? 'none' : 'block' }}></div>
       
       <Button type="button" variant="outline" onClick={onClose} aria-label="Close QR scanner">
         Cancel Scanner
