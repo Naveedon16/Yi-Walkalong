@@ -35,7 +35,7 @@ const HeroBanner = () => (
 
     {/* WalkAlong */}
     <div className="pb-0">
-      <SafeImage src="/partners/walkalong.png" alt="Walk Along" className="h-14 sm:h-20 lg:h-24 w-auto object-contain mix-blend-multiply" />
+      <SafeImage src="/partners/walkalong.png" fallbackSrcs={['/Untitled design.png']} alt="Walk Along" className="h-14 sm:h-20 lg:h-24 w-auto object-contain mix-blend-multiply" />
     </div>
   </div>
 );

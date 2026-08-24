@@ -6,6 +6,7 @@ import { motion } from 'motion/react';
 import { AdminAuthService } from '../services/AdminAuthService';
 import { useState, useEffect } from 'react';
 import { NetworkStatus } from './NetworkStatus';
+import { SafeImage } from './ui/SafeImage';
 
 export function Layout() {
   const location = useLocation();
@@ -20,7 +21,7 @@ export function Layout() {
       <header className="sticky top-0 z-50 w-full h-16 px-4 sm:px-6 flex items-center justify-between bg-white border-b border-[#e1e2ec] shrink-0  ">
         <div className="flex items-center gap-3">
           <Link to="/" className="flex items-center gap-3 group">
-            <img src="/Yi.png" alt="Yi Logo" className="w-12 h-12 object-contain" />
+            <SafeImage src="/Yi.png" fallbackSrcs={['/Yi-nobg.png', '/Yi Logo.jpg.jpeg']} alt="Yi Logo" className="w-12 h-12 object-contain" />
             <div className="flex flex-col">
               <span className="text-lg font-semibold leading-tight tracking-tight text-[#1d1b20] ">WalkAlong</span>
               <span className="text-[10px] text-[#49454f]  uppercase tracking-widest font-bold">Chennai Chapter</span>
