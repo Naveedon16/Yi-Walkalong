@@ -11,30 +11,30 @@ import { Link } from 'react-router-dom';
 
 
 const HeroBanner = () => (
-  <div className="flex flex-col items-center justify-center space-y-4 sm:space-y-6 overflow-hidden relative mt-2 sm:mt-4 mb-4 lg:mb-8 w-full">
+  <div className="flex flex-col items-center justify-center space-y-3 sm:space-y-4 overflow-hidden relative mt-2 mb-4 lg:mb-6 w-full">
     {/* Top 4 logos */}
-    <div className="w-full max-w-6xl flex flex-wrap justify-center sm:justify-between items-center gap-6 sm:gap-4 px-4 lg:px-8">
-      <img src="/partners/yi-logo.jpeg?v=3" alt="Yi Logo" className="w-24 h-12 sm:w-32 sm:h-16 lg:w-48 lg:h-24 object-contain mix-blend-multiply    " />
-      <img src="/partners/theme-2026.jpeg?v=3" alt="One Bharat Spirit" className="w-24 h-12 sm:w-32 sm:h-16 lg:w-48 lg:h-24 object-contain mix-blend-multiply    " />
-      <img src="/partners/chennai-day.png" alt="Chennai Day" className="w-24 h-12 sm:w-32 sm:h-16 lg:w-48 lg:h-20 object-contain mix-blend-multiply    " />
-      <img src="/partners/cii.jpeg" alt="CII Logo" className="w-24 h-12 sm:w-32 sm:h-16 lg:w-48 lg:h-20 object-contain mix-blend-multiply    " />
+    <div className="w-full max-w-5xl flex flex-wrap justify-center items-center gap-6 sm:gap-12 lg:gap-16 px-4 lg:px-8">
+      <img src="/partners/yi-logo.jpeg?v=3" alt="Yi Logo" className="h-8 sm:h-12 lg:h-16 w-auto object-contain mix-blend-multiply" />
+      <img src="/partners/theme-2026.jpeg?v=3" alt="One Bharat Spirit" className="h-8 sm:h-12 lg:h-16 w-auto object-contain mix-blend-multiply" />
+      <img src="/partners/chennai-day.png" alt="Chennai Day" className="h-8 sm:h-12 lg:h-16 w-auto object-contain mix-blend-multiply" />
+      <img src="/partners/cii.jpeg" alt="CII Logo" className="h-8 sm:h-12 lg:h-16 w-auto object-contain mix-blend-multiply" />
     </div>
 
     {/* Dalmia */}
-    <div className="pt-2 sm:pt-4">
-      <img src="/partners/dalmia.png" alt="Dalmia Bharat Cement" className="h-28 sm:h-40 lg:h-52 w-auto object-contain mix-blend-multiply    " />
+    <div className="pt-1 sm:pt-2">
+      <img src="/partners/dalmia.png" alt="Dalmia Bharat Cement" className="h-20 sm:h-28 lg:h-36 w-auto object-contain mix-blend-multiply" />
     </div>
 
     {/* Presents */}
-    <div className="flex items-center justify-center w-full max-w-[200px] sm:max-w-[300px]">
-      <div className="flex-grow h-px bg-[#49454f]/30 "></div>
-      <span className="px-4 text-[10px] sm:text-xs font-bold text-[#49454f]  tracking-[0.3em] uppercase">Presents</span>
-      <div className="flex-grow h-px bg-[#49454f]/30 "></div>
+    <div className="flex items-center justify-center w-full max-w-[200px] sm:max-w-[250px]">
+      <div className="flex-grow h-px bg-[#49454f]/30"></div>
+      <span className="px-3 text-[10px] sm:text-xs font-bold text-[#49454f] tracking-[0.2em] uppercase">Presents</span>
+      <div className="flex-grow h-px bg-[#49454f]/30"></div>
     </div>
 
     {/* WalkAlong */}
     <div className="pb-0">
-      <img src="/partners/walkalong.png" alt="Walk Along" className="h-16 sm:h-24 lg:h-32 w-auto object-contain mix-blend-multiply    " />
+      <img src="/partners/walkalong.png" alt="Walk Along" className="h-14 sm:h-20 lg:h-24 w-auto object-contain mix-blend-multiply" />
     </div>
   </div>
 );
