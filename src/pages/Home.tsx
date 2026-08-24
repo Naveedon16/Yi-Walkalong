@@ -8,27 +8,17 @@ import { Users, User, Calendar, MapPin, Clock, Heart, Music, Award, Coffee, Acti
 import { GALLERY_IMAGES, GalleryImage } from '../components/GalleryImage';
 import { GallerySlideshow } from '../components/GallerySlideshow';
 import { Link } from 'react-router-dom';
-
-import yiLogo from '../assets/logos/yi-logo.png';
-import themeLogo from '../assets/logos/theme-2026.png';
-import chennaiDayLogo from '../assets/logos/chennai-day.png';
-import ciiLogo from '../assets/logos/cii.png';
-import dalmiaLogo from '../assets/logos/dalmia.png';
-import walkalongLogo from '../assets/logos/walkalong.png';
-import armoraaLogo from '../assets/logos/armoraa.png';
-import lotteLogo from '../assets/logos/lotte.png';
-import peperoLogo from '../assets/logos/pepero.png';
-import ramsLogo from '../assets/logos/rams.png';
-import tamilMatrimonyLogo from '../assets/logos/tamil_matrimony.png';
+import { SafeImage } from '../components/ui/SafeImage';
 
 const HeroBanner = () => (
-  <div className="flex flex-col items-center justify-center space-y-4 sm:space-y-5 overflow-hidden relative mt-2 mb-4 lg:mb-6 w-full max-w-5xl mx-auto">
+  <div className="flex flex-col items-center justify-center space-y-4 sm:space-y-5 relative mt-2 mb-4 lg:mb-6 w-full max-w-5xl mx-auto">
     {/* Top 4 logos - 4 equal columns with balanced visual weighting */}
     <div className="w-full grid grid-cols-4 items-center justify-items-center gap-2 sm:gap-6 lg:gap-8 px-2 sm:px-6">
       {/* Yi Logo */}
       <div className="flex items-center justify-center w-full h-12 sm:h-16 lg:h-20">
-        <img 
-          src={yiLogo} 
+        <SafeImage 
+          src="/Yi.png" 
+          fallbackSrcs={['/Yi Logo.jpg.jpeg', '/partners/yi-logo.jpeg']} 
           alt="Young Indians Logo" 
           className="h-9 sm:h-12 lg:h-16 w-auto max-w-full object-contain mix-blend-multiply" 
         />
@@ -36,17 +26,19 @@ const HeroBanner = () => (
 
       {/* One Bharat Spirit */}
       <div className="flex items-center justify-center w-full h-12 sm:h-16 lg:h-20">
-        <img 
-          src={themeLogo} 
+        <SafeImage 
+          src="/2026 Theme logo_White.jpeg" 
+          fallbackSrcs={['/partners/theme-2026.jpeg']} 
           alt="One Bharat Spirit" 
-          className="h-8 sm:h-11 lg:h-14 w-auto max-w-full object-contain mix-blend-multiply" 
+          className="h-8 sm:h-11 lg:h-14 w-auto max-w-full object-contain mix-blend-multiply scale-[2]" 
         />
       </div>
 
       {/* Chennai Day */}
       <div className="flex items-center justify-center w-full h-12 sm:h-16 lg:h-20">
-        <img 
-          src={chennaiDayLogo} 
+        <SafeImage 
+          src="/Chennai day logo.png" 
+          fallbackSrcs={['/partners/chennai-day.png']} 
           alt="Chennai Day" 
           className="h-7 sm:h-10 lg:h-13 w-auto max-w-full object-contain mix-blend-multiply" 
         />
@@ -54,8 +46,9 @@ const HeroBanner = () => (
 
       {/* CII Logo */}
       <div className="flex items-center justify-center w-full h-12 sm:h-16 lg:h-20">
-        <img 
-          src={ciiLogo} 
+        <SafeImage 
+          src="/CII logo blue JPG.jpg.jpeg" 
+          fallbackSrcs={['/partners/cii.jpeg']} 
           alt="Confederation of Indian Industry" 
           className="h-6 sm:h-9 lg:h-11 w-auto max-w-full object-contain mix-blend-multiply" 
         />
@@ -64,8 +57,9 @@ const HeroBanner = () => (
 
     {/* Dalmia */}
     <div className="pt-1 flex items-center justify-center">
-      <img 
-        src={dalmiaLogo} 
+      <SafeImage 
+        src="/dalmia.jpg" 
+        fallbackSrcs={['/partners/dalmia.png']} 
         alt="Dalmia Bharat Cement" 
         className="h-20 sm:h-28 lg:h-36 w-auto max-w-full object-contain mix-blend-multiply" 
       />
@@ -80,8 +74,9 @@ const HeroBanner = () => (
 
     {/* WalkAlong */}
     <div className="pb-0 flex items-center justify-center px-4">
-      <img 
-        src={walkalongLogo} 
+      <SafeImage 
+        src="/Untitled design.png" 
+        fallbackSrcs={['/partners/walkalong.png']} 
         alt="Walk Along" 
         className="h-12 sm:h-16 lg:h-20 w-auto max-w-full object-contain mix-blend-multiply" 
       />
@@ -221,7 +216,7 @@ export function Home() {
             <h3 className="text-sm font-bold text-[#79747e]  uppercase tracking-widest text-center mb-8">Title Partner</h3>
             <div className="flex justify-center">
               <div className="w-72 h-36 bg-white  rounded-3xl border border-[#cac4d0]  flex items-center justify-center shadow-sm overflow-hidden p-3 hover:shadow-md transition-shadow">
-                <img src={dalmiaLogo} alt="Dalmia" className="max-w-full max-h-full object-contain" />
+                <SafeImage src="/dalmia.jpg" fallbackSrcs={['/partners/dalmia.png']} alt="Dalmia" className="max-w-full max-h-full object-contain scale-[1.3]" />
               </div>
             </div>
           </div>
@@ -231,16 +226,16 @@ export function Home() {
             <h3 className="text-sm font-bold text-[#79747e]  uppercase tracking-widest text-center mb-6">Gold Partners</h3>
             <div className="flex flex-wrap justify-center gap-6">
               <div className="w-48 h-24 bg-white  rounded-xl border border-[#cac4d0]  flex items-center justify-center shadow-sm overflow-hidden p-4 hover:shadow-md transition-shadow">
-                <img src={armoraaLogo} alt="Armora" className="max-w-full max-h-full object-contain" />
+                <SafeImage src="/armoraa.png" fallbackSrcs={['/partners/armoraa.png']} alt="Armora" className="max-w-full max-h-full object-contain" />
               </div>
               <div className="w-48 h-24 bg-white  rounded-xl border border-[#cac4d0]  flex items-center justify-center shadow-sm overflow-hidden p-4 hover:shadow-md transition-shadow">
-                <img src={lotteLogo} alt="Lotte" className="max-w-full max-h-full object-contain" />
+                <SafeImage src="/lotte.png" fallbackSrcs={['/partners/lotte.png']} alt="Lotte" className="max-w-full max-h-full object-contain" />
               </div>
               <div className="w-48 h-24 bg-white  rounded-xl border border-[#cac4d0]  flex items-center justify-center shadow-sm overflow-hidden p-4 hover:shadow-md transition-shadow">
-                <img src={peperoLogo} alt="Pepero" className="max-w-full max-h-full object-contain" />
+                <SafeImage src="/pepero.png" fallbackSrcs={['/partners/pepero.png']} alt="Pepero" className="max-w-full max-h-full object-contain" />
               </div>
               <div className="w-48 h-24 bg-white  rounded-xl border border-[#cac4d0]  flex items-center justify-center shadow-sm overflow-hidden p-3 hover:shadow-md transition-shadow">
-                <img src={ramsLogo} alt="RAMS" className="max-w-full max-h-full object-contain" />
+                <SafeImage src="/RAMS.png" fallbackSrcs={['/partners/rams.png']} alt="RAMS" className="max-w-full max-h-full object-contain scale-[1.3]" />
               </div>
             </div>
           </div>
@@ -250,7 +245,7 @@ export function Home() {
             <h3 className="text-sm font-bold text-[#79747e]  uppercase tracking-widest text-center mb-6">Support Partner</h3>
             <div className="flex justify-center">
               <div className="w-48 h-24 bg-white  rounded-xl border border-[#cac4d0]  flex items-center justify-center shadow-sm overflow-hidden p-4 hover:shadow-md transition-shadow">
-                <img src={tamilMatrimonyLogo} alt="Tamil Matrimony" className="max-w-full max-h-full object-contain" />
+                <SafeImage src="/tamil_matrimony.png" fallbackSrcs={['/partners/tamil_matrimony.png']} alt="Tamil Matrimony" className="max-w-full max-h-full object-contain" />
               </div>
             </div>
           </div>
