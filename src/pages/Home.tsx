@@ -7,6 +7,7 @@ import { Users, User, Calendar, MapPin, Clock, Heart, Music, Award, Coffee, Acti
 
 import { GALLERY_IMAGES, GalleryImage } from '../components/GalleryImage';
 import { GallerySlideshow } from '../components/GallerySlideshow';
+import { SafeImage } from '../components/ui/SafeImage';
 import { Link } from 'react-router-dom';
 
 
@@ -14,15 +15,15 @@ const HeroBanner = () => (
   <div className="flex flex-col items-center justify-center space-y-3 sm:space-y-4 overflow-hidden relative mt-2 mb-4 lg:mb-6 w-full">
     {/* Top 4 logos */}
     <div className="w-full max-w-5xl flex flex-wrap justify-center items-center gap-6 sm:gap-12 lg:gap-16 px-4 lg:px-8">
-      <img src="/partners/yi-logo.jpeg?v=3" alt="Yi Logo" className="h-8 sm:h-12 lg:h-16 w-auto object-contain mix-blend-multiply" />
-      <img src="/partners/theme-2026.jpeg?v=3" alt="One Bharat Spirit" className="h-8 sm:h-12 lg:h-16 w-auto object-contain mix-blend-multiply" />
-      <img src="/partners/chennai-day.png" alt="Chennai Day" className="h-8 sm:h-12 lg:h-16 w-auto object-contain mix-blend-multiply" />
-      <img src="/partners/cii.jpeg" alt="CII Logo" className="h-8 sm:h-12 lg:h-16 w-auto object-contain mix-blend-multiply" />
+      <SafeImage src="/partners/yi-logo.jpeg?v=3" fallbackSrcs={['/Yi Logo.jpg.jpeg', '/Yi.png']} alt="Yi Logo" className="h-8 sm:h-12 lg:h-16 w-auto object-contain mix-blend-multiply" />
+      <SafeImage src="/partners/theme-2026.jpeg?v=3" fallbackSrcs={['/2026 Theme logo_White.jpeg']} alt="One Bharat Spirit" className="h-8 sm:h-12 lg:h-16 w-auto object-contain mix-blend-multiply" />
+      <SafeImage src="/partners/chennai-day.png" fallbackSrcs={['/Chennai day logo.png']} alt="Chennai Day" className="h-8 sm:h-12 lg:h-16 w-auto object-contain mix-blend-multiply" />
+      <SafeImage src="/partners/cii.jpeg" fallbackSrcs={['/CII logo blue JPG.jpg.jpeg']} alt="CII Logo" className="h-8 sm:h-12 lg:h-16 w-auto object-contain mix-blend-multiply" />
     </div>
 
     {/* Dalmia */}
     <div className="pt-1 sm:pt-2">
-      <img src="/partners/dalmia.png" alt="Dalmia Bharat Cement" className="h-20 sm:h-28 lg:h-36 w-auto object-contain mix-blend-multiply" />
+      <SafeImage src="/partners/dalmia.png" fallbackSrcs={['/dalmia.jpg']} alt="Dalmia Bharat Cement" className="h-20 sm:h-28 lg:h-36 w-auto object-contain mix-blend-multiply" />
     </div>
 
     {/* Presents */}
@@ -34,7 +35,7 @@ const HeroBanner = () => (
 
     {/* WalkAlong */}
     <div className="pb-0">
-      <img src="/partners/walkalong.png" alt="Walk Along" className="h-14 sm:h-20 lg:h-24 w-auto object-contain mix-blend-multiply" />
+      <SafeImage src="/partners/walkalong.png" alt="Walk Along" className="h-14 sm:h-20 lg:h-24 w-auto object-contain mix-blend-multiply" />
     </div>
   </div>
 );
@@ -171,7 +172,7 @@ export function Home() {
             <h3 className="text-sm font-bold text-[#79747e]  uppercase tracking-widest text-center mb-8">Title Partner</h3>
             <div className="flex justify-center">
               <div className="w-72 h-36 bg-white  rounded-3xl border border-[#cac4d0]  flex items-center justify-center shadow-sm overflow-hidden p-2 hover:shadow-md transition-shadow">
-                <img src="/partners/dalmia.png" alt="Dalmia" className="max-w-full max-h-full object-contain scale-[1.3]" />
+                <SafeImage src="/partners/dalmia.png" fallbackSrcs={['/dalmia.jpg']} alt="Dalmia" className="max-w-full max-h-full object-contain scale-[1.3]" />
               </div>
             </div>
           </div>
@@ -181,16 +182,16 @@ export function Home() {
             <h3 className="text-sm font-bold text-[#79747e]  uppercase tracking-widest text-center mb-6">Gold Partners</h3>
             <div className="flex flex-wrap justify-center gap-6">
               <div className="w-48 h-24 bg-white  rounded-xl border border-[#cac4d0]  flex items-center justify-center shadow-sm overflow-hidden p-4 hover:shadow-md transition-shadow">
-                <img src="/partners/armoraa.png" alt="Armora" className="max-w-full max-h-full object-contain" />
+                <SafeImage src="/partners/armoraa.png" fallbackSrcs={['/armoraa.png']} alt="Armora" className="max-w-full max-h-full object-contain" />
               </div>
               <div className="w-48 h-24 bg-white  rounded-xl border border-[#cac4d0]  flex items-center justify-center shadow-sm overflow-hidden p-4 hover:shadow-md transition-shadow">
-                <img src="/partners/lotte.png" alt="Lotte" className="max-w-full max-h-full object-contain" />
+                <SafeImage src="/partners/lotte.png" fallbackSrcs={['/lotte.png']} alt="Lotte" className="max-w-full max-h-full object-contain" />
               </div>
               <div className="w-48 h-24 bg-white  rounded-xl border border-[#cac4d0]  flex items-center justify-center shadow-sm overflow-hidden p-4 hover:shadow-md transition-shadow">
-                <img src="/partners/pepero.png" alt="Pepero" className="max-w-full max-h-full object-contain" />
+                <SafeImage src="/partners/pepero.png" fallbackSrcs={['/pepero.png']} alt="Pepero" className="max-w-full max-h-full object-contain" />
               </div>
               <div className="w-48 h-24 bg-white  rounded-xl border border-[#cac4d0]  flex items-center justify-center shadow-sm overflow-hidden p-2 hover:shadow-md transition-shadow">
-                <img src="/partners/rams.png" alt="RAMS" className="max-w-full max-h-full object-contain scale-[1.3]" />
+                <SafeImage src="/partners/rams.png" fallbackSrcs={['/RAMS.png']} alt="RAMS" className="max-w-full max-h-full object-contain scale-[1.3]" />
               </div>
             </div>
           </div>
@@ -200,7 +201,7 @@ export function Home() {
             <h3 className="text-sm font-bold text-[#79747e]  uppercase tracking-widest text-center mb-6">Support Partner</h3>
             <div className="flex justify-center">
               <div className="w-48 h-24 bg-white  rounded-xl border border-[#cac4d0]  flex items-center justify-center shadow-sm overflow-hidden p-4 hover:shadow-md transition-shadow">
-                <img src="/partners/tamil_matrimony.png" alt="Tamil Matrimony" className="max-w-full max-h-full object-contain" />
+                <SafeImage src="/partners/tamil_matrimony.png" fallbackSrcs={['/tamil_matrimony.png']} alt="Tamil Matrimony" className="max-w-full max-h-full object-contain" />
               </div>
             </div>
           </div>
