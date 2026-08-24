@@ -7,7 +7,6 @@ import { Users, User, Calendar, MapPin, Clock, Heart, Music, Award, Coffee, Acti
 
 import { GALLERY_IMAGES, GalleryImage } from '../components/GalleryImage';
 import { GallerySlideshow } from '../components/GallerySlideshow';
-import { SafeImage } from '../components/ui/SafeImage';
 import { Link } from 'react-router-dom';
 
 import yiLogo from '../assets/logos/yi-logo.png';

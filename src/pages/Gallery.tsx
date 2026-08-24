@@ -69,8 +69,8 @@ export function Gallery() {
           >
             <button
               onClick={closeLightbox}
-              className="absolute top-4 right-4 z-10 text-white/70 hover:text-white bg-black/40 hover:bg-black/60 p-2 rounded-full transition-colors"
-              aria-label="Close image lightbox" autoFocus focus:ring-2 focus:ring-white focus:outline-none
+              className="absolute top-4 right-4 z-10 text-white/70 hover:text-white bg-black/40 hover:bg-black/60 p-2 rounded-full transition-colors focus:ring-2 focus:ring-white focus:outline-none"
+              aria-label="Close image lightbox" autoFocus
             >
               <X className="w-6 h-6" />
             </button>

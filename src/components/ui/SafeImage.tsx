@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 interface SafeImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+  src?: string;
   fallbackSrcs?: string[];
 }
 
