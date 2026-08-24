@@ -11,30 +11,30 @@ import { Link } from 'react-router-dom';
 
 
 const HeroBanner = () => (
-  <div className="flex flex-col items-center justify-center space-y-2 sm:space-y-3 overflow-hidden relative mt-2 sm:mt-4 mb-4 lg:mb-8 w-full">
+  <div className="flex flex-col items-center justify-center space-y-6 sm:space-y-8 overflow-hidden relative mt-4 sm:mt-8 mb-8 lg:mb-12 w-full">
     {/* Top 4 logos */}
-    <div className="w-full flex flex-wrap justify-center items-center gap-3 sm:gap-5 lg:gap-8 px-2">
-      <img src="/partners/yi-logo.jpeg" alt="Yi Logo" className="w-20 h-10 sm:w-28 sm:h-12 lg:w-40 lg:h-16 object-contain mix-blend-multiply dark:mix-blend-normal dark:bg-white dark:p-1.5 dark:rounded-lg" />
-      <img src="/partners/theme-2026.jpeg" alt="One Bharat Spirit" className="w-20 h-10 sm:w-28 sm:h-12 lg:w-40 lg:h-16 object-contain mix-blend-multiply dark:mix-blend-normal dark:bg-white dark:p-1.5 dark:rounded-lg" />
-      <img src="/partners/chennai-day.png" alt="Chennai Day" className="w-20 h-10 sm:w-28 sm:h-12 lg:w-40 lg:h-16 object-contain mix-blend-multiply dark:mix-blend-normal dark:bg-white dark:p-1.5 dark:rounded-lg" />
-      <img src="/partners/cii.jpeg" alt="CII Logo" className="w-20 h-10 sm:w-28 sm:h-12 lg:w-40 lg:h-16 object-contain mix-blend-multiply dark:mix-blend-normal dark:bg-white dark:p-1.5 dark:rounded-lg" />
+    <div className="w-full max-w-6xl flex flex-wrap justify-center sm:justify-between items-center gap-6 sm:gap-4 px-4 lg:px-8">
+      <img src="/partners/yi-logo.jpeg" alt="Yi Logo" className="w-24 h-12 sm:w-32 sm:h-16 lg:w-48 lg:h-20 object-contain mix-blend-multiply dark:mix-blend-normal dark:bg-white dark:p-1.5 dark:rounded-lg" />
+      <img src="/partners/theme-2026.jpeg" alt="One Bharat Spirit" className="w-24 h-12 sm:w-32 sm:h-16 lg:w-48 lg:h-20 object-contain mix-blend-multiply dark:mix-blend-normal dark:bg-white dark:p-1.5 dark:rounded-lg" />
+      <img src="/partners/chennai-day.png" alt="Chennai Day" className="w-24 h-12 sm:w-32 sm:h-16 lg:w-48 lg:h-20 object-contain mix-blend-multiply dark:mix-blend-normal dark:bg-white dark:p-1.5 dark:rounded-lg" />
+      <img src="/partners/cii.jpeg" alt="CII Logo" className="w-24 h-12 sm:w-32 sm:h-16 lg:w-48 lg:h-20 object-contain mix-blend-multiply dark:mix-blend-normal dark:bg-white dark:p-1.5 dark:rounded-lg" />
     </div>
 
     {/* Dalmia */}
-    <div className="pt-1">
-      <img src="/partners/dalmia.png" alt="Dalmia Bharat Cement" className="h-14 sm:h-16 lg:h-20 w-auto object-contain mix-blend-multiply dark:mix-blend-normal dark:bg-white dark:p-2 dark:rounded-xl" />
+    <div className="pt-4 sm:pt-6">
+      <img src="/partners/dalmia.png" alt="Dalmia Bharat Cement" className="h-20 sm:h-28 lg:h-36 w-auto object-contain mix-blend-multiply dark:mix-blend-normal dark:bg-white dark:p-2 dark:rounded-xl" />
     </div>
 
     {/* Presents */}
-    <div className="flex items-center justify-center w-full max-w-[140px] sm:max-w-[180px]">
+    <div className="flex items-center justify-center w-full max-w-[200px] sm:max-w-[300px]">
       <div className="flex-grow h-px bg-[#49454f]/30 dark:bg-gray-600"></div>
-      <span className="px-3 text-[8px] sm:text-[10px] font-bold text-[#49454f] dark:text-gray-400 tracking-[0.3em] uppercase">Presents</span>
+      <span className="px-4 text-[10px] sm:text-xs font-bold text-[#49454f] dark:text-gray-400 tracking-[0.3em] uppercase">Presents</span>
       <div className="flex-grow h-px bg-[#49454f]/30 dark:bg-gray-600"></div>
     </div>
 
     {/* WalkAlong */}
     <div className="pb-0">
-      <img src="/partners/walkalong.png" alt="Walk Along" className="h-14 sm:h-16 lg:h-20 w-auto object-contain mix-blend-multiply dark:mix-blend-normal dark:bg-white dark:p-2 dark:rounded-xl" />
+      <img src="/partners/walkalong.png" alt="Walk Along" className="h-16 sm:h-24 lg:h-32 w-auto object-contain mix-blend-multiply dark:mix-blend-normal dark:bg-white dark:p-2 dark:rounded-xl" />
     </div>
   </div>
 );

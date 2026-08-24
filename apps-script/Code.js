@@ -476,7 +476,29 @@ function submitIndividual(payload) {
       if (tf) throw new Error("A registration with this phone number already exists.");
     }
     
-    id = 'IND-' + Utilities.getUuid().split('-')[0].toUpperCase();
+    // Generate sequential ID
+    const idIdx = headers.findIndex(h => String(h).toLowerCase() === 'registration id');
+    let nextNum = 1;
+    if (idIdx !== -1) {
+      const lastRow = sheet.getLastRow();
+      if (lastRow > 1) {
+        const lastId = sheet.getRange(lastRow, idIdx + 1).getValue();
+        const match = String(lastId).match(/IND-(\d+)/);
+        if (match) {
+          nextNum = parseInt(match[1], 10) + 1;
+        } else {
+           const allIds = sheet.getRange(2, idIdx + 1, lastRow - 1, 1).getValues();
+           for (let i = allIds.length - 1; i >= 0; i--) {
+             const m = String(allIds[i][0]).match(/IND-(\d+)/);
+             if (m) {
+               nextNum = parseInt(m[1], 10) + 1;
+               break;
+             }
+           }
+        }
+      }
+    }
+    id = 'IND-' + nextNum.toString().padStart(4, '0');
     const row = new Array(headers.length).fill('');
     
     const setVal = (colName, val) => {

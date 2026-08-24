@@ -10,7 +10,12 @@ const filesToRestore = [
   'public/partners/pepero.png',
   'public/partners/rams.png',
   'public/partners/tamil_matrimony.png',
-  'public/partners/dalmia.png'
+  'public/partners/dalmia.png',
+  'public/partners/yi-logo.jpeg',
+  'public/partners/theme-2026.jpeg',
+  'public/partners/chennai-day.png',
+  'public/partners/cii.jpeg',
+  'public/partners/walkalong.png'
 ];
 let script = `const fs = require('fs');\nconst path = require('path');\n\nconst images = {\n`;
 for (const file of filesToRestore) {

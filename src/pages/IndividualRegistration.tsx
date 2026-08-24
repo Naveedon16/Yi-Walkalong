@@ -69,8 +69,7 @@ export function IndividualRegistration() {
     employer: z.string().optional(),
     yiChapter: z.string().optional(),
 
-    companyName: z.string().optional(),
-    designation: z.string().optional(),
+
 
     school: z.string().optional(),
     coordinatorName: z.string().optional(),
@@ -308,7 +307,6 @@ export function IndividualRegistration() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <Input label="Phone Number" type="tel" {...register('phone')} error={errors.phone?.message} required />
                     <Input label="Email Address (Optional)" type="email" {...register('email')} error={errors.email?.message} />
-                    <Input label="Organization / Company (Optional)" {...register('organization')} error={errors.organization?.message} />
                   </div>
                 </div>
 
