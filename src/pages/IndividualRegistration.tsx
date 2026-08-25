@@ -68,15 +68,12 @@ export function IndividualRegistration() {
 
     employer: z.string().optional(),
     yiChapter: z.string().optional(),
-
-
-
-    school: z.string().optional(),
-    coordinatorName: z.string().optional(),
-
-    college: z.string().optional(),
-    department: z.string().optional(),
-
+    hasCaretaker: z.boolean().optional(),
+    caretakerName: z.string().optional(),
+    caretakerTShirtSize: z.string().optional(),
+    hasFamilyMember: z.boolean().optional(),
+    familyMemberName: z.string().optional(),
+    familyMemberTShirtSize: z.string().optional(),
   }).refine(data => {
     if (data.category === 'PWD' && data.disabilityType === 'Other' && !data.disabilityOther?.trim()) {
       return false;
@@ -331,6 +328,25 @@ export function IndividualRegistration() {
                       )}
                       <Input label="Institution Name" {...register('institutionName')} error={errors.institutionName?.message} />
                       <Input label="Special Requirements" {...register('specialRequirements')} error={errors.specialRequirements?.message} />
+                      
+                      <div className="col-span-full">
+                        <label className="flex items-center space-x-3 mb-2 cursor-pointer">
+                          <input type="checkbox" className="form-checkbox h-5 w-5 text-[#6750a4]" {...register('hasCaretaker')} />
+                          <span className="text-[#49454f] font-medium">Will you be accompanied by a caretaker?</span>
+                        </label>
+                      </div>
+
+                      {watch('hasCaretaker') && (
+                        <>
+                          <Input label="Caretaker Name" {...register('caretakerName')} error={errors.caretakerName?.message} />
+                          <Select
+                            label="Caretaker T-Shirt Size"
+                            options={settings.tshirtSizes}
+                            {...register('caretakerTShirtSize')}
+                            error={errors.caretakerTShirtSize?.message}
+                          />
+                        </>
+                      )}
                     </div>
                   </div>
                 )}
@@ -339,8 +355,27 @@ export function IndividualRegistration() {
                   <div className="space-y-4 bg-[#f8f9ff]  p-6 rounded-[24px] border border-[#e1e2ec] ">
                     <h3 className="text-lg font-bold text-[#6750a4]">Yi Member Details</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <Input label="Employer / Business Name" {...register('employer')} error={errors.employer?.message} required />
-                      <Input label="Yi Chapter" {...register('yiChapter')} error={errors.yiChapter?.message} required />
+                      <Input label="Employer / Business Name" {...register('employer')} error={errors.employer?.message} />
+                      <Input label="Yi Chapter" {...register('yiChapter')} error={errors.yiChapter?.message} />
+
+                      <div className="col-span-full mt-2">
+                        <label className="flex items-center space-x-3 mb-2 cursor-pointer">
+                          <input type="checkbox" className="form-checkbox h-5 w-5 text-[#6750a4]" {...register('hasFamilyMember')} />
+                          <span className="text-[#49454f] font-medium">Will you be accompanied by a family member?</span>
+                        </label>
+                      </div>
+
+                      {watch('hasFamilyMember') && (
+                        <>
+                          <Input label="Family Member Name" {...register('familyMemberName')} error={errors.familyMemberName?.message} />
+                          <Select
+                            label="Family Member T-Shirt Size"
+                            options={settings.tshirtSizes}
+                            {...register('familyMemberTShirtSize')}
+                            error={errors.familyMemberTShirtSize?.message}
+                          />
+                        </>
+                      )}
                     </div>
                   </div>
                 )}

@@ -1,10 +1,6 @@
 export type Category = 
   | 'PWD'
-  | 'YI_MEMBER'
-  | 'CII_MEMBER'
-  | 'YUVA'
-  | 'THALIR'
-  | 'GENERAL';
+  | 'YI_MEMBER';
 
 export interface CommonFields {
   name: string;
@@ -26,42 +22,24 @@ export interface PwdFields {
   disabilityOther?: string;
   institutionName: string;
   specialRequirements?: string;
+  hasCaretaker?: boolean;
+  caretakerName?: string;
+  caretakerTShirtSize?: 'S' | 'M' | 'L' | 'XL' | 'XXL' | '';
 }
 
 export interface YiMemberFields {
   employer: string;
   yiChapter: string;
   willingToWalkWithPwd: boolean;
-}
-
-export interface CiiMemberFields {
-  companyName: string;
-  designation: string;
-}
-
-export interface ThalirFields {
-  school: string;
-  coordinatorName: string;
-}
-
-export interface YuvaFields {
-  college: string;
-  department: string;
-  year: string;
-}
-
-export interface GeneralFields {
-  occupation: string;
+  hasFamilyMember?: boolean;
+  familyMemberName?: string;
+  familyMemberTShirtSize?: 'S' | 'M' | 'L' | 'XL' | 'XXL' | '';
 }
 
 export type RegistrationFormValues = CommonFields & {
   category: Category;
 } & Partial<PwdFields> 
-  & Partial<YiMemberFields> 
-  & Partial<CiiMemberFields> 
-  & Partial<ThalirFields> 
-  & Partial<YuvaFields> 
-  & Partial<GeneralFields>;
+  & Partial<YiMemberFields>;
 
 export interface RegistrationStatus {
   id: string;

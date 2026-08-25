@@ -470,11 +470,7 @@ function submitIndividual(payload) {
       if (tf) throw new Error("A registration with this email already exists.");
     }
     
-    if (payloadPhone && phoneIdx !== -1) {
-      const phoneCol = sheet.getRange(2, phoneIdx + 1, sheet.getLastRow() || 1, 1);
-      const tf = phoneCol.createTextFinder(payloadPhone).matchEntireCell(true).findNext();
-      if (tf) throw new Error("A registration with this phone number already exists.");
-    }
+    
     
     // Generate sequential ID
     const idIdx = headers.findIndex(h => String(h).toLowerCase() === 'registration id');
@@ -516,6 +512,27 @@ function submitIndividual(payload) {
     setVal('Category', payload.category);
     setVal('T-Shirt Size', payload.tshirtSize);
     setVal('Status', 'Confirmed');
+
+    // Common Fields
+    setVal('Organization', payload.organization || '');
+    
+    // PWD Category Specific
+    setVal('Disability Type', payload.disabilityType || '');
+    setVal('Disability Other', payload.disabilityOther || '');
+    setVal('Institution Name', payload.institutionName || '');
+    setVal('Special Requirements', payload.specialRequirements || '');
+    
+    setVal('Has Caretaker', payload.hasCaretaker ? 'Yes' : 'No');
+    setVal('Caretaker Name', payload.caretakerName || '');
+    setVal('Caretaker T-Shirt Size', payload.caretakerTShirtSize || '');
+
+    // YI Member Category Specific
+    setVal('Employer', payload.employer || '');
+    setVal('Yi Chapter', payload.yiChapter || '');
+    
+    setVal('Has Family Member', payload.hasFamilyMember ? 'Yes' : 'No');
+    setVal('Family Member Name', payload.familyMemberName || '');
+    setVal('Family Member T-Shirt Size', payload.familyMemberTShirtSize || '');
     
     sheet.appendRow(row);
     CacheService.getScriptCache().remove('dashboard_stats');
