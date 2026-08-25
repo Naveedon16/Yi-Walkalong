@@ -94,6 +94,7 @@ export function IndividualRegistration() {
 
   const { register, handleSubmit, watch, control, formState: { errors }, trigger } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    mode: 'onChange',
     defaultValues: {}
   });
 
