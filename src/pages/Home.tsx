@@ -271,7 +271,7 @@ export function Home() {
         </div>
         <div className="space-y-6">
           {[
-            { q: "Is there a registration fee?", a: "Yes, WalkAlong is free to participate only for People with Disabilities." },
+            { q: "Is there a registration fee?", a: "Yes, There is a registration fee of Rs. 500 for General public.\nWalkAlong is free to participate only for People with Disabilities." },
             { q: "Can I register on the spot?", a: "No, Spot registrations are not available. We strongly encourage registering online beforehand." },
             { q: "Are T-shirts provided?", a: "Yes, complimentary T-shirts will be provided to all registered participants on a first-come, first-served basis at the venue." },
             { q: "Where can I park my vehicle?", a: "Designated parking areas are available near the venue. Detailed maps will be shared via email closer to the event date." }
@@ -283,7 +283,7 @@ export function Home() {
                   <ChevronDown className="w-6 h-6" />
                 </span>
               </summary>
-              <div className="px-8 pb-8 text-[#49454f]  leading-relaxed text-base">
+              <div className="px-8 pb-8 text-[#49454f]  leading-relaxed text-base whitespace-pre-line">
                 {faq.a}
               </div>
             </details>
