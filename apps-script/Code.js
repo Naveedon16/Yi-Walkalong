@@ -108,7 +108,8 @@ function getSettings() {
     eventDate: '2026-08-15',
     categories: [
       { value: 'PWD', label: 'Participant with Disability' },
-      { value: 'YI_MEMBER', label: 'Yi Member' }
+      { value: 'YI_MEMBER', label: 'Yi Member' },
+      { value: 'SPECIAL_INVITEE', label: 'Special Invitee' }
     ],
     tshirtSizes: [
       { label: 'Extra Small (XS)', value: 'XS' },

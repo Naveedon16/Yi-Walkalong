@@ -53,7 +53,10 @@ export function IndividualRegistration() {
   const formSchema = z.object({
     category: z.string().min(1, 'Category is required'),
     name: z.string().min(2, 'Name must be at least 2 characters'),
-    age: z.string().regex(/^[0-9]+$/, 'Age must be valid'),
+    age: z.string().regex(/^[0-9]+$/, 'Age must be a valid number').refine((val) => {
+      const num = parseInt(val, 10);
+      return num >= 0 && num <= 100;
+    }, 'Age must be between 0 and 100'),
     gender: z.string().min(1, 'Gender is required'),
     phone: z.string().regex(/^[0-9]{10}$/, 'Must be a valid 10-digit phone number'),
     email: z.string().email('Invalid email address').or(z.literal('')).optional(),
@@ -74,6 +77,7 @@ export function IndividualRegistration() {
     hasFamilyMember: z.boolean().optional(),
     familyMemberName: z.string().optional(),
     familyMemberTShirtSize: z.string().optional(),
+    remarks: z.string().optional(),
   }).refine(data => {
     if (data.category === 'PWD' && data.disabilityType === 'Other' && !data.disabilityOther?.trim()) {
       return false;
@@ -111,6 +115,8 @@ export function IndividualRegistration() {
         dynamicFieldsValid = await trigger(['disabilityType', 'disabilityOther']);
       } else if (selectedCategory === 'YI_MEMBER') {
         dynamicFieldsValid = await trigger(['employer', 'yiChapter']);
+      }  else if (selectedCategory === 'SPECIAL_INVITEE') {
+        dynamicFieldsValid = await trigger(['employer', 'remarks']);
       }
 
       if (dynamicFieldsValid) {
@@ -258,7 +264,7 @@ export function IndividualRegistration() {
                     render={({ field }) => (
                       <SearchableSelect
                         label="Select Category"
-                        options={settings.categories.filter(c => c.value === 'PWD' || c.value === 'YI_MEMBER')}
+                        options={settings.categories.filter(c => c.value === 'PWD' || c.value === 'YI_MEMBER' || c.value === 'SPECIAL_INVITEE')}
                         value={field.value || ''}
                         onChange={field.onChange}
                         error={errors.category?.message}
@@ -358,6 +364,35 @@ export function IndividualRegistration() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <Input label="Employer / Business Name" {...register('employer')} error={errors.employer?.message} />
                       <Input label="Yi Chapter" {...register('yiChapter')} error={errors.yiChapter?.message} />
+
+                      <div className="col-span-full mt-2">
+                        <label className="flex items-center space-x-3 mb-2 cursor-pointer">
+                          <input type="checkbox" className="form-checkbox h-5 w-5 text-[#6750a4]" {...register('hasFamilyMember')} />
+                          <span className="text-[#49454f] font-medium">Will you be accompanied by a family member?</span>
+                        </label>
+                      </div>
+
+                      {watch('hasFamilyMember') && (
+                        <>
+                          <Input label="Family Member Name" {...register('familyMemberName')} error={errors.familyMemberName?.message} />
+                          <Select
+                            label="Family Member T-Shirt Size"
+                            options={settings.tshirtSizes}
+                            {...register('familyMemberTShirtSize')}
+                            error={errors.familyMemberTShirtSize?.message}
+                          />
+                        </>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {selectedCategory === 'SPECIAL_INVITEE' && (
+                  <div className="space-y-4 bg-[#f8f9ff]  p-6 rounded-[24px] border border-[#e1e2ec] ">
+                    <h3 className="text-lg font-bold text-[#6750a4]">Special Invitee Details</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <Input label="Business Name" {...register('employer')} error={errors.employer?.message} />
+                      <Input label="Remarks" {...register('remarks')} error={errors.remarks?.message} />
 
                       <div className="col-span-full mt-2">
                         <label className="flex items-center space-x-3 mb-2 cursor-pointer">

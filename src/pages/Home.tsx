@@ -103,17 +103,30 @@ export function Home() {
               <span className="text-[#6750a4] font-bold text-xl">→</span>
             </div>
             <p className="text-sm text-[#49454f]  mt-1">
-              For PWD and Yi Members.
+              Only for PWD and Yi Members.
             </p>
           </div>
         </div>
       </div>
 
-      <div className="bg-blue-50  border border-blue-200  rounded-2xl p-4 flex gap-3 items-start sm:items-center">
-        <Info className="w-5 h-5 text-blue-600  shrink-0 mt-0.5 sm:mt-0" />
-        <p className="text-sm text-blue-800  font-medium">
-          Registrations for other categories will be opened soon.
-        </p>
+       <div 
+        onClick={() => window.open('https://cam.mycii.in/ORNew/Registration.html?EventId=E000076448', '_blank', 'noopener,noreferrer')}
+        className="bg-white  rounded-[32px] p-6 shadow-sm border border-[#e1e2ec]  hover:border-[#6750a4] hover:bg-[#fef7ff]  transition-all cursor-pointer group"
+      >
+        <div className="flex gap-4">
+          <div className="w-14 h-14 rounded-2xl bg-[#f3edf7]  group-hover:bg-[#eaddff] flex items-center justify-center text-[#6750a4] transition-colors shrink-0">
+            <User className="w-8 h-8" />
+          </div>
+          <div className="flex-1">
+            <div className="flex justify-between items-center">
+              <h3 className="text-xl font-bold text-[#1d1b20] ">Registration</h3>
+              <span className="text-[#6750a4] font-bold text-xl">→</span>
+            </div>
+            <p className="text-sm text-[#49454f]  mt-1">
+              For All others.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
