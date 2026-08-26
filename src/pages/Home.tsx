@@ -186,6 +186,30 @@ export function Home() {
       </div>
       </div>
 
+    {/* 2. Event Details */}
+      <section className="space-y-12">
+        <div className="text-center max-w-3xl mx-auto space-y-4">
+          <h2 className="text-4xl lg:text-5xl font-bold text-[#1d1b20] ">Event Highlights</h2>
+          <p className="text-[#49454f]  text-xl">Experience a morning filled with joy, inclusivity, and community spirit.</p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 xl:gap-8">
+          {[
+            { icon: <Heart className="w-8 h-8" />, title: "Inclusive Walk", desc: "Walking side-by-side with Persons with Disabilities." },
+            { icon: <Music className="w-8 h-8" />, title: "Entertainment", desc: "Live music, cultural performances, and activities." },
+            { icon: <Award className="w-8 h-8" />, title: "Goodies", desc: "Goodies and E-certificates for all registered participants." },
+            { icon: <Coffee className="w-8 h-8" />, title: "Refreshments", desc: "Complimentary breakfast and hydration points." }
+          ].map((item, i) => (
+            <div key={i} className="bg-white p-8 rounded-[32px] border border-[#e1e2ec] hover:border-[#6750a4] hover:shadow-md transition-all">
+              <div className="w-16 h-16 rounded-2xl bg-[#fef7ff] text-[#6750a4] flex items-center justify-center mb-6">
+                {item.icon}
+              </div>
+              <h3 className="text-xl font-bold text-[#1d1b20]  mb-3">{item.title}</h3>
+              <p className="text-base text-[#49454f]  leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* 3. Accessibility Features */}
       <section className="bg-[#f8f9ff]  rounded-[32px] p-10 lg:p-16 xl:p-20 border border-[#e1e2ec]  relative overflow-hidden">
         <div className="absolute top-0 right-0 p-12 lg:p-20 opacity-5 pointer-events-none">

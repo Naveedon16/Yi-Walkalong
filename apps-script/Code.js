@@ -458,18 +458,7 @@ function submitIndividual(payload) {
   try {
     const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
     
-    // Duplicate check using TextFinder
-    const payloadEmail = String(payload.email || '').trim().toLowerCase();
-    const payloadPhone = String(payload.phone || '').trim();
-    
-    const emailIdx = headers.findIndex(h => String(h).toLowerCase() === 'email');
-    const phoneIdx = headers.findIndex(h => String(h).toLowerCase() === 'phone');
-    
-    if (payloadEmail && emailIdx !== -1) {
-      const emailCol = sheet.getRange(2, emailIdx + 1, sheet.getLastRow() || 1, 1);
-      const tf = emailCol.createTextFinder(payloadEmail).matchEntireCell(true).findNext();
-      if (tf) throw new Error("A registration with this email already exists.");
-    }
+
     
     
     
@@ -534,6 +523,9 @@ function submitIndividual(payload) {
     setVal('Has Family Member', payload.hasFamilyMember ? 'Yes' : 'No');
     setVal('Family Member Name', payload.familyMemberName || '');
     setVal('Family Member T-Shirt Size', payload.familyMemberTShirtSize || '');
+    
+    // Special Invitee Category Specific
+    setVal('Remarks', payload.remarks || '');
     
     sheet.appendRow(row);
     CacheService.getScriptCache().remove('dashboard_stats');
