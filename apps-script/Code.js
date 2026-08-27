@@ -164,7 +164,7 @@ function doPost(e) {
   try {
     const body = JSON.parse(e.postData.contents);
     const action = body.action;
-    const payload = body.payload;
+    const payload = body.payload || {};
     const token = payload.token;
     
     // Protected actions

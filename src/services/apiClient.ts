@@ -26,7 +26,7 @@ const DEFAULT_TIMEOUT_MS = 45000;
 export const apiClient = {
   async post<T, R>(action: string, payload: T, timeoutMs: number = DEFAULT_TIMEOUT_MS): Promise<R> {
     if (!GAS_ENDPOINT) {
-      throw new ApiError('The registration service is temporarily unavailable. Please try again shortly.', 'CONFIGURATION_ERROR');
+      throw new ApiError('Backend configuration error: Please make sure you have copied the latest apps-script/Code.js into your Google Apps Script editor and deployed it as a NEW version. Then run the setup() function.', 'CONFIGURATION_ERROR');
     }
     
     const controller = new AbortController();
@@ -77,7 +77,7 @@ export const apiClient = {
       }
       const errorMsg = data.error || 'Unknown error occurred';
       if (isConfigError(errorMsg)) {
-        throw new ApiError('The registration service is temporarily unavailable. Please try again shortly.', 'CONFIGURATION_ERROR');
+        throw new ApiError('Backend configuration error: Please make sure you have copied the latest apps-script/Code.js into your Google Apps Script editor and deployed it as a NEW version. Then run the setup() function.', 'CONFIGURATION_ERROR');
       }
       throw new ApiError(errorMsg, data.code || 'APPLICATION_ERROR');
     }
@@ -87,7 +87,7 @@ export const apiClient = {
   
   async get<R>(action: string, params?: Record<string, string>, timeoutMs: number = DEFAULT_TIMEOUT_MS): Promise<R> {
     if (!GAS_ENDPOINT) {
-      throw new ApiError('The registration service is temporarily unavailable. Please try again shortly.', 'CONFIGURATION_ERROR');
+      throw new ApiError('Backend configuration error: Please make sure you have copied the latest apps-script/Code.js into your Google Apps Script editor and deployed it as a NEW version. Then run the setup() function.', 'CONFIGURATION_ERROR');
     }
     
     const url = new URL(GAS_ENDPOINT, window.location.origin);
@@ -141,7 +141,7 @@ export const apiClient = {
       }
       const errorMsg = data.error || 'Unknown error occurred';
       if (isConfigError(errorMsg)) {
-        throw new ApiError('The registration service is temporarily unavailable. Please try again shortly.', 'CONFIGURATION_ERROR');
+        throw new ApiError('Backend configuration error: Please make sure you have copied the latest apps-script/Code.js into your Google Apps Script editor and deployed it as a NEW version. Then run the setup() function.', 'CONFIGURATION_ERROR');
       }
       throw new ApiError(errorMsg, data.code || 'APPLICATION_ERROR');
     }
