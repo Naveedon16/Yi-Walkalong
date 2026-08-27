@@ -488,8 +488,13 @@ function submitIndividual(payload) {
     const row = new Array(headers.length).fill('');
     
     const setVal = (colName, val) => {
-      const idx = headers.findIndex(h => String(h).toLowerCase() === String(colName).toLowerCase());
-      if (idx !== -1) row[idx] = val;
+      let idx = headers.findIndex(h => String(h).toLowerCase() === String(colName).toLowerCase());
+      if (idx === -1) {
+        headers.push(colName);
+        idx = headers.length - 1;
+        sheet.getRange(1, headers.length).setValue(colName);
+      }
+      row[idx] = val;
     };
     
     setVal('Registration ID', id);
@@ -527,7 +532,18 @@ function submitIndividual(payload) {
     // Special Invitee Category Specific
     setVal('Remarks', payload.remarks || '');
     
+    
+    // Dynamically capture any other unexpected fields from the frontend
+    const knownKeys = ['name', 'age', 'gender', 'phone', 'email', 'category', 'tshirtSize', 'organization', 'disabilityType', 'disabilityOther', 'institutionName', 'specialRequirements', 'hasCaretaker', 'caretakerName', 'caretakerTShirtSize', 'employer', 'yiChapter', 'hasFamilyMember', 'familyMemberName', 'familyMemberTShirtSize', 'remarks', 'forceSubmit'];
+    for (const key in payload) {
+      if (payload.hasOwnProperty(key) && !knownKeys.includes(key)) {
+        const colName = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+        setVal(colName, payload[key] || '');
+      }
+    }
+    
     sheet.appendRow(row);
+
     CacheService.getScriptCache().remove('dashboard_stats');
     CacheService.getScriptCache().remove('participants_data');
   } finally {

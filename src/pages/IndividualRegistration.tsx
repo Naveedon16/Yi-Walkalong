@@ -167,7 +167,7 @@ export function IndividualRegistration() {
       if (submitData.disabilityType === 'Other' && submitData.disabilityOther) {
         submitData.disabilityType = `Other - ${submitData.disabilityOther.trim()}`;
       }
-      delete (submitData as any).disabilityOther;
+      // delete (submitData as any).disabilityOther; // Preserved for backend storage
 
       const response = await RegistrationService.submitIndividual(submitData as any);
       if (response.isDuplicate) {
