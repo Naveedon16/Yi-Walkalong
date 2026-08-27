@@ -89,9 +89,9 @@ export function Home() {
 
   const registrationCards = (
     <div className="flex flex-col gap-6">
-      <div 
-        onClick={() => navigate('/register/individual')}
-        className="bg-white  rounded-[32px] p-6 shadow-sm border border-[#e1e2ec]  hover:border-[#6750a4] hover:bg-[#fef7ff]  transition-all cursor-pointer group"
+      <Link 
+        to="/register/individual"
+        className="bg-white  rounded-[32px] p-6 shadow-sm border border-[#e1e2ec]  hover:border-[#6750a4] hover:bg-[#fef7ff]  transition-all cursor-pointer group block"
       >
         <div className="flex gap-4">
           <div className="w-14 h-14 rounded-2xl bg-[#f3edf7]  group-hover:bg-[#eaddff] flex items-center justify-center text-[#6750a4] transition-colors shrink-0">
@@ -107,11 +107,13 @@ export function Home() {
             </p>
           </div>
         </div>
-      </div>
+      </Link>
 
-       <div 
-        onClick={() => window.open('https://cam.mycii.in/ORNew/Registration.html?EventId=E000076448', '_blank', 'noopener,noreferrer')}
-        className="bg-white  rounded-[32px] p-6 shadow-sm border border-[#e1e2ec]  hover:border-[#6750a4] hover:bg-[#fef7ff]  transition-all cursor-pointer group"
+       <a 
+        href="https://cam.mycii.in/ORNew/Registration.html?EventId=E000076448"
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="bg-white  rounded-[32px] p-6 shadow-sm border border-[#e1e2ec]  hover:border-[#6750a4] hover:bg-[#fef7ff]  transition-all cursor-pointer group block"
       >
         <div className="flex gap-4">
           <div className="w-14 h-14 rounded-2xl bg-[#f3edf7]  group-hover:bg-[#eaddff] flex items-center justify-center text-[#6750a4] transition-colors shrink-0">
@@ -127,7 +129,7 @@ export function Home() {
             </p>
           </div>
         </div>
-      </div>
+      </a>
     </div>
   );
 
