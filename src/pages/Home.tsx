@@ -274,7 +274,7 @@ export function Home() {
                 <SafeImage src="/pepero.png" fallbackSrcs={['/partners/pepero.png']} alt="Pepero" className="max-w-full max-h-full object-contain" />
               </div>
               <div className="w-48 h-24 bg-white  rounded-xl border border-[#cac4d0]  flex items-center justify-center shadow-sm overflow-hidden p-3 hover:shadow-md transition-shadow">
-                <SafeImage src="/RAMS.png" fallbackSrcs={['/partners/rams.png']} alt="RAMS" className="max-w-full max-h-full object-contain scale-[1.3]" />
+                <SafeImage src="/HMJ.jpg" fallbackSrcs={['/HMJ.jpg']} alt="HMJ" className="max-w-full max-h-full object-contain scale-[1.3]" />
               </div>
             </div>
           </div>
