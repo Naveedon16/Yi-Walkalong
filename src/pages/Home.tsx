@@ -12,8 +12,8 @@ import { SafeImage } from '../components/ui/SafeImage';
 
 const HeroBanner = () => (
   <div className="flex flex-col items-center justify-center space-y-4 sm:space-y-5 relative mt-2 mb-4 lg:mb-6 w-full max-w-5xl mx-auto">
-    {/* Top 4 logos - 4 equal columns with balanced visual weighting */}
-    <div className="w-full grid grid-cols-4 items-center justify-items-center gap-2 sm:gap-6 lg:gap-8 px-2 sm:px-6">
+    {/* Top 3 logos - 3 equal columns with balanced visual weighting */}
+    <div className="w-full grid grid-cols-3 items-center justify-items-center gap-2 sm:gap-6 lg:gap-8 px-2 sm:px-6">
       {/* Yi Logo */}
       <div className="flex items-center justify-center w-full h-12 sm:h-16 lg:h-20">
         <SafeImage 
@@ -31,16 +31,6 @@ const HeroBanner = () => (
           fallbackSrcs={['/partners/theme-2026.jpeg']} 
           alt="One Bharat Spirit" 
           className="h-8 sm:h-11 lg:h-14 w-auto max-w-full object-contain mix-blend-multiply scale-[2]" 
-        />
-      </div>
-
-      {/* Chennai Day */}
-      <div className="flex items-center justify-center w-full h-12 sm:h-16 lg:h-20">
-        <SafeImage 
-          src="/Chennai day logo.png" 
-          fallbackSrcs={['/partners/chennai-day.png']} 
-          alt="Chennai Day" 
-          className="h-7 sm:h-10 lg:h-13 w-auto max-w-full object-contain mix-blend-multiply" 
         />
       </div>
 
@@ -279,12 +269,31 @@ export function Home() {
             </div>
           </div>
 
-          {/* Support Partners */}
-          <div>
-            <h3 className="text-sm font-bold text-[#79747e]  uppercase tracking-widest text-center mb-6">Support Partner</h3>
-            <div className="flex justify-center">
+          {/* Government and Support Partners Row */}
+          <div className="flex flex-col md:flex-row justify-center gap-10 md:gap-16">
+            {/* Government Partners */}
+            <div>
+              <h3 className="text-sm font-bold text-[#79747e]  uppercase tracking-widest text-center mb-6">Government Partners</h3>
+              <div className="flex flex-wrap justify-center gap-6">
               <div className="w-48 h-24 bg-white  rounded-xl border border-[#cac4d0]  flex items-center justify-center shadow-sm overflow-hidden p-4 hover:shadow-md transition-shadow">
-                <SafeImage src="/tamil_matrimony.png" fallbackSrcs={['/partners/tamil_matrimony.png']} alt="Tamil Matrimony" className="max-w-full max-h-full object-contain" />
+                  <SafeImage src="/TN_gov.44.34 PM.jpeg" fallbackSrcs={['/TN_gov.44.34 PM.jpeg']} alt="TN Gov" className="max-w-full max-h-full object-contain" />
+                </div>
+                <div className="w-48 h-24 bg-white  rounded-xl border border-[#cac4d0]  flex items-center justify-center shadow-sm overflow-hidden p-4 hover:shadow-md transition-shadow">
+                  <SafeImage src="/TN Rights Logo-01.png" fallbackSrcs={['/TN Rights Logo-01.png']} alt="TN Rights" className="max-w-full max-h-full object-contain" />
+                </div>
+              </div>
+            </div>
+
+            {/* Support Partners */}
+            <div>
+              <h3 className="text-sm font-bold text-[#79747e]  uppercase tracking-widest text-center mb-6">Support Partner</h3>
+              <div className="flex flex-wrap justify-center gap-6">
+                <div className="w-48 h-24 bg-white  rounded-xl border border-[#cac4d0]  flex items-center justify-center shadow-sm overflow-hidden p-4 hover:shadow-md transition-shadow">
+                  <SafeImage src="/tamil_matrimony.png" fallbackSrcs={['/partners/tamil_matrimony.png']} alt="Tamil Matrimony" className="max-w-full max-h-full object-contain" />
+                </div>
+                <div className="w-48 h-24 bg-white  rounded-xl border border-[#cac4d0]  flex items-center justify-center shadow-sm overflow-hidden p-4 hover:shadow-md transition-shadow">
+                  <SafeImage src="/Urbaser.jpg" fallbackSrcs={['/Urbaser.jpg']} alt="Urbaser" className="max-w-full max-h-full object-contain" />
+                </div>
               </div>
             </div>
           </div>
