@@ -433,7 +433,13 @@ function getDashboardStats() {
       if (status === 'Checked In') stats.bandsAssigned += count;
       else stats.bandsPending += count;
       
-      if (cat) stats.byCategory[cat] = (stats.byCategory[cat] || 0) + count;
+      if (cat) {
+        if (!stats.byCategory[cat]) stats.byCategory[cat] = { individual: 0, family: 0, caretaker: 0 };
+        stats.byCategory[cat].individual += 1;
+        stats.byCategory[cat].family += familyCount;
+        stats.byCategory[cat].caretaker += caretakerCount;
+      }
+
       if (ts) stats.byTshirtSize[ts] = (stats.byTshirtSize[ts] || 0) + 1;
       if (familyCount > 0 && familyTs) stats.byTshirtSize[familyTs] = (stats.byTshirtSize[familyTs] || 0) + 1;
       if (caretakerCount > 0 && caretakerTs) stats.byTshirtSize[caretakerTs] = (stats.byTshirtSize[caretakerTs] || 0) + 1;

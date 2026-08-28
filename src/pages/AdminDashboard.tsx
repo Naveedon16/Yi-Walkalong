@@ -313,36 +313,49 @@ export function AdminDashboard() {
 
       {stats && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          <Card>
-            <h3 className="text-lg font-bold text-[#1d1b20]  mb-4">Individual Categories</h3>
-            <div className="space-y-3">
-              {stats.individualCategories ? Object.entries(stats.individualCategories).map(([cat, count]) => (
-                <div key={`ind-${cat}`} className="flex justify-between items-center">
-                  <span className="text-[#49454f] ">{cat}</span>
-                  <span className="font-medium text-[#1d1b20] ">{count}</span>
-                </div>
-              )) : Object.entries(stats.byCategory).map(([cat, count]) => (
-                <div key={cat} className="flex justify-between items-center">
-                  <span className="text-[#49454f] ">{cat}</span>
-                  <span className="font-medium text-[#1d1b20] ">{count}</span>
-                </div>
-              ))}
+          <Card className="lg:col-span-2">
+            <h3 className="text-lg font-bold text-[#1d1b20]  mb-4">Individual Categories Breakdown</h3>
+            <div className="overflow-x-auto rounded-xl border border-[#e1e2ec]">
+              <table className="w-full text-left border-collapse min-w-[600px]">
+                <thead className="bg-[#f8f9ff]">
+                  <tr className="border-b border-[#e1e2ec]">
+                    <th className="py-3 px-4 font-medium text-[#49454f]">Category</th>
+                    <th className="py-3 px-4 font-medium text-[#49454f]">Individuals</th>
+                    <th className="py-3 px-4 font-medium text-[#49454f]">Family Members</th>
+                    <th className="py-3 px-4 font-medium text-[#49454f]">Caretakers</th>
+                    <th className="py-3 px-4 font-bold text-[#1d1b20]">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {Object.entries(stats.byCategory).map(([cat, counts]: [string, any]) => (
+                    <tr key={cat} className="border-b border-[#e1e2ec] last:border-0 hover:bg-[#fef7ff] transition-colors">
+                      <td className="py-3 px-4 text-[#1d1b20] font-medium">{cat.replace(/_/g, ' ')}</td>
+                      <td className="py-3 px-4 text-[#49454f]">{typeof counts === 'object' ? counts.individual : counts}</td>
+                      <td className="py-3 px-4 text-[#49454f]">{typeof counts === 'object' ? counts.family : 0}</td>
+                      <td className="py-3 px-4 text-[#49454f]">{typeof counts === 'object' ? counts.caretaker : 0}</td>
+                      <td className="py-3 px-4 font-bold text-[#1d1b20]">
+                        {typeof counts === 'object' ? (counts.individual + counts.family + counts.caretaker) : counts}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </Card>
           
-          <Card>
-            <h3 className="text-lg font-bold text-[#1d1b20]  mb-4">Institution Categories</h3>
-            <div className="space-y-3">
-              {stats.institutionCategories ? Object.entries(stats.institutionCategories).map(([cat, count]) => (
-                <div key={`inst-${cat}`} className="flex justify-between items-center">
-                  <span className="text-[#49454f] ">{cat}</span>
-                  <span className="font-medium text-[#1d1b20] ">{count}</span>
-                </div>
-              )) : (
-                <div className="text-[#49454f] ">No institution data</div>
-              )}
-            </div>
-          </Card>
+          {stats.institutionCategories && (
+            <Card>
+              <h3 className="text-lg font-bold text-[#1d1b20]  mb-4">Institution Categories</h3>
+              <div className="space-y-3">
+                {Object.entries(stats.institutionCategories).map(([cat, count]) => (
+                  <div key={`inst-${cat}`} className="flex justify-between items-center">
+                    <span className="text-[#49454f] ">{cat}</span>
+                    <span className="font-medium text-[#1d1b20] ">{count}</span>
+                  </div>
+                ))}
+              </div>
+            </Card>
+          )}
 
           <Card className="lg:col-span-2">
             <h3 className="text-lg font-bold text-[#1d1b20]  mb-4">Registrations by T-Shirt Size</h3>
