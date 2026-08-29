@@ -86,23 +86,24 @@ export function AdminDashboard() {
     let content = `WalkAlong 2026 Registration Summary\nGenerated: ${new Date().toLocaleString()}\n\n`;
     content += `Total Registrations: ${stats.totalRegistrations}\n`;
     content += `Total Participants: ${stats.totalParticipants}\n\n`;
-    content += `Individual Registrations: ${stats.individualRegistrations}\n`;
+
     content += `Confirmed: ${stats.confirmedRegistrations}\n`;
     content += `Pending: ${stats.pendingValidation}\n\n`;
     
-    content += `Individual Categories:\n`;
-    Object.entries(stats.individualCategories || {}).forEach(([cat, count]) => {
-      content += `- ${cat}: ${count}\n`;
-    });
-    
-    content += `\nInstitution Categories:\n`;
-    Object.entries(stats.institutionCategories || {}).forEach(([cat, count]) => {
-      content += `- ${cat}: ${count}\n`;
+    content += `Categories Breakdown:\n`;
+    Object.entries(stats.byCategory || {}).forEach(([cat, counts]) => {
+      const catName = cat.replace(/_/g, ' ');
+      if (typeof counts === 'object') {
+        const total = counts.individual + counts.family + counts.caretaker;
+        content += `- ${catName}: ${total} total (${counts.individual} individuals, ${counts.family} family, ${counts.caretaker} caretakers)\n`;
+      } else {
+        content += `- ${catName}: ${counts}\n`;
+      }
     });
     
     content += `\nRegistration Trends:\n`;
     (stats.trends || []).forEach(trend => {
-      content += `- ${trend.date}: ${trend.participants} participants (${trend.individual} individual, ${trend.institution} institution)\n`;
+      content += `- ${trend.date}: ${trend.participants} participants\n`;
     });
     
     const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
@@ -285,11 +286,11 @@ export function AdminDashboard() {
             <div className="h-72 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
-                  <Pie
-                    data={[
-                      { name: 'Individual', value: stats.individualRegistrations },
-                      { name: 'Institution', value: stats.institutionRegistrations }
-                    ]}
+                <Pie
+                    data={Object.entries(stats.byCategory || {}).map(([name, counts]) => ({
+                      name: name.replace(/_/g, ' '),
+                      value: typeof counts === 'object' ? counts.individual + counts.family + counts.caretaker : counts
+                    }))}
                     cx="50%"
                     cy="50%"
                     innerRadius={60}
@@ -297,8 +298,10 @@ export function AdminDashboard() {
                     paddingAngle={5}
                     dataKey="value"
                   >
-                    <Cell key="cell-0" fill="#6750a4" />
-                    <Cell key="cell-1" fill="#b3261e" />
+                    {Object.keys(stats.byCategory || {}).map((entry, index) => {
+                      const colors = ['#6750a4', '#b3261e', '#2e7d32', '#f9a825', '#1976d2', '#c2185b', '#0097a7', '#558b2f'];
+                      return <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />;
+                    })}
                   </Pie>
                   <Tooltip 
                     contentStyle={{ backgroundColor: 'white', borderRadius: '8px', border: `1px solid ${'#cac4d0'}`, color: '#1d1b20' }}
