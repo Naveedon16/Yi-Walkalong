@@ -1,7 +1,8 @@
 export type Category = 
   | 'PWD'
   | 'YI_MEMBER'
-  | 'SPECIAL_INVITEE';
+  | 'SPECIAL_INVITEE'
+  | 'GENERAL_PUBLIC';
 
 export interface CommonFields {
   name: string;

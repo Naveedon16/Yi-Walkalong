@@ -109,7 +109,8 @@ function getSettings() {
     categories: [
       { value: 'PWD', label: 'Participant with Disability' },
       { value: 'YI_MEMBER', label: 'Yi Member' },
-      { value: 'SPECIAL_INVITEE', label: 'Special Invitee' }
+      { value: 'SPECIAL_INVITEE', label: 'Special Invitee' },
+      { value: 'GENERAL_PUBLIC', label: 'General Public' }
     ],
     tshirtSizes: [
       { label: 'Extra Small (XS)', value: 'XS' },
@@ -419,17 +420,19 @@ function getDashboardStats() {
       let count = 1;
       let familyCount = 0;
       let caretakerCount = 0;
-
+      
+      const familySizes = String(familyTs).split(',').map(s => s.trim()).filter(s => s);
       const hasFamilyStr = String(hasFamily).trim().toLowerCase();
       if (hasFamilyStr === 'yes' || hasFamilyStr === 'true') {
-        familyCount = 1;
-        count++;
+        familyCount = familySizes.length > 0 ? familySizes.length : 1;
+        count += familyCount;
       }
       
+      const caretakerSizes = String(caretakerTs).split(',').map(s => s.trim()).filter(s => s);
       const hasCaretakerStr = String(hasCaretaker).trim().toLowerCase();
       if (hasCaretakerStr === 'yes' || hasCaretakerStr === 'true') {
-        caretakerCount = 1;
-        count++;
+        caretakerCount = caretakerSizes.length > 0 ? caretakerSizes.length : 1;
+        count += caretakerCount;
       }
       
       stats.totalRegistrations++;
@@ -448,9 +451,22 @@ function getDashboardStats() {
         stats.byCategory[cat].caretaker += caretakerCount;
       }
 
-      if (ts) stats.byTshirtSize[ts] = (stats.byTshirtSize[ts] || 0) + 1;
-      if (familyCount > 0 && familyTs) stats.byTshirtSize[familyTs] = (stats.byTshirtSize[familyTs] || 0) + 1;
-      if (caretakerCount > 0 && caretakerTs) stats.byTshirtSize[caretakerTs] = (stats.byTshirtSize[caretakerTs] || 0) + 1;
+      const mainSizes = String(ts).split(',').map(s => s.trim()).filter(s => s);
+      mainSizes.forEach(size => {
+        stats.byTshirtSize[size] = (stats.byTshirtSize[size] || 0) + 1;
+      });
+      
+      if (familyCount > 0) {
+        familySizes.forEach(size => {
+          stats.byTshirtSize[size] = (stats.byTshirtSize[size] || 0) + 1;
+        });
+      }
+      
+      if (caretakerCount > 0) {
+        caretakerSizes.forEach(size => {
+          stats.byTshirtSize[size] = (stats.byTshirtSize[size] || 0) + 1;
+        });
+      }
       
       if (dateVal) {
         const d = new Date(dateVal);

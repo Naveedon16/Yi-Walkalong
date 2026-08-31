@@ -240,6 +240,7 @@ export function AdminParticipants() {
                 { label: 'Participant with Disability', value: 'PWD' },
                 { label: 'Yi Member', value: 'YI_MEMBER' },
                 { label: 'Special Invitee', value: 'SPECIAL_INVITEE' },
+                { label: 'General Public', value: 'GENERAL_PUBLIC' },
               ]}
               value={categoryFilter}
               onChange={(e) => setCategoryFilter(e.target.value)}

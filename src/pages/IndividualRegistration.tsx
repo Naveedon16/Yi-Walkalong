@@ -115,7 +115,7 @@ export function IndividualRegistration() {
         dynamicFieldsValid = await trigger(['disabilityType', 'disabilityOther']);
       } else if (selectedCategory === 'YI_MEMBER') {
         dynamicFieldsValid = await trigger(['employer', 'yiChapter']);
-      }  else if (selectedCategory === 'SPECIAL_INVITEE') {
+      }  else if (selectedCategory === 'SPECIAL_INVITEE' || selectedCategory === 'GENERAL_PUBLIC') {
         dynamicFieldsValid = await trigger(['employer', 'remarks']);
       }
 
@@ -264,7 +264,7 @@ export function IndividualRegistration() {
                     render={({ field }) => (
                       <SearchableSelect
                         label="Select Category"
-                        options={settings.categories.filter(c => c.value === 'PWD' || c.value === 'YI_MEMBER' || c.value === 'SPECIAL_INVITEE')}
+                        options={settings.categories.filter(c => c.value === 'PWD' || c.value === 'YI_MEMBER' || c.value === 'SPECIAL_INVITEE' || c.value === 'GENERAL_PUBLIC')}
                         value={field.value || ''}
                         onChange={field.onChange}
                         error={errors.category?.message}
@@ -387,9 +387,9 @@ export function IndividualRegistration() {
                   </div>
                 )}
 
-                {selectedCategory === 'SPECIAL_INVITEE' && (
+                {(selectedCategory === 'SPECIAL_INVITEE' || selectedCategory === 'GENERAL_PUBLIC') && (
                   <div className="space-y-4 bg-[#f8f9ff]  p-6 rounded-[24px] border border-[#e1e2ec] ">
-                    <h3 className="text-lg font-bold text-[#6750a4]">Special Invitee Details</h3>
+                    <h3 className="text-lg font-bold text-[#6750a4]">{selectedCategory === 'SPECIAL_INVITEE' ? 'Special Invitee' : 'General Public'} Details</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <Input label="Business Name" {...register('employer')} error={errors.employer?.message} />
                       <Input label="Remarks" {...register('remarks')} error={errors.remarks?.message} />

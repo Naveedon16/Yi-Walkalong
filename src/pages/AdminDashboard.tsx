@@ -93,9 +93,9 @@ export function AdminDashboard() {
     content += `Categories Breakdown:\n`;
     Object.entries(stats.byCategory || {}).forEach(([cat, counts]) => {
       const catName = cat.replace(/_/g, ' ');
-      if (typeof counts === 'object') {
-        const total = counts.individual + counts.family + counts.caretaker;
-        content += `- ${catName}: ${total} total (${counts.individual} individuals, ${counts.family} family, ${counts.caretaker} caretakers)\n`;
+      if (typeof counts === 'object' && counts !== null && 'individual' in counts) {
+        const total = (counts as any).individual + (counts as any).family + (counts as any).caretaker;
+        content += `- ${catName}: ${total} total (${(counts as any).individual} individuals, ${(counts as any).family} family, ${(counts as any).caretaker} caretakers)\n`;
       } else {
         content += `- ${catName}: ${counts}\n`;
       }
@@ -289,7 +289,7 @@ export function AdminDashboard() {
                 <Pie
                     data={Object.entries(stats.byCategory || {}).map(([name, counts]) => ({
                       name: name.replace(/_/g, ' '),
-                      value: typeof counts === 'object' ? counts.individual + counts.family + counts.caretaker : counts
+                      value: typeof counts === 'object' && counts !== null && 'individual' in counts ? (counts as any).individual + (counts as any).family + (counts as any).caretaker : counts
                     }))}
                     cx="50%"
                     cy="50%"
@@ -333,11 +333,11 @@ export function AdminDashboard() {
                   {Object.entries(stats.byCategory).map(([cat, counts]: [string, any]) => (
                     <tr key={cat} className="border-b border-[#e1e2ec] last:border-0 hover:bg-[#fef7ff] transition-colors">
                       <td className="py-3 px-4 text-[#1d1b20] font-medium">{cat.replace(/_/g, ' ')}</td>
-                      <td className="py-3 px-4 text-[#49454f]">{typeof counts === 'object' ? counts.individual : counts}</td>
-                      <td className="py-3 px-4 text-[#49454f]">{typeof counts === 'object' ? counts.family : 0}</td>
-                      <td className="py-3 px-4 text-[#49454f]">{typeof counts === 'object' ? counts.caretaker : 0}</td>
+                      <td className="py-3 px-4 text-[#49454f]">{typeof counts === 'object' && counts !== null && 'individual' in counts ? (counts as any).individual : counts}</td>
+                      <td className="py-3 px-4 text-[#49454f]">{typeof counts === 'object' && counts !== null && 'individual' in counts ? (counts as any).family : 0}</td>
+                      <td className="py-3 px-4 text-[#49454f]">{typeof counts === 'object' && counts !== null && 'individual' in counts ? (counts as any).caretaker : 0}</td>
                       <td className="py-3 px-4 font-bold text-[#1d1b20]">
-                        {typeof counts === 'object' ? (counts.individual + counts.family + counts.caretaker) : counts}
+                        {typeof counts === 'object' && counts !== null && 'individual' in counts ? ((counts as any).individual + (counts as any).family + (counts as any).caretaker) : counts}
                       </td>
                     </tr>
                   ))}
