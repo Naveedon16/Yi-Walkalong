@@ -83,43 +83,18 @@ export function Home() {
         to="/register/individual"
         className="bg-white  rounded-[32px] p-6 shadow-sm border border-[#e1e2ec]  hover:border-[#6750a4] hover:bg-[#fef7ff]  transition-all cursor-pointer group block"
       >
-        <div className="flex gap-4">
+        <div className="flex items-center gap-4">
           <div className="w-14 h-14 rounded-2xl bg-[#f3edf7]  group-hover:bg-[#eaddff] flex items-center justify-center text-[#6750a4] transition-colors shrink-0">
             <User className="w-8 h-8" />
           </div>
           <div className="flex-1">
             <div className="flex justify-between items-center">
-              <h3 className="text-xl font-bold text-[#1d1b20] ">Registration</h3>
+              <h3 className="text-xl font-bold text-[#1d1b20] ">Register Now</h3>
               <span className="text-[#6750a4] font-bold text-xl">→</span>
             </div>
-            <p className="text-sm text-[#49454f]  mt-1">
-              Only for PWD and Yi Members.
-            </p>
           </div>
         </div>
       </Link>
-
-       <a 
-        href="https://cam.mycii.in/ORNew/Registration.html?EventId=E000076448"
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="bg-white  rounded-[32px] p-6 shadow-sm border border-[#e1e2ec]  hover:border-[#6750a4] hover:bg-[#fef7ff]  transition-all cursor-pointer group block"
-      >
-        <div className="flex gap-4">
-          <div className="w-14 h-14 rounded-2xl bg-[#f3edf7]  group-hover:bg-[#eaddff] flex items-center justify-center text-[#6750a4] transition-colors shrink-0">
-            <User className="w-8 h-8" />
-          </div>
-          <div className="flex-1">
-            <div className="flex justify-between items-center">
-              <h3 className="text-xl font-bold text-[#1d1b20] ">Registration</h3>
-              <span className="text-[#6750a4] font-bold text-xl">→</span>
-            </div>
-            <p className="text-sm text-[#49454f]  mt-1">
-              For All others.
-            </p>
-          </div>
-        </div>
-      </a>
     </div>
   );
 
