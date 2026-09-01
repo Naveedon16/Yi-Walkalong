@@ -404,6 +404,13 @@ function getDashboardStats() {
     const familyMemberTsIdx = headers.findIndex(h => normalizeHeader(h) === 'family member t-shirt size');
     const hasCaretakerIdx = headers.findIndex(h => normalizeHeader(h) === 'has caretaker');
     const caretakerTsIdx = headers.findIndex(h => normalizeHeader(h) === 'caretaker t-shirt size');
+    
+    const phoneIdx = headers.findIndex(h => normalizeHeader(h) === 'phone');
+    const caretakerNameIdx = headers.findIndex(h => normalizeHeader(h) === 'caretaker name');
+    const familyMemberNameIdx = headers.findIndex(h => normalizeHeader(h) === 'family member name');
+
+    const seenCaretakers = new Set();
+    const seenFamilyMembers = new Set();
 
     for (let i = 1; i < data.length; i++) {
       const row = data[i];
@@ -416,6 +423,10 @@ function getDashboardStats() {
       const familyTs = familyMemberTsIdx !== -1 ? row[familyMemberTsIdx] : '';
       const hasCaretaker = hasCaretakerIdx !== -1 ? row[hasCaretakerIdx] : '';
       const caretakerTs = caretakerTsIdx !== -1 ? row[caretakerTsIdx] : '';
+      
+      const phone = phoneIdx !== -1 ? row[phoneIdx] : '';
+      const caretakerName = caretakerNameIdx !== -1 ? row[caretakerNameIdx] : '';
+      const familyMemberName = familyMemberNameIdx !== -1 ? row[familyMemberNameIdx] : '';
 
       let count = 1;
       let familyCount = 0;
@@ -423,16 +434,48 @@ function getDashboardStats() {
       
       const familySizes = String(familyTs).split(',').map(s => s.trim()).filter(s => s);
       const hasFamilyStr = String(hasFamily).trim().toLowerCase();
+      
+      let isDuplicateFamily = false;
+      
       if (hasFamilyStr === 'yes' || hasFamilyStr === 'true') {
-        familyCount = familySizes.length > 0 ? familySizes.length : 1;
-        count += familyCount;
+        const p = String(phone).trim().toLowerCase();
+        const fn = String(familyMemberName).trim().toLowerCase();
+        const ft = String(familyTs).trim().toLowerCase();
+        
+        const uniqueKey = p + '_' + fn + '_' + ft;
+        if (uniqueKey && seenFamilyMembers.has(uniqueKey)) {
+          isDuplicateFamily = true;
+        } else {
+          seenFamilyMembers.add(uniqueKey);
+        }
+
+        if (!isDuplicateFamily) {
+          familyCount = familySizes.length > 0 ? familySizes.length : 1;
+          count += familyCount;
+        }
       }
       
       const caretakerSizes = String(caretakerTs).split(',').map(s => s.trim()).filter(s => s);
       const hasCaretakerStr = String(hasCaretaker).trim().toLowerCase();
+      
+      let isDuplicateCaretaker = false;
+      
       if (hasCaretakerStr === 'yes' || hasCaretakerStr === 'true') {
-        caretakerCount = caretakerSizes.length > 0 ? caretakerSizes.length : 1;
-        count += caretakerCount;
+        const p = String(phone).trim().toLowerCase();
+        const cn = String(caretakerName).trim().toLowerCase();
+        const ct = String(caretakerTs).trim().toLowerCase();
+        
+        const uniqueKey = p + '_' + cn + '_' + ct;
+        if (uniqueKey && seenCaretakers.has(uniqueKey)) {
+          isDuplicateCaretaker = true;
+        } else {
+          seenCaretakers.add(uniqueKey);
+        }
+
+        if (!isDuplicateCaretaker) {
+          caretakerCount = caretakerSizes.length > 0 ? caretakerSizes.length : 1;
+          count += caretakerCount;
+        }
       }
       
       stats.totalRegistrations++;
@@ -456,13 +499,13 @@ function getDashboardStats() {
         stats.byTshirtSize[size] = (stats.byTshirtSize[size] || 0) + 1;
       });
       
-      if (familyCount > 0) {
+      if (familyCount > 0 && !isDuplicateFamily) {
         familySizes.forEach(size => {
           stats.byTshirtSize[size] = (stats.byTshirtSize[size] || 0) + 1;
         });
       }
       
-      if (caretakerCount > 0) {
+      if (caretakerCount > 0 && !isDuplicateCaretaker) {
         caretakerSizes.forEach(size => {
           stats.byTshirtSize[size] = (stats.byTshirtSize[size] || 0) + 1;
         });
@@ -939,13 +982,13 @@ function updateSummarySheet() {
   
   const data = [];
   
-  data.push(['WalkAlong 2026 - Registration Summary', '']);
-  data.push(['Last Updated:', new Date().toLocaleString()]);
-  data.push(['', '']);
+  data.push(['WalkAlong 2026 - Registration Summary', '', '', '', '']);
+  data.push(['Last Updated:', new Date().toLocaleString(), '', '', '']);
+  data.push(['', '', '', '', '']);
   
-  data.push(['Total Registrations', stats.totalRegistrations]);
-  data.push(['Total Participants', stats.totalParticipants]);
-  data.push(['', '']);
+  data.push(['Total Registrations', stats.totalRegistrations, '', '', '']);
+  data.push(['Total Participants', stats.totalParticipants, '', '', '']);
+  data.push(['', '', '', '', '']);
   
   data.push(['Category Breakdown', '', '', '', '']);
   data.push(['Category', 'Individuals', 'Family Members', 'Caretakers', 'Total']);
