@@ -18,7 +18,9 @@ import { Category, RegistrationFormValues } from '../types';
 import { SizeGuideModal } from '../components/SizeGuideModal';
 
 export function IndividualRegistration() {
+
   const navigate = useNavigate();
+
   const [step, setStep] = useState<1 | 2>(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [duplicateWarning, setDuplicateWarning] = useState(false);
@@ -46,9 +48,31 @@ export function IndividualRegistration() {
       });
   };
 
+
   useEffect(() => {
     loadSettings();
   }, []);
+
+  const isClosed = true;
+  if (isClosed) {
+    return (
+      <div className="pt-8 px-4">
+        <Card className="p-8 text-center max-w-lg mx-auto mt-12">
+          <div className="w-16 h-16 bg-[#f3edf7] rounded-full flex items-center justify-center mx-auto mb-6 text-[#6750a4]">
+            <AlertCircle className="w-8 h-8" />
+          </div>
+          <h2 className="text-2xl font-bold text-[#1d1b20] mb-4">Registrations Closed</h2>
+          <p className="text-[#49454f] mb-8 text-lg">
+            Thank you for your interest. Registrations for Yi WalkAlong 4.0 are now officially closed.
+          </p>
+          <Button onClick={() => navigate('/')} className="w-full">
+            Back to Home
+          </Button>
+        </Card>
+      </div>
+    );
+  }
+
 
   const formSchema = z.object({
     category: z.string().min(1, 'Category is required'),
